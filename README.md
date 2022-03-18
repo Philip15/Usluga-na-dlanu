@@ -1,5 +1,5 @@
-#Usluga na dlanu
----
+# Usluga na dlanu
+
 Web aplikacija koja pomaže u pronalaženju pružalaca konkretnih usluga (vodoinstalater, električar, čistač…).
 Moguća je pretraga prema tipu usluge, geografskoj blizini ili po periodu dostupnosti. 
 Pri ugovaranju nekog posla, običan korisnik salje zahtev za uslugu u određenom vremenskom periodu (slodobni termini su dostupni na profilu pružaoca). 
