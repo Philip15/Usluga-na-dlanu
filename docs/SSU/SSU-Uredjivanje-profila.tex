@@ -1,0 +1,135 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{tabto} 
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{4}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+%EDIT HERE
+\newcommand{\genitivfunkcionalnosti}{uređivanja profila korisnika}
+\newcommand{\dativfunkcionalnosti}{uređivanja profila korisnika}
+\newcommand{\inicijalniautor}{Jana Pašajlić}
+\newcommand{\inicijalnidatum}{18.03.2022.}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
+	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\section*{Istorija izmena}
+\begin{tabular}{ |c|c|c|c| }
+\hline
+\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+\hline
+ \inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
+ \hline
+ &  & &  \\
+ \hline
+ &  &  &  \\
+ \hline
+ &  &  &  \\
+ \hline
+\end{tabular}
+\end{center}
+\newpage
+
+\tableofcontents
+
+\newpage
+\section{Uvod}
+\subsection{Rezime}
+    Definisanje scenarija slučaja upotrebe izmene profila korisnika, sa primerima odgovarajućih HTML stranica.
+\subsection{Namena dokumenta i ciljne grupe}
+    Dokument će koristiti svi članovi projektnog tima u razvoju projekta i testiranju, a može se koristiti i pri pisanju dokumentacije namenjene administratoru.
+\subsection{Reference}
+ \begin{enumerate}
+    \item Projektni zadatak
+    \item Uputstvo za pisanje specifikacije scenarija upotrebe funkcionalnosti 
+    \item Guidelines - Use Case, Rational Unified Process 2000
+    \item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+ \end{enumerate}
+\subsection{Otvorena pitanja}
+    \begin{center}
+    \begin{tabular}{ |c|p{10cm}|l| }
+    \hline
+    \textbf{Redni broj} & \hspace{4cm} \textbf{Opis} & \textbf{Rešenje} \\ 
+    \hline
+     1. & Da li dozvoliti izemnu email adrese korisnika? & \\
+     \hline
+      & &   \\
+     \hline
+     & &   \\
+     \hline
+    \end{tabular}
+    \end{center}
+\section{Scenario \dativfunkcionalnosti}
+\subsection{Kratak opis}
+    Nakon prijave na sistem korisnik ima privilegije izmene svog profila. Svaki korisnik može izmeniti svoju profilnu sliku i korisničko ime, dok pružalac usluga može dodatno menjati adresu poslovanja, kategoriju usluge koju pruža, kalendar zauzetosti, kao i opis na profilu. Posle izmene željenih informacija korisnik ostaje prijavljen na sistem i može nastaviti sa korišćenjem sajta.
+
+\subsection{Tok događaja}
+    \paragraph*{Osnovni uspešni scenario}
+    \begin{enumerate}
+        \item Korisnik se prijavljuje na sistem.
+        \item Korisnik vrši pregled svog profila.
+        \item Korisnik menja informacije i klikom na dugme Prijava ''Završi izmenu'' čuva izmene. 
+        \item Korisnik nastavlja sa daljim korišćenjem sajta.
+    \end{enumerate}
+    
+    \paragraph*{Proširenja} 
+    \begin{enumerate}
+        \item[2.1] Korisnik je odabrao izmenu korisničkog imena.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+            \item Korisnik unosi željeno korisničko ime.
+            \item Sistem prikazuje da li korisničko ime već postoji.
+            \item Ukoliko korisničko ime ne postoji u bazi, korisnik nastavlja sa korakom 2.
+        \end{enumerate}
+    
+        \item[2.2] Korisnik je odabrao izmenu profilne sliku.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+             \item Korisnik postavlja željenu sliku i nastavlja sa korakom 2.
+        \end{enumerate}
+        
+        \item[2.3] Korisnik (pružalac usluge) je odabrao izmenu adrese poslovanja.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+        \item Korisnik unosi novu adresu poslovanja i nastavlja sa korakom 2.
+        \end{enumerate}
+    
+        \item[2.4] Korisnik (pružalac usluge) je odabrao izmenu kategoirija usluga.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+            \item Korisnik bira kategorije usluga i nastavlja sa korakom 2.
+        \end{enumerate}
+        
+        \item[2.5] Korisnik (pružalac usluge) je odabrao izmenu kalendara zauzetosti.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+            \item Korisnik označava željene vremenske periode kao zauzete ili slobodne i nastavlja sa korakom 2.
+        \end{enumerate}
+   
+        \item[2.6] Korisnik (pružalac usluge) je odabrao izmenu opisa profila.
+         \begin{enumerate}[noitemsep,topsep=-8pt]
+        \item Koirsnik unosi nov opis profila i nastavlja sa korakom 2.
+        \end{enumerate}
+    \end{enumerate}
+    
+\subsection{Posebni zahtevi}
+    Nema.
+\subsection{Preduslovi}
+    Potrebno je da se korisnik prijavi na sistem. 
+\subsection{Posledice}
+    Nakon uspešno izvršene sekvence koraka, u bazi se ažuriraju informacije o korisniku.
+\end{document}

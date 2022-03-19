@@ -1,0 +1,138 @@
+% !TeX spellcheck = sr_LATN-SerbianLatin
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{enumitem}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+%EDIT HERE
+\newcommand{\genitivfunkcionalnosti}{registacije korisnika}
+\newcommand{\dativfunkcionalnosti }{registraciji korisnika}
+\newcommand{\inicijalniautor}{Jana Pašajlić}
+\newcommand{\inicijalnidatum}{17.03.2022.}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
+	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\section*{Istorija izmena}
+\begin{tabular}{ |c|c|c|c| }
+\hline
+\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+\hline
+ \inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
+ \hline
+ &  & &  \\
+ \hline
+ &  &  &  \\
+ \hline
+ &  &  &  \\
+ \hline
+\end{tabular}
+\end{center}
+\newpage
+
+\tableofcontents
+
+\newpage
+\section{Uvod}
+\subsection{Rezime}
+Definisanje scenarija upotrebe pri \dativfunkcionalnosti, sa primerima odgovarajućih HTML stranica.
+\subsection{Namena dokumenta i ciljne grupe}
+Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i testiranja aplikacije. Može se koristiti prilikom izrade uputstva za upotrebu.
+\subsection{Reference}
+    \begin{enumerate}
+        \item Projektni zadatak
+        \item Uputstvo za pisanje specifikacije scenarija upotrebe funkcionalnosti 
+        \item Guidelines - Use Case, Rational Unified Process 2000
+        \item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+    \end{enumerate}
+\subsection{Otvorena pitanja}
+    \begin{center}
+    \begin{tabular}{ |c|p{10cm}|l| }
+    \hline
+    \textbf{Redni broj} & \hspace{4cm} \textbf{Opis} & \textbf{Rešenje} \\ 
+    \hline
+         1. & Da li treba slati verifikacioni kod na email 
+         korisnika koji se registruje? & \\
+         \hline
+          2.& Da li trajno pamtiti zahteve za kreiranje naloga? &  \\
+         \hline
+         & &   \\ 
+         \hline
+    \end{tabular}
+    \end{center}
+    
+\section{Scenario \genitivfunkcionalnosti}
+\subsection{Kratak opis}
+    Korisnik se registruje unošenjem jedinstvenog korisničkog imena, jedinstvene email adrese i lozinke. Bez registracije i kreiranja naloga korisnik nije u mogućnosti da vidi kontakt informacije o pružaocima usluga. Ukoliko korisnik želi da bude pružalac usluge, potrebno je da unese dodatne podatke (kategoriju usluge i adresu poslovanja). Nakon korektno unetih podataka, na email adresu korisnika se šalje verifikacioni kod čijim se unošenjem prilikom registracije potvrđuje ispravnost unete email adrese, kreira se nalog i korisnik se registruje na sajt. 
+    \newpage
+\subsection{Tok događaja}
+    \paragraph*{Osnovni uspešni scenario}
+    \begin{enumerate}
+        \item Korisnik unosi korisničko ime.
+        \item Korisnik unosi email adresu.
+        \item Korisnik unosi lozinku.
+        \item Korisnik označava da li želi da bude pružalac usluge.
+        \item Korisnik mora da označi saglasnost o uslovima korišćenja.
+        \item Sistem šalje verifikacioni kod na unetu korisničku email adresu, čijim daljim unosom korisnik potvrđuje da je uneta korektna email adresa. Unete informacije o korisniku i se upisuje u bazu zahteva za kreiranje naloga. 
+        \item Korisnik unosi verifikacioni kod koji mu je dostavljen na email adresu.
+        \item Sistem unosi nalog korisnika u bazu.
+        \item Nakon 24h zahtev za kreiranje naloga korisnika se briše iz baze.
+    \end{enumerate}
+
+    \paragraph*{Proširenja} 
+    \begin{enumerate}
+        \item[1.1] Korisnik je uneo već postojeće korisničko ime.
+            \begin{enumerate}[noitemsep,topsep=-8pt]
+                \item Sistem prikazuje da je korisničko ime zauzeto.
+            \end{enumerate}
+   
+        \item[2.1] Korisnik je uneo email adresu koja postoji u bazi.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+            \item Sistem prikazuje da je email adresa zauzeto.
+        \end{enumerate}
+    
+        \item[4.1] Korisnik je označio da želi da bude pružalac usluge.
+            \begin{enumerate}[noitemsep,topsep=-8pt]
+                \item Korisnik bira kategorije usluga.
+                \item Korisnik unosi adresu poslovanja.
+            \end{enumerate}
+    
+        \item[6.1] Korisnik nije uneo sve obavezne informacije.
+            \begin{enumerate}[noitemsep,topsep=-8pt]
+                \item Sistem prikazuje poruku da treba popuniti sva obavezna polja.
+            \end{enumerate}
+ 
+        \item[6.2] Korisnik nije validnu email adresu.
+             \begin{enumerate}[noitemsep,topsep=-8pt]
+                \item Sistem prikazuje poruku da uneta email adresa nije validna.
+                \item Korisnik se vraća u korak 2.
+            \end{enumerate}
+    \end{enumerate}
+    
+\subsection{Posebni zahtevi}
+    Korisnikova lozinka se u bazi čuva kao enkriptovana.
+\subsection{Preduslovi}
+    Potrebno je da korisnik poseduje email adresu. 
+\subsection{Posledice}
+    Nakon uspešno izvršene sekvence koraka, u bazu se trajno upisuje korsniko sa svojim informacijama i dalje može pristupati sajtu prijavom pomoću korisničkog imena i lozinke.
+\end{document}

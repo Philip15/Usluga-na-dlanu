@@ -1,0 +1,134 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{tabto} 
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{4}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+%EDIT HERE
+\newcommand{\genitivfunkcionalnosti}{evidentiranja zauzetosti pružaoca usluge}
+\newcommand{\dativfunkcionalnosti}{evidentiranju zauzetosti pružaoca usluge}
+\newcommand{\inicijalniautor}{Jana Pašajlić}
+\newcommand{\inicijalnidatum}{18.03.2022.}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
+	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\section*{Istorija izmena}
+\begin{tabular}{ |c|c|c|c| }
+\hline
+\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+\hline
+ \inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
+ \hline
+ &  & &  \\
+ \hline
+ &  &  &  \\
+ \hline
+ &  &  &  \\
+ \hline
+\end{tabular}
+\end{center}
+\newpage
+
+\tableofcontents
+
+\newpage
+\section{Uvod}
+\subsection{Rezime}
+    Definisanje scenarija slučaja upotrebe \genitivfunkcionalnosti, sa primerima odgovarajućih HTML stranica.
+\subsection{Namena dokumenta i ciljne grupe}
+    Dokument će koristiti svi članovi projektnog tima u razvoju projekta i testiranju, a može se koristiti i pri pisanju dokumentacije namenjene administratoru.
+\subsection{Reference}
+ \begin{enumerate}
+    \item Projektni zadatak
+    \item Uputstvo za pisanje specifikacije scenarija upotrebe funkcionalnosti 
+    \item Guidelines - Use Case, Rational Unified Process 2000
+    \item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+ \end{enumerate}
+\subsection{Otvorena pitanja}
+    \begin{center}
+    \begin{tabular}{ |c|p{10cm}|l| }
+    \hline
+    \textbf{Redni broj} & \hspace{4cm} \textbf{Opis} & \textbf{Rešenje} \\ 
+    \hline
+     & & \\
+     \hline
+      & &   \\
+     \hline
+     & &   \\
+     \hline
+    \end{tabular}
+    \end{center}
+\section{Scenario \dativfunkcionalnosti}
+\subsection{Kratak opis}
+    Pružalac usluge može označiti određene vremenske periode kao slobodne ili zazete.Takođe, prilikom kontaktiranja pružaoca usluge od strane korisnika postoji specificirani vremenski period i u kalendaru pružaoca usluge se isti označava kao potencijalno zauzet. Potom pružalac usluge može da potvrdi ili da odbije taj termin, označavajući ga slobodnim ili zauzetim.
+
+\subsection{Tok događaja}
+    \paragraph*{Osnovni uspešni scenario za neoznačene zahteve pružanja usluge}
+    \begin{enumerate}
+        \item Sistem prikazuje pružaocu usluge da postoje zahtevi o pružanju usluga.
+        \item Pružalac usluge otvara svoju komandnu tablu klikom na njenu ikonu.
+        \item Sistem prikazuje zahteve o uslugama koje pružalac može da prihvati ili da odbije.
+        \item Pružalac usluge otvara željeni zahtev.
+        \item Razrešenje zahteva.
+        \item Pružalac usluge se vraća na korak 4 ili prelazi na korak 7.
+        \item Pružalac usluge završava pregled neoznačenih zahteva.
+    \end{enumerate}
+    
+    \paragraph*{Proširenja uspešnog scenarija za neoznačene zahteve pružanja usluge} 
+    \begin{enumerate}
+        \item[5.1] Pružalac usluge želi da pruži uslugu.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+            \item U slučaju da pružalac usluge nije slobodan u vremenskom periodu predviđenim zahtevom, sistem onemogućava dugme za prihvatanje zahteva i pružalac se vraća u korak 6 osnovnog toka. 
+            \item Pružalac usluge klikom na odgovarajuće dugme prihvata pružanje usluge.
+            \item Kada korisnik koji je kreirao zahtev prihvati odobren zahtev, sistem ažurira kalendar pružaoca usluge i označava da je u navedenom vremenskom periodu pružalac zauzet.
+            \item Zahtev o pružanju usluge se evidentira kao prihvaćen i ostaje vidljiv kod pružaoca usluge.
+        \end{enumerate}
+    
+        \item[5.2] Pružalac usluge ne želi da pruži uslugu.
+        \begin{enumerate}[noitemsep,topsep=-8pt]
+            \item Pružalac usluge klikom na odgovarajuće dugme odbija pružanje usluge.
+            \item Zahtev o pružanju usluge se evidentira kao neostvaren i zahtev se briše.
+        \end{enumerate}
+    \end{enumerate}
+    
+    \paragraph*{Scenario označavanja već prihvaćenih zahteva o uslugama kao neostvarene}
+    \begin{enumerate}
+        \item Pružalac usluge otvara svoju komandnu tablu klikom na njenu ikonu.
+        \item Sistem prikazuje sekcije o prihvaćenim zahtevima.
+        \item Pružalac usluge otvara sekciju prihvaćenih zahteva.
+        \item Pružalac usluge bira zahtev za pružanje usluge.
+        \item Pružalac usluge klikom na odgovarajuće dugme označava zahtev kao neostvaren.
+        \item Sistem ažurira kalendar pružaoca usluge i označava da je u navedenom vremenskom periodu pružalac slobodan.
+        \item Zahtev o pružanju usluge se evidentira kao neostvaren.
+        \item Pružalac se vraća na korak 4 ili prelazi na korak 9.
+        \item Pružalac usluge završava pregled prihvaćenih zahteva.
+    \end{enumerate}
+    
+    
+\subsection{Posebni zahtevi}
+    Obratiti pažnju prilikom testiranja rada sistema na slučajeve istovremeno pristiglih zahteva, kako ne bi došlo do neželjenih preklapanja termina prilikom prihvatanja i odbijanja zahteva.
+\subsection{Preduslovi}
+    Potrebno je da se pružalac usluge prijavi na sistem. 
+\subsection{Posledice}
+    Nakon uspešno izvršene sekvence koraka, u bazi se ažuriraju informacije o zauzetosti pružaoca usluge, kao i u njegovom kalendaru .
+\end{document}
