@@ -1,0 +1,145 @@
+% !TeX spellcheck = sr_LATN-SerbianLatin
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{enumitem}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+%EDIT HERE
+\newcommand{\genitivfunkcionalnosti}{Kreiranja zahteva za uslugom}
+\newcommand{\dativfunkcionalnosti }{Kreiranju zahteva za uslugom}
+\newcommand{\inicijalniautor}{Filip Janjić}
+\newcommand{\inicijalnidatum}{18.03.2022.}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
+	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\
+	\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{center}
+		\section*{Istorija izmena}
+			\begin{tabular}{ |l|l|l|l| }
+				\hline
+				\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+				\hline
+				\inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
+				\hline
+				&  & &  \\
+				\hline
+				&  &  &  \\
+				\hline
+				&  &  &  \\
+				\hline
+			\end{tabular}
+	\end{center}
+	
+	\newpage
+	
+	\tableofcontents
+	
+	\newpage
+	
+	\section{Uvod}
+		\subsection{Rezime}
+			Definisanje scenarija upotrebe pri \dativfunkcionalnosti, sa primerima odgovarajućih html stranica.
+		\subsection{Namena dokumenta i ciljne grupe}
+			Dokument će koristiti svi članovi projektnog tima u razvoju projekta i testiranju, a može se koristiti i pri pisanju dokumentacije namenjene administratoru.
+		\subsection{Reference}
+			\begin{enumerate}
+				\item Projektni zadatak
+				\item Uputstvo za pisanje specifikacije scenarija upotrebe funkcionalnosti
+				\item Guidelines - Use Case, Rational Unified Process 2000
+				\item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+			\end{enumerate}
+		\subsection{Otvorena pitanja}
+			\begin{tabular}{ |c|p{10cm}|l| }
+				\hline
+				\textbf{Redni broj} & \textbf{Opis} & \textbf{Rešenje} \\ 
+				\hline
+			    & &  \\
+				\hline
+			    &  & \\
+				\hline
+				&  & \\
+				\hline
+				&  & \\
+				\hline
+			\end{tabular}
+	\section{Scenario \genitivfunkcionalnosti}
+		\subsection{Kratak opis}
+			Prijavljeni korisnik može kreirati zahtev za odredenu uslugu od odredenog pružaoca, gde je potrebno da na njegovom kalendaru označi tačan vremenski period na nivou sati ili dana i ostavi kratak opis konkretne usluge koju zahteva. Nakon toga pružalac može da modifikuje dati period u datom zahtevu i prihvati ili odbije isti. U slučaju prihvatanja, naknadno dodaje komentar na zahtev i opseg cene datog zahteva, korisnik dobija obaveštenje o prihvaćenom zahtevu na koji takode reaguje prihvatanjem ili odbijanjem. U slučaju prihvatanja korisnika, ili bilo kog odbijanja zahteva, drugoj strani se šalje odgovaraju ća poruka i po potrebi se ažuriraju podaci na profilima korisnika.
+		\newpage
+		\subsection{Tok događaja}
+			\paragraph*{Osnovni uspešni scenario}
+				\begin{enumerate}
+					\item Korisnik ulazi na profil pružaoca.
+					\item Korisnik klikom bira opciju kreiranja zahteva.
+					\item Korisnik označava period zahteva na kalendaru.
+					\item Unosi se opis zahteva u prostor predviđenu za to.
+					\item Označava se hitnost zahteva.
+					\item Korisnik pritiska dugme "Pošalji".
+					\item Prikazuje se prozor na kojem korisnik potvrđuje kreiranje zahteva i isti se prosleđuje pružaocu.
+					\item Pružalac dobija obaveštenje o novom zahtevu.
+					\item Pružalac klikom prihvata zahtev nakon čega se otvara prozor za dodatne opcije.
+					\item Pružalac modifikuje vremenski period zahteva.
+					\item Pružalac unosi obaveznu okvirnu cenu usluge i komentar i pritiska dugme "Prihvati".
+					\item Prikazuje se prozor na kojem pružalac potvrđuje prihvatanje zahteva, isti se prosleđuje korisniku i briše iz tekućih zahteva.
+					\item Korisniku stiže obaveštenje o prihvaćenom zahtevu sa modifikovanim uslovima.
+					\item Korisnik prihvata zahtev klikom na dugme "Prihvati".
+					\item Pružaocu stiže obaveštenje o prihvaćenom zahtevu i kalendar mu se ažurira zauzimajući period dat u istom.
+					\item Prelazi se na stranicu profila pružaoca.
+				\end{enumerate}
+			\paragraph*{Proširenja}
+				\begin{enumerate}
+					\item[6.1] Korisnik pritiska dugme "Otkaži".
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Prelazi se na akciju 2.
+						\end{enumerate}
+					\item[7.1] Korisnik pritiska dugme "Otkaži".
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Prelazi se na akciju 6.
+						\end{enumerate}
+					\item[9.1] Korisnik pritiska dugme "Odbij".
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Zahtev se briše iz tekućih zahteva pružaoca i korisniku se šalje obaveštenje o odbijanju zahteva.
+							\item Prelazi se na akciju 17.
+						\end{enumerate}
+					\item[11.1] Korisnik ne unosi cenu.
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Dugme "Prihvati" postaje neaktivno.
+						\end{enumerate}
+					\item[12.1] Korisnik pritiska dugme "Otkaži".
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Prelazi se na akciju 11.
+						\end{enumerate}
+					\item[14.1] Korisnik pritiska dugme "Odbij".
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Zahtev se briše iz tekućih i pružaocu se šalje obaveštenje o odbijanju zahteva.
+							\item Prelazi se na akciju 17.
+						\end{enumerate}
+				\end{enumerate}
+		\subsection{Posebni zahtevi}
+		    Jedna od najkomplikovanijih funkcionalnosti sistema.
+		    Zbog same kompleksnosti, treba težiti da implementacija ima što bolju modularnost.
+		    Posebnu pažnju posvetiti kalendaru i opcijama izbora vremenskog perioda koji nije kontinualan.
+		\subsection{Preduslovi}
+			U trenutku interakcije sa zahtevom, svaki učesnik treba da bude prijavljen na sistem.
+		\subsection{Posledice}
+			Kreira se zahtev za određenom uslugom i ažurira se kalendar na profilu pružaoca.
+			Zahtev se prebacuje u prihvaćene, odakle pružalac može da ga označi kao Ostvaren/Neostvaren, što korisniku posle omogućava da ostavi recenziju.
+\end{document}
