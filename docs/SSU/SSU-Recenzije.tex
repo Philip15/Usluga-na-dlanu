@@ -1,0 +1,116 @@
+% !TeX spellcheck = sr_LATN-SerbianLatin
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{enumitem}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+%EDIT HERE
+\newcommand{\genitivfunkcionalnosti}{ostavljanja recenzija i komentara}
+\newcommand{\dativfunkcionalnosti }{ostavljanju recenzija i komentara}
+\newcommand{\inicijalniautor}{Lazar Premović}
+\newcommand{\inicijalnidatum}{18.03.2022.}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
+	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\
+	\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{center}
+		\section*{Istorija izmena}
+			\begin{tabular}{ |l|l|l|l| }
+				\hline
+				\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+				\hline
+				\inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
+				\hline
+				1 & Da li bi mogućnost ostavljanja recenzije trebalo da istekne nakon nekog vremena? & &  \\
+				\hline
+				&  &  &  \\
+				\hline
+				&  &  &  \\
+				\hline
+			\end{tabular}
+	\end{center}
+	
+	\newpage
+	
+	\tableofcontents
+	
+	\newpage
+	
+	\section{Uvod}
+		\subsection{Rezime}
+			Definisanje scenarija upotrebe pri \dativfunkcionalnosti, sa primerima odgovarajućih html stranica.
+		\subsection{Namena dokumenta i ciljne grupe}
+			Dokument će koristiti svi članovi projektnog tima u razvoju projekta i testiranju, a može se koristiti i pri pisanju dokumentacije namenjene administratoru.
+		\subsection{Reference}
+			\begin{enumerate}
+				\item Projektni zadatak
+				\item Uputstvo za pisanje specifikacije scenarija upotrebe funkcionalnosti
+				\item Guidelines - Use Case, Rational Unified Process 2000
+				\item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+			\end{enumerate}
+		\subsection{Otvorena pitanja}
+			\begin{tabular}{ |c|p{10cm}|l| }
+				\hline
+				\textbf{Redni broj} & \textbf{Opis} & \textbf{Rešenje} \\ 
+				\hline
+			    & &  \\
+				\hline
+			    &  & \\
+				\hline
+				&  & \\
+				\hline
+				&  & \\
+				\hline
+			\end{tabular}
+	\section{Scenario \genitivfunkcionalnosti}
+		\subsection{Kratak opis}
+			Nakon ostvarivanja nekog zahteva, tj. pružanja neke usluge, korisnik može da ostavi brojčanu ocenu i opcioni tekstualni komentar na uslugu koja mu je pružena.
+		\newpage
+		\subsection{Tok događaja}
+			\paragraph*{Osnovni uspešni scenario}
+				\begin{enumerate}
+					\item Sistem prikazuje korisniku da postoji usluga za koju može da ostavi recenziju
+					\item Korisnik otvara svoju komandnu tablu klikom na njenu ikonu
+					\item Sistem prikazuje usluge za koje korisnik može da ostavi recenziju
+					\item Korisnik popunjava ocenu i opciono ostavlja komentar
+					\item Korisnik potvrđuje recenziju klikom na odgovarajuće dugme
+					\item Sistem beleži recenziju u bazi podataka i zahvaljuje se korisniku na odvojenom vremenu
+				\end{enumerate}
+			\paragraph*{Proširenja}
+				\begin{enumerate}
+					\item[4.1] Korisnik ne želi da ostavi recenziju
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Korisnik uklanja uslugu sa spiska bez davanja recenzije klikom na odgovarajuće dugme
+							\item Sistem označava recenziju kao odbijenu i uklanja je sa komandne table
+						\end{enumerate}
+					\item[4.4] Korisnik nije popunio ocenu
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Sistem obaveštava korisnika da je ocena obavezno polje
+							\item Korisnik može popuniti ocenu i nastaviti sa scenariom
+						\end{enumerate}
+				\end{enumerate}
+		\subsection{Posebni zahtevi}
+			Nema.
+		\subsection{Preduslovi}
+			Korisnik je prijavljen. Postoji usluga koje je realizovana i za koju korisnik još uvek nije ostavio recenziju.
+		\subsection{Posledice}
+			Ažurirana prosečna ocena i komentar se pojavljuju na stranici ponuđača.
+\end{document}

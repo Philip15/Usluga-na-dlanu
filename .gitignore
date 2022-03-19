@@ -1,0 +1,8 @@
+#Latex generated files
+*.aux
+*.log
+*.gz
+*.toc
+
+#SSU-Template generated file
+SSU-Template.pdf

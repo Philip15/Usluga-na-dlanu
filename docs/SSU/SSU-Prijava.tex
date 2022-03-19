@@ -1,0 +1,114 @@
+% !TeX spellcheck = sr_LATN-SerbianLatin
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{enumitem}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+%EDIT HERE
+\newcommand{\genitivfunkcionalnosti}{prijave korisnika}
+\newcommand{\dativfunkcionalnosti }{prijavi korisnika}
+\newcommand{\inicijalniautor}{Lazar Premović}
+\newcommand{\inicijalnidatum}{17.03.2022.}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
+	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\
+	\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{center}
+		\section*{Istorija izmena}
+			\begin{tabular}{ |l|l|l|l| }
+				\hline
+				\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+				\hline
+				\inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
+				\hline
+				&  & &  \\
+				\hline
+				&  &  &  \\
+				\hline
+				&  &  &  \\
+				\hline
+			\end{tabular}
+	\end{center}
+	
+	\newpage
+	
+	\tableofcontents
+	
+	\newpage
+	
+	\section{Uvod}
+		\subsection{Rezime}
+			Definisanje scenarija upotrebe pri \dativfunkcionalnosti, sa primerima odgovarajućih html stranica.
+		\subsection{Namena dokumenta i ciljne grupe}
+			Dokument će koristiti svi članovi projektnog tima u razvoju projekta i testiranju, a može se koristiti i pri pisanju dokumentacije namenjene administratoru.
+		\subsection{Reference}
+			\begin{enumerate}
+				\item Projektni zadatak
+				\item Uputstvo za pisanje specifikacije scenarija upotrebe funkcionalnosti
+				\item Guidelines - Use Case, Rational Unified Process 2000
+				\item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+			\end{enumerate}
+		\subsection{Otvorena pitanja}
+			\begin{tabular}{ |c|p{10cm}|l| }
+				\hline
+				\textbf{Redni broj} & \textbf{Opis} & \textbf{Rešenje} \\ 
+				\hline
+			    1 & Da li treba onemogućiti prijavu nakon nekoliko neuspešnih pokušaja? &  \\
+				\hline
+			    &  & \\
+				\hline
+				&  & \\
+				\hline
+				&  & \\
+				\hline
+			\end{tabular}
+	\section{Scenario \genitivfunkcionalnosti}
+		\subsection{Kratak opis}
+			Korisnik se prijavljuje korišćenjem korisničkog imena i šifre koje je uneo prilikom
+			registracije. Nakon uspešne prijave korisniku se omogućava pregled kontakt informacija pružaoca usluge i
+			kontaktiranje istog.
+		\newpage
+		\subsection{Tok događaja}
+			\paragraph*{Osnovni uspešni scenario}
+				\begin{enumerate}
+					\item Korisnik otvara padajući meni klikom na dugme "Prijava"
+					\item Korisnik unosi svoje korisničko ime
+					\item Korisnik unosi svoju šifru
+					\item Korisnik potvrđuje unete podatke klikom na dugme "Prijavi se"
+					\item Sistem proverava da li korisnik sa datim korisničkim imenom postoji i da li je uneta pravilna šifra.
+					\item Korisnik započinje sesiju vezanu za njegov korisnički nalog
+				\end{enumerate}
+			\paragraph*{Proširenja}
+				\begin{enumerate}
+					\item[6.1] Korisnik je uneo nepravilnu vrednost za korisničko ime ili šifru
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Podaci iz polja za šifru se brišu
+							\item Ispisuje se poruka da je korisničko ime ili šifra neispravna
+							\item Korisnik može opet pokušati sa prijavom od drugog koraka uspešnog scenarija
+						\end{enumerate}
+				\end{enumerate}
+		\subsection{Posebni zahtevi}
+			Šifre se u bazi podataka čuvaju heširane, te korisnički unos treba heširati pre poređenja sa podacima u bazi.
+		\subsection{Preduslovi}
+			Korisnik mora biti registrovan u sistemu.
+		\subsection{Posledice}
+			Ukoliko je prijava uspešna, korisnik započinje sesiju koja persistira do napuštanja sajta.
+\end{document}

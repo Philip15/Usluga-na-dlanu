@@ -1,0 +1,129 @@
+% !TeX spellcheck = sr_LATN-SerbianLatin
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{4}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge \textbf{Usluga na dlanu}\\ \ \\\includegraphics[scale=0.25]{res/Logo.png}\\}
+\date{\Large Projektni zadatak \\ \ \\ \ \\ \Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\section*{Istorija izmena}
+\begin{tabular}{ |l|l|l|l| }
+\hline
+\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+\hline
+ 13.03.2022. & 0.9  & Inicijalna verzija & Jana Pašajlić, Lazar Premović \\
+ \hline
+ 14.03.2022. & 1.0 & Dopuna funkcionalnosti & Filip Janjić \\
+ \hline
+ &  &  &  \\
+ \hline
+ &  &  &  \\
+ \hline
+\end{tabular}
+\end{center}
+\newpage
+
+\tableofcontents
+
+\newpage
+\section{Uvod}
+\subsection{Rezime}
+Projekat \textit{Usluga na dlanu} je sastavni deo praktične nastave na predmetu Principi softverskog inženjerstva na odseku za Softversko inženjerstvo. Aplikacija je namenjena svima koji žele da na jednostavan način dođu do pružaoca usluga ili lako oglase usluge koje pružaju. Ideja sajta je pojednostavljenje potrage za uslugama kroz pregledan korisnički interfejs i sistem za recenzije, koji uliva sigurnost korisnicima.
+
+\subsection{Namena dokumenta i ciljne grupe}
+Namena dokumenta je definisanje problema, kategorizacija korisnika, opis funkcionalnih i nefunkcionalnih zahteva. Dokument je namenjen svim članovima tima, čime se postiže jedinstven plan i ideja u daljem radu.
+
+\section{Opis problema}
+Opšte je poznato da je za određene usluge jako teško pronaći pouzdanog pružaoca u kratkom vremenskom periodu. Česti problemi na koje se nailazi pri traženju pružaoca usluga na konvencionalan način su: 
+    \begin{itemize}
+        \item Teško pronalaženje kontakt informacija
+        \item Upitna pouzdanost i kvalitet usluge
+        \item Nepoznato vreme čekanja na pružanje usluge.
+    \end{itemize}
+Naš projekat rešava gore navedene probleme putem agregacije pružaoca usluga na jednom mestu, sistema za recenzije sa utiscima korisnika i prikaza dostupnosti određenog pružaoca usluga. 
+
+\section{Kategorizacija korisnika}
+Na sistemu postoje sledeće vrste korisnika:
+    \begin{itemize}
+        \item Neregistrovani korisnik
+        \item Registrovani korisnik
+        \item Pružalac usluga
+        \item Administrator
+    \end{itemize}
+\newpage
+\subsection{Neregistrovani korisnik}
+Korisnik koji nema napravljen nalog na sajtu. Može samo da pretražuje sve tipove pružalaca usluga, kao i da pročita recenzije i komentare.
+\subsection{Registrovani korisnik}
+Registrovani korisnik pored pretraživanja na sajtu može videti informacije o pružaocima usluga, kreirati i poslati zahtev za neku uslugu i posle ostaviti recenziju. 
+\subsection{Pružalac usluga}
+Pružalac usluga je registrovani korisnik, koji nakon odobrenja može oglašavati usluge koje pruža i evidentirati slobodne termine (moguće je biti pružalac 0 ili više usluga).
+\subsection{Administrator}
+Administrator odobrava zahteve za kreiranje naloga pružaocima usluga i uređuje kategorije usluga na sajtu.
+\section{Opis proizvoda}
+Sistem je sačinjen od Web stranice i pozadinske baze podataka. Korisnički interfejs Web stranice je baziran na JavaScript-u, dok pozadinski web server koristi PHP i Ajax tehnologije. Baza podataka sadrži sve perzistente podatke i biće realizovana koristeći MySQL server.
+\section{Funkcionalni zahtevi}
+U ovom odeljku definišu se osnovne funkcije koje sistem treba da obezbedi različitim kategorijama korisnika.
+\subsection{Registracija korisnika}
+Korisnik se može registrovati unošenjem korisničkog imena i šifre. Ukoliko korisnik želi da bude pružalac usluge, potrebno je da unese dodatne podatke(kategoriju usluge, email adresu i adresu poslovanja), nakon čega je potrebno odobrenje naloga od strane administratora. 
+\subsection{Prijava korisnika}
+Korisnik se može prijaviti korišćenjem korisničkog imena i šifre koje je uneo prilikom registracije. Prijavljenom korisniku je omogućen pregled informacija o pružaocu usluge i kontaktiranje istog.
+\subsection{Administracija}
+Korisnik sa privilegijama administratora može: odobravati zahteve za registraciju pružaocima usluga, uređivati kategorije usluga i upravljati svim nalozima.
+\subsection{Uređivanje profila pružaoca}
+Pružalac usluge može urediti svoj profil koji se sastoji od profilne slike, opisa i kontakt informacija.
+
+\subsection{Pretraga i filtriranje usluga}
+Korisniku je omogućeno da na različite načine pretražuje usluge iz izabrane kategorije.
+\subsubsection{Sortiranje po geografskoj udaljenosti}
+Moguće je sortirati rezultate na osnovu geografske udaljenosti pružalaca usluge i korisnički definisane lokacije na mapi.
+\subsubsection{Sortiranje po oceni}
+Moguće je sortirati rezultate po prosečnoj oceni pružalaca usluge.
+\subsubsection{Filtriranje po dostupnosti}
+Moguće je filtrirati rezultate tako da su prikazani samo pružaoci usluge dostupni u određenom vremenskom periodu.
+\subsection{Kontaktiranje pružaoca usluge}
+Ukoliko je korisnik prijavljen, može kontaktirati pružaoca usluge putem dijaloga na njegovom profilu. Poslate poruke se prosleđuju pružaocu usluge na njegovu email adresu.
+\subsection{Kreiranje zahteva za uslugom}
+Prijavljeni korisnik može kreirati zahtev za određenu uslugu od određenog pružaoca, gde je potrebno da na njegovom kalendaru označi tačan vremenski period na nivou sati ili dana i ostavi kratak opis konkretne usluge koju zahteva. Nakon toga pružalac može da modifikuje dati period u datom zahtevu i prihvati ili odbije isti. U slučaju prihvatanja, naknadno dodaje komentar na zahtev i opseg cene datog zahteva, korisnik dobija obaveštenje o prihvaćenom zahtevu na koji takođe reaguje prihvatanjem ili odbijanjem. U slučaju prihvatanja korisnika, ili bilo kog odbijanja zahteva, drugoj strani se šalje odgovarajuća poruka i po potrebi se ažuriraju podaci na profilima korisnika. 
+\subsection{Evidentiranje zauzetosti pružaoca usluge}
+Pružalac usluge može označiti određene vremenske periode kao slobodne ili zauzete. Takođe, prilikom kontaktiranja pružaoca usluge od strane korisnika postoji falsificirani vremenski period, u kalendaru pružaoca se isti označava kao potencijalno zauzet. Potom pružalac može da potvrdi ili odbije taj termin.
+\subsection{Ostavljanje recenzija i komentara}
+Ukoliko se određeni zahtev ostvari, po njegovom završetku korisnik može ostaviti brojčanu recenziju i opcioni komentar na pruženu uslugu. Sve recenzije se prikazuju na profilu pružaoca.
+\section{Pretpostavke i ograničenja}
+Potrebno je posebno obratiti pažnju na bezbednost podataka korisnika, kako bi se izbegao neovlašćen pristup i osigurao nesmetan rad web sajta. Korisnički interfejs treba da bude intuitivan za svakog korisnika i lak za upotrebu.
+\section{Kvalitet}
+Potrebno je obaviti jedinično testiranje bitnih komponenti sistema korišćenjem tehnika crne kutije. Nakon implementacije celokupnog sistema potrebno je obaviti integraciono testiranje kako bi bili sigurni da sve komponente komuniciraju na pravilan način kao i testiranje celokupnog sistema na nepovoljne uslove (preopterećenje sajta, zagušenje konekcije, itd.)
+\section{Nefunkcionalni zahtevi}
+\subsection{Sistemski zahtevi}
+Serverskom delu aplikacije je potrebno omogućiti da se izvršava na bilo kom Web serveru koji podržava PHP tehnologiju. Korisnički interfejs bi trebalo da bude raspoloživ, kao i da održava konzistentan vizuelni identitet na većini poznatih internet pretraživača( Chrome, Firefox, Edge, Opera, itd.).
+
+\subsection{Ostali zahtevi}
+Sistem treba da bude u mogućnosti da pruži zadovoljavajuće kratak odziv, kao i mogućnost adaptacije prikaza za različite rezolucije i veličine ekrana.
+\section{Zahtevi za korisničkom dokumentacijom}
+Dizajn korisničkog interfejsa treba da bude dovoljno intuitivan i lagodan kako običnim korisnicima ne bi bila potrebna dokumentacija za upotrebu web sajta.
+Dokumentacija je jedino neophodna administratoru sajta, s obzirom na kompleksnost njemu specifičnih funkcionalnosti.
+\newpage
+\section{Plan i prioriteti}
+Koristi se iterativni i inkrementalni pristup razvoju aplikacije. Minimalni funkcionalni proizvod treba da sadrži sledeće funkcionalnosti:
+\begin{itemize}
+        \item Registraciju i prijavu korisnika
+        \item Uređivanje profila pružaoca usluge
+        \item Pretragu usluga
+        \item Ostvarivanje zahteva za određenu uslugu
+        \item Pregled kontakt informacija pružaoca usluge
+    \end{itemize}
+    Jedno od potencijalnih unapređenja projekta bi bila implementacija potpuno integrisanog sistema za razmenu poruka.
+\end{document}
