@@ -1,0 +1,101 @@
+footer{
+    background-color: #ADEFD1FF;
+    width: 100%;
+    color: #062639;
+}
+
+.navbar{
+    background-color: #ADEFD1FF;
+    width: 100%;
+}
+
+.navbar-brand{
+    font-weight: bolder;
+    color: #062639;
+    font-size: 26px;
+}
+
+.reg{
+    background-color: #062639;
+    text-align: center;
+}
+
+#logo{
+    margin-left: 15px;
+}
+
+.reg-title {
+    font-size: 26px;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+.container-reg {
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+.wrap-reg{
+    width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 55px 55px 37px 55px;
+    background: -webkit-linear-gradient(top, #ADEFD1FF, #EEEEFF);
+}
+
+.wrap-input {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,0.24);
+    margin-bottom: 30px;
+}
+
+.input {
+    font-size: 16px;
+    color: #291528;
+    line-height: 1.2;
+  
+    display: block;
+    width: 100%;
+    height: 35px;
+    background: transparent;
+    padding: 0 5px 0 38px;
+}
+
+.focus-input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.btn-reg{
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 120px;
+    border-radius: 8px;
+    height: 45px;
+    background-color: #ADEFD1FF;
+}
+
+#PSI{
+    text-align: right;
+}
