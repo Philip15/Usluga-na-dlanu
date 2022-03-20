@@ -9,6 +9,10 @@ footer{
     width: 100%;
 }
 
+.navbar-brand:hover{
+    color: black;
+}
+
 .navbar-brand{
     font-weight: bolder;
     color: #062639;
@@ -99,3 +103,26 @@ footer{
 #PSI{
     text-align: right;
 }
+
+#container-photos{
+    text-align: center;
+    background-color:  #062639;
+}
+
+#ETF:hover{
+    color:#291528;
+}
+
+#ETF {
+    color:#062639;
+}
+
+.p-o{
+    text-align: center;
+}
+
+.border{
+    background-color: #ADEFD1FF;
+}
+
+
