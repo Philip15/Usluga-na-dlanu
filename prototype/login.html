@@ -1,5 +1,4 @@
-<!--Autor: Lazar Premović-->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sr" class="h-100">
     <head>
         <meta charset="utf-8">
@@ -11,149 +10,74 @@
 
         <title>Usluga na dlanu</title>
     </head>
-    <body class="d-flex flex-column h-100">
+    <body>
         
         <header>
-            <div class="container-fluid">
-                <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">
-                        <img src="res/Logot.png" height="40px"/>
-                        Usluga na dlanu
+            <div class="container-fullwidth">
+                <nav class="navbar">
+                    <a class="navbar-brand" href="main-page.html">
+                        <img id="logo" src="res/Logot.png" height="50px"/>
+                            Usluga na dlanu
                     </a>
-                    <div class="justify-content-end">
-                        <button class="btn btn-outline-primary" type="button">Prijava</button>
-                        <button class="btn btn-outline-info" type="button">Registracija</button>
-                    </div>
                 </nav>
             </div>
         </header>
 
-        <section class="p-0">
-            <img src="https://picsum.photos/1000/250" class="img-fluid" style="width: 100%;"/>
-        </section>
-        
-        <div class="d-flex bg-light">
+        <div class="reg">
+            <div class="container-reg">
+                <div class="wrap-reg">
+                    <form>
+                        <span class="reg-title p-b-34 p-t-27">
+                            Prijava
+                        </span>
+    
+                        <div class="wrap-input">
+                            Email adresa
+                            <input class="input" type="email" name="email" placeholder="email@email.com">
+                        </div>
 
-            <aside class="d-flex flex-column flex-shrink-0 p-3 bg-light border-end" style="width:280px;">
-                <h5>Kategorije usluga:</h5>
-                <ul class="flex-column nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"> Sve</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"> Vodoinstalater</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"> Električar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"> Bravar</a>
-                    </li>
-                </ul>
-                <hr>
-            </aside>
+                        <div class="wrap-input">
+                            Korisničko ime
+                            <input class="input" type="text" name="username" placeholder="Korisničko ime">
+                        </div>
+    
+                        <div class="wrap-input">
+                            Lozinka
+                            <input class="input" type="password" name="pass" placeholder="Lozinka">
+                        </div>
 
-            <main class="w-100 mx-4 my-4">
-                <div class="container-fluid">
-                    <div class="row g-5">
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
+                        <div class="wrap-input">
+                            <input class="input-checkbox" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox" for="ckb1">
+                                Zaboravljena lozinka?
+                            </label>
                         </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
+    
+                        <div>
+                            <button class="btn-reg">
+                                Prijavi me
+                            </button>
                         </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!--<div class="row gx-5">
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row gx-5">
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                        <div class="col-3 bg-light p-3">
-                            <div class="border bg-light">
-                                <img src="https://picsum.photos/150" class="img-fluid" style="width: 100%;"/>
-                                <h6>AAAAAAAAAAAAA</h6>
-                            </div>
-                        </div>
-                    </div>-->
+                    </form>
                 </div>
-            </main>
-
+            </div>
         </div>
 
-        <footer class="footer bg-light border-top mt-auto">
+        <footer class="footer border-top mt-auto">
             <div class="container my-2">
                 <div class="row">
-                    <div class="col-md-4 text-muted text-center">
-                        AAAAAAAAAAAAAAAA
+                    <div id="PSI" class="col-md-4">
+                        Principi softverskog inženjerstva
                     </div>
-                    <div class="col-md-4 text-muted text-center">
-                        AAAAAAAAAAAAAAAA
+                    <div class="col-md-4 text-center">
+                        <a id="ETF" href="https://www.etf.bg.ac.rs"> Elektrotehnički fakultet u Beogradu</a>
                     </div>
-                    <div class="col-md-4 text-muted text-center">
-                        AAAAAAAAAAAAAAAA
+                    <div class="col-md-4 text-left">
+                        Tim: Under pressure
                     </div>
                 </div>
             </div>
         </footer>
-
         <script src="js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
