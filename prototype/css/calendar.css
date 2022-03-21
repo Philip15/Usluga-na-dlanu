@@ -1,0 +1,94 @@
+ul {
+    list-style-type: none;
+}
+
+/* Month header */
+.month {
+  padding: 50px 25px;
+  width: 100%;
+  background:#1abc9c;
+  text-align: center;
+}
+
+/* Month list */
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 30px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+/* Next button */
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color:#ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: rgb(53, 53, 53);
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: rgb(85, 85, 85);
+}
+
+/* Highlight the "current" day */
+.days li .active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important
+}
+
+.days li .occupied {
+    padding: 5px;
+    background: red;
+    color: white !important
+}
+
+.days li .last-month {
+    padding: 5px;
+    color:rgb(196, 196, 196);
+}
+.wrap-cal{
+    width: 650px;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 15px 15px 15px 15px;
+    background: #ADEFD1FF;
+}
