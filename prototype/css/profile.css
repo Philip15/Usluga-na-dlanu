@@ -1,0 +1,142 @@
+.form-control:focus {
+    box-shadow: none;
+    border-color: #062639;
+}
+
+.profile-button {
+    background: #062639;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #06263991;
+}
+
+.profile-button:focus {
+    background: #062639;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #062639;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #062639;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 14px;
+    padding-top: 13px;
+    padding-bottom: 3px;
+}
+
+.labels-sel {
+    font-size: 14px;
+    padding-bottom: 3px;
+}
+
+.add-experience:hover {
+    background: #062639;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #062639
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* Month header */
+.month {
+  padding: 30px 15px;
+  width: 100%;
+  background:#1abc9c;
+  text-align: center;
+}
+
+/* Month list */
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+/* Next button */
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  margin: 0;
+  padding: 5px 0;
+  background-color:#ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 12.9%;
+  color: rgb(53, 53, 53);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+  padding: 5px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 12.9%;
+  text-align: center;
+  margin-bottom: 3px;
+  font-size: 14px;
+  color: rgb(85, 85, 85);
+}
+
+/* Highlight the "current" day */
+.days li .active {
+  padding: 3px;
+  background: #1abc9c;
+  color: white !important
+}
+
+.days li .occupied {
+    padding: 3px;
+    background: red;
+    color: white !important
+}
+
+.days li .last-month {
+    padding: 3px;
+    color:rgb(196, 196, 196);
+}
+.wrap-cal{
+    width: 400px;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 15px 15px 15px 15px;
+    background: #ADEFD1FF;
+}
