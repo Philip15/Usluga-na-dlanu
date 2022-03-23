@@ -1,0 +1,109 @@
+% !TeX spellcheck = sr_LATN-SerbianLatin
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1,OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{enumitem}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+%EDIT HERE
+\newcommand{\genitivfunkcionalnosti}{Administracije - odobravanju registracije pružaoca}
+\newcommand{\dativfunkcionalnosti }{Administraciji - odobravanju registracije pružaoca}
+\newcommand{\inicijalniautor}{Filip Janjić}
+\newcommand{\inicijalnidatum}{20.03.2022.}
+
+\title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
+\author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
+	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\
+	\large Verzija 1.0}
+\renewcommand{\contentsname}{Sadržaj}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{center}
+		\section*{Istorija izmena}
+			\begin{tabular}{ |l|l|l|l| }
+				\hline
+				\textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
+				\hline
+				\inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
+				\hline
+				&  & &  \\
+				\hline
+				&  &  &  \\
+				\hline
+				&  &  &  \\
+				\hline
+			\end{tabular}
+	\end{center}
+	
+	\newpage
+	
+	\tableofcontents
+	
+	\newpage
+	
+	\section{Uvod}
+		\subsection{Rezime}
+			Definisanje scenarija upotrebe pri \dativfunkcionalnosti, sa primerima odgovarajućih HTML stranica.
+		\subsection{Namena dokumenta i ciljne grupe}
+			Dokument će koristiti svi članovi projektnog tima u razvoju projekta i testiranju, a može se koristiti i pri pisanju dokumentacije namenjene administratoru.
+		\subsection{Reference}
+			\begin{enumerate}
+				\item Projektni zadatak
+				\item Uputstvo za pisanje specifikacije scenarija upotrebe funkcionalnosti
+				\item Guidelines - Use Case, Rational Unified Process 2000
+				\item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+			\end{enumerate}
+		\subsection{Otvorena pitanja}
+			\begin{tabular}{ |c|p{10cm}|l| }
+				\hline
+				\textbf{Redni broj} & \textbf{Opis} & \textbf{Rešenje} \\ 
+				\hline
+			    & &  \\
+				\hline
+			    &  & \\
+				\hline
+				&  & \\
+				\hline
+				&  & \\
+				\hline
+			\end{tabular}
+	\section{Scenario \genitivfunkcionalnosti}
+		\subsection{Kratak opis}
+			Korisnik sa privijegijama administratora može odobravati zahteve za registraciju pružaocima usluga
+		\newpage
+		\subsection{Tok događaja}
+			\paragraph*{Osnovni uspešni scenario}
+				\begin{enumerate}
+					\item Admin ulazi na karticu za zahteve za registracijom.
+					\item Admin prihvata određeni zahtev pritiskom na dugme "Odobri".
+					\item Kreira se nov profil sa rolom pružaoca i unosi se u bazu.
+					\item Zahtev se briše iz tekućih zahteva.
+				\end{enumerate}
+			\paragraph*{Proširenja}
+				\begin{enumerate}
+					\item[2.1] Odbijanje zahteva za registracijom
+						\begin{enumerate}[noitemsep,topsep=-8pt]
+							\item Admin pritiska dugme "Odbij".
+							\item Korisniku se kreira običan profil.
+						\end{enumerate}
+				\end{enumerate}
+		\subsection{Posebni zahtevi}
+			Nema.
+		\subsection{Preduslovi}
+			Administrator mora da bude prijavljen na sistem da bi mu se omogućila ova opcija.
+		\subsection{Posledice}
+			Kreira se profil korisnika, po mogućstvu sa rolom pružaoca, koji se unosi u bazu.
+\end{document}

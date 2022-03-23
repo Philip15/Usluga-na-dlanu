@@ -10,8 +10,8 @@
 \setcounter{tocdepth}{4}
 
 \title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
-\author{\Huge \textbf{Usluga na dlanu}\\ \ \\\includegraphics[scale=0.25]{res/Logo.png}\\}
-\date{\Large Projektni zadatak \\ \ \\ \ \\ \Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.0}
+\author{\Huge \textbf{Usluga na dlanu}\\ \ \\\includegraphics[scale=0.25]{Logo.png}\\}
+\date{\Large Projektni zadatak \\ \ \\ \ \\ \Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.1}
 \renewcommand{\contentsname}{Sadržaj}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -21,7 +21,7 @@
 
 \begin{center}
 \section*{Istorija izmena}
-\begin{tabular}{ |l|l|l|l| }
+\begin{tabular}{ |l|l|l|l|}
 \hline
 \textbf{Datum} & \textbf{Verzija} & \textbf{Kratak opis} & \textbf{Autor} \\ 
 \hline
@@ -29,7 +29,7 @@
  \hline
  14.03.2022. & 1.0 & Dopuna funkcionalnosti & Filip Janjić \\
  \hline
- &  &  &  \\
+ 23.03.2022. & 1.1 & Razdvajanje složenih funkcionalnosti & Filip Janjić \\
  \hline
  &  &  &  \\
  \hline
@@ -81,8 +81,12 @@ U ovom odeljku definišu se osnovne funkcije koje sistem treba da obezbedi razli
 Korisnik se može registrovati unošenjem korisničkog imena i šifre. Ukoliko korisnik želi da bude pružalac usluge, potrebno je da unese dodatne podatke(kategoriju usluge, email adresu i adresu poslovanja), nakon čega je potrebno odobrenje naloga od strane administratora. 
 \subsection{Prijava korisnika}
 Korisnik se može prijaviti korišćenjem korisničkog imena i šifre koje je uneo prilikom registracije. Prijavljenom korisniku je omogućen pregled informacija o pružaocu usluge i kontaktiranje istog.
-\subsection{Administracija}
-Korisnik sa privilegijama administratora može: odobravati zahteve za registraciju pružaocima usluga, uređivati kategorije usluga i upravljati svim nalozima.
+\subsection{Administracija - odobravanje registracije pružaoca}
+Korisnik sa privilegijama administratora može odobravati zahteve za registraciju pružaocima usluga koje oni šalju pri registraciji ili naknadnom izjašnjavanju kao pružalac.
+
+\subsection{Administracija - uređivanje kategorija usluga}
+Korisnik sa privilegijama administratora može dodati ili ukloniti određenu kategoriju usluga.
+
 \subsection{Uređivanje profila pružaoca}
 Pružalac usluge može urediti svoj profil koji se sastoji od profilne slike, opisa i kontakt informacija.
 
