@@ -140,3 +140,16 @@ ul {
     padding: 15px 15px 15px 15px;
     background: #ADEFD1FF;
 }
+
+.container-cal-profile{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+}
