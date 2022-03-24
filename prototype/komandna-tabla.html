@@ -15,7 +15,7 @@
 		<script src="js/prototype.js"></script>
 	</head>
 	<body class="d-flex flex-column h-100 bg-dark">
-		<header>
+        <header>
             <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered ">
                     <div class="modal-content bg-light">
@@ -56,7 +56,9 @@
                             </span>
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
-                        <li><a class="dropdown-item" href="dashboard.html">Komandna Tabla <span class="badge bg-danger" id="numberOfNotifications"></span></a></li>
+                        <li><a class="dropdown-item" href="komandna-tabla.html">Komandna Tabla <span class="badge bg-danger" id="numberOfNotifications"></span></a></li>
+                        <li><a class="dropdown-item" href="uredjivanje-profila.html" id="editUser">Uređivanje profila</a></li>
+                        <li><a class="dropdown-item" href="uredjivanje-profila-pruzaoca.html" id="editProvider">Uređivanje profila</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
                     </ul>
@@ -66,7 +68,7 @@
                     <a class="btn btn-primary" href="registration.html" role="button">Registracija</a>
                 </div>
             </nav>
-            <script>clearNotifications();header_Init(true);</script>
+            <script>clearNotifications();header_Init(false);</script>
         </header>
 
 		<div class="container" id="reviewContainer">

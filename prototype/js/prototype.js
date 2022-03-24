@@ -6,7 +6,8 @@ function initLocalStorage()
     if(ls.users === undefined) 
     {
         ls.users="{}"; 
-        register("lazar","qwerty");
+        register("lazar","qwerty","user");
+        register("pruzalac","asdf","provider");
         ls.user="lazar";
         addOpenReview("Misko","24.03.2022.");
         addOpenReview("Zaki","25.03.2022.");
@@ -52,16 +53,21 @@ function initLocalStorage()
     }
 }
 
-function register(username,password)
+function register(username,password,type)
 {
     var users = JSON.parse(ls.users);
     users[username]={};
     users[username]["password"]=password;
+    users[username]["type"]=type;
     ls.users=JSON.stringify(users);
 }
 
 function login(username,password)
 {
+    if(JSON.parse(ls.users)[username]===undefined)
+    {
+        return false;
+    }
     if(JSON.parse(ls.users)[username]["password"]===password)
     {
         ls.user=username;
@@ -73,6 +79,12 @@ function login(username,password)
 function isUserLoggedIn()
 {
     return ls.user !== undefined;
+}
+
+function isGetUserType()
+{
+    var users = JSON.parse(ls.users);
+    return users[ls.user]["type"];
 }
 
 function addOpenReview(provider,date)
@@ -318,6 +330,16 @@ function header_Init(redirect)
         else
         {
             document.getElementById("numberOfNotifications").innerHTML=numnot;
+        }
+        if(isGetUserType()=="provider")
+        {
+            document.getElementById("editUser").style.display="none";
+            document.getElementById("editProvider").style.display="block";
+        }
+        else
+        {
+            document.getElementById("editUser").style.display="block";
+            document.getElementById("editProvider").style.display="none";
         }
     }
     else 
