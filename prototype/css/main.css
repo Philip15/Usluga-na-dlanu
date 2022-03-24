@@ -16,7 +16,7 @@ footer{
 .navbar-brand{
     font-weight: bolder;
     color: #062639;
-    font-size: 26px;
+    font-size: 28px;
 }
 
 .reg{
@@ -25,11 +25,11 @@ footer{
 }
 
 #logo{
-    margin-left: 15px;
+    margin-left: 16px;
 }
 
 .reg-title {
-    font-size: 26px;
+    font-size: 28px;
     line-height: 1.2;
     text-align: center;
     text-transform: uppercase;
@@ -48,7 +48,7 @@ footer{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 16px;
     background-position: center;
     background-size: cover;
     position: relative;
@@ -65,7 +65,7 @@ footer{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 16px;
     background-position: center;
     background-size: cover;
     position: relative;
