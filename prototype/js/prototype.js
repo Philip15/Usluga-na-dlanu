@@ -99,6 +99,21 @@ function addOpenReview(provider,date)
     addNotification();
 }
 
+function removeReview(provider)
+{
+    var users = JSON.parse(ls.users);
+    var reviews = users[ls.user]["reviews"];
+    var remaining=[];
+    for (let i = 0; i < reviews.length; i++) {
+        if(reviews[i].provider!=provider)
+        {
+            remaining.push(reviews[i]);
+        }
+    }
+    users[ls.user]["reviews"]=remaining;
+    ls.users=JSON.stringify(users);
+}
+
 function addNotification()
 {
     var users = JSON.parse(ls.users);
@@ -112,6 +127,7 @@ function addNotification()
 
 function clearNotifications() 
 {
+    if(ls.user==undefined){return;}
     var users = JSON.parse(ls.users);
     users[ls.user]["notifications"]=0;
     ls.users=JSON.stringify(users);
@@ -465,7 +481,7 @@ function locationChangedCallback(currentLocation, radius, isMarkerDropped) {
 
 function onClick_Card(e)
 {
-    console.log(e.getElementsByClassName("card-title")[0].innerHTML);
+    window.location.href="kontaktiranje-pruzaoca.html?name="+e.getElementsByClassName("card-title")[0].innerHTML;
 }
 
 function dashboard_Init()
@@ -486,10 +502,10 @@ function dashboard_Init()
             </div>
             <div class="col-auto">
                 <div class="row">
-                    <output class="fs-4 fw-bold mb-2" id="pruzalac">${openRewiews[i].provider}</output>
+                    <output class="fs-4 fw-bold mb-2 pruzalac" id="pruzalac">${openRewiews[i].provider}</output>
                 </div>
                 <div class="row">
-                    <output class="fs-5 fw-bold mb-2" id="datum">${openRewiews[i].date}</output>
+                    <output class="fs-5 fw-bold mb-2 datum" id="datum">${openRewiews[i].date}</output>
                 </div>
             </div>
         </div>
@@ -570,6 +586,7 @@ function onClick_Remove(e)
     if(confirm("Da li zaista želite da uklonite ovu uslugu bez davanja recenzije?"))
     {
         e.parentElement.parentElement.setAttribute('style', 'display:none !important');
+        removeReview(e.parentElement.parentElement.getElementsByClassName("pruzalac")[0].innerHTML);
     }
 }
 
@@ -578,6 +595,7 @@ function onClick_Post(e)
     if(e.parentElement.parentElement.getElementsByClassName("bi-star-fill").length>0)
     {
         e.parentElement.parentElement.setAttribute('style', 'display:none !important');
+        removeReview(e.parentElement.parentElement.getElementsByClassName("pruzalac")[0].innerHTML);
     }
     else
     {
