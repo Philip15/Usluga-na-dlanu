@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sr" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon"       type="image/png" href="res/favicon.png">
+        <link rel="stylesheet" type="text/css"  href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css"  href="css/main.css" />
+        <link rel="stylesheet" type="text/css" href="css/profile.css">
+
+        <title>Usluga na dlanu</title>
+</head>
+<body style="background-color: #062639;">
+    <header>
+        <div class="container-fullwidth">
+            <nav class="navbar">
+                <a class="navbar-brand" href="main-page.html">
+                    <img id="logo" src="res/Logot.png" height="50px"/>
+                    Usluga na dlanu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="images/avatar1.jpg">
+                    <span class="font-weight-bold" style="font-size:larger">Pera Perić</span>
+                    <span class="text-black-50">pera.peric@gmail.com</span>
+                    <br>
+                    <button class="btn btn-primary profile-button" type="button">Izmeni profilnu sliku</button>
+                    <span> </span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Pregled profila</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">Ime</label><input type="text" class="form-control" placeholder="Ime" value=""></div>
+                        <div class="col-md-6"><label class="labels">Prezime</label><input type="text" class="form-control" value="" placeholder="Prezime"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Korisničko ime</label><input type="text" class="form-control" placeholder="Korisničko ime" value=""></div>
+                        <div class="col-md-12"><label class="labels">Email adresa</label><input type="email" class="form-control" placeholder="email@email.com" value=""></div>
+                        <div class="col-md-12"><label class="labels">Lozinka</label><input type="password" class="form-control" placeholder="Lozinka" value=""></div>
+                        <div class="col-md-12"><label class="labels">Dodatne informacije</label><input type="text" class="form-control" placeholder="Dodatne informacije" value=""></div>
+                    </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Sačuvaj izmene</button></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience"><h4>Izmena profila u pružaoca usluge<h4></div><br>
+                    <div class="col-md-12"><label class="labels">Kategorija usluge</label>
+                        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                        <option selected>Vodoinstalater</option>
+                        <option value="1">Električar</option>
+                        <option value="2">Bravar</option>
+                        <option value="3">Moler</option>
+                        </select>
+                        <br>
+                    <div class="col-md-12"><label class="labels-sel">Adresa poslovanja</label><input type="text" class="form-control" placeholder="Ulica i broj, grad" value=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer border-top mt-auto">
+        <div class="container my-2">
+            <div class="row">
+                <div id="PSI" class="col-md-4">
+                    Principi softverskog inženjerstva
+                </div>
+                <div class="col-md-4 text-center">
+                    <a id="ETF" href="https://www.etf.bg.ac.rs"> Elektrotehnički fakultet u Beogradu</a>
+                </div>
+                <div class="col-md-4 text-left">
+                    Tim: Under pressure
+                </div>
+            </div>
+        </div>
+       </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
