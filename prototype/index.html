@@ -21,58 +21,58 @@
     </head>
     <body class="d-flex flex-column h-100 bg-dark">
 
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered ">
-                <div class="modal-content bg-light">
-                    <div class="modal-header border-light mt-3">
-                        <h5 class="modal-title w-100 text-center ms-5" id="loginModalLabel">Prijava</h5>
-                        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="d-flex flex-column container justify-content-center">
-                            <div class="form-floating">
-                                <input class="form-control m-1" type="text" name="username" id="username" placeholder="Korisničko ime">
-                                <label class="d-flex align-items-center" for="username">Korisničko ime</label>
-                            </div>
-                            <div class="form-floating">
-                                <input class="form-control m-1" type="password" name="pass" id="password" placeholder="Lozinka">
-                                <label class="d-flex align-items-center" for="pass">Lozinka</label>
-                            </div>
-                            <p class="px-2 mt-2 mb-0 text-danger dnone" id="wrongPassword">Pogrešno korisničko ime ili lozinka.</p>
-                            <div class="form-floating">
-                                <button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" onclick="onClick_Login()">Prijavi se</button>
-                            </div>
-                        </form>
+        <header>
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content bg-light">
+                        <div class="modal-header border-light mt-3">
+                            <h5 class="modal-title w-100 text-center ms-5" id="loginModalLabel">Prijava</h5>
+                            <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="d-flex flex-column container justify-content-center">
+                                <div class="form-floating">
+                                    <input class="form-control m-1" type="text" name="username" id="username" placeholder="Korisničko ime">
+                                    <label class="d-flex align-items-center" for="username">Korisničko ime</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control m-1" type="password" name="pass" id="password" placeholder="Lozinka">
+                                    <label class="d-flex align-items-center" for="pass">Lozinka</label>
+                                </div>
+                                <p class="px-2 mt-2 mb-0 text-danger dnone" id="wrongPassword">Pogrešno korisničko ime ili lozinka.</p>
+                                <div class="form-floating">
+                                    <button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" onclick="onClick_Login()">Prijavi se</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <header>
-                <nav class="navbar navbar-light bg-light px-3">
-                    <a class="navbar-brand fw-bolder fs-3" href="index.html">
-                        <img src="res/Logot.png" height="50px"/>
-                        Usluga na dlanu
+            <nav class="navbar navbar-light bg-light px-3">
+                <a class="navbar-brand fw-bolder fs-3" href="index.html">
+                    <img src="res/Logot.png" height="50px"/>
+                    Usluga na dlanu
+                </a>
+                <div class="dropdown justify-content-end" id="userProfile">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="res/placeholder-user.jpg" width="40" height="40" class="rounded-circle">
+                            <span class="position-absolute top-0 start-40px translate-middle p-2 bg-danger border border-light rounded-circle" id="hasNotifications">
+                                <span class="visually-hidden">Nova Obaveštenja</span>
+                            </span>
                     </a>
-                    <div class="dropdown justify-content-end" id="userProfile">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="res/placeholder-user.jpg" width="40" height="40" class="rounded-circle">
-                                <span class="position-absolute top-0 start-40px translate-middle p-2 bg-danger border border-light rounded-circle" id="hasNotifications">
-                                    <span class="visually-hidden">Nova Obaveštenja</span>
-                                </span>
-                        </a>
-                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
-                            <li><a class="dropdown-item" href="dashboard.html">Komandna Tabla <span class="badge bg-danger" id="numberOfNotifications"></span></a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
-                        </ul>
-                    </div>
-                    <div class="justify-content-end" id="loginButtons">
-                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Prijava</button>
-                        <a class="btn btn-primary" href="registration.html" role="button">Registracija</a>
-                    </div>
-                </nav>
-                <script>header_Init(false);</script>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+                        <li><a class="dropdown-item" href="dashboard.html">Komandna Tabla <span class="badge bg-danger" id="numberOfNotifications"></span></a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
+                    </ul>
+                </div>
+                <div class="justify-content-end" id="loginButtons">
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Prijava</button>
+                    <a class="btn btn-primary" href="registration.html" role="button">Registracija</a>
+                </div>
+            </nav>
+            <script>header_Init(false);</script>
         </header>
 
         <section class="p-0 bg-white">
@@ -82,9 +82,9 @@
         <div class="d-flex">
             <aside class="d-flex flex-column flex-shrink-0 p-3 border-end text-light border-light" style="width:280px;">
                 <h5>Kategorije usluga:</h5>
-                <ul class="flex-column nav">
+                <ul class="flex-column nav" id="categories">
                     <li class="nav-item">
-                        <button type="button" class="btn nav-link text-light bg-dark w-100 active" aria-current="page" onclick="onClick_Category(this)"> Sve</button>
+                        <button type="button" class="btn nav-link text-light bg-dark w-100" aria-current="page" onclick="onClick_Category(this)">Sve</button>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="btn nav-link text-light bg-dark w-100" onclick="onClick_Category(this)">Vodoinstalater</button>
@@ -147,8 +147,8 @@
                     <script>
                         $('#locationPicker').locationpicker({
                             location: {
-                                latitude: 44.816667,
-                                longitude: 20.466667
+                                latitude: getSearchParam("lat"),
+                                longitude: getSearchParam("lon")
                             },
                             radius: 0,
                             onchanged: locationChangedCallback
@@ -158,106 +158,8 @@
             </aside>
 
             <main class="w-100 mx-4 my-4">
-                <div class="row">
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov1</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov2</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov3</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov4</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov5</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov6</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov7</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov8</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov9</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov10</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
-                    <div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-                        <img src="res/placeholder-avatar1.jpg" class="card-img-top"/>
-                        <div class="card-body">
-                            <h5 class="card-title">Naslov11</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3km</h6>
-                            <p class="card-text">Kratak opis usluge</p>
-                            <p class="card-text"><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></p>
-                        </div>
-                    </div>
+                <div class="row" id="cardContainer">
+                    
                 </div>    
             </main>
 
@@ -278,6 +180,7 @@
                 </div>
             </div>
         </footer>
+        <script>index_Init();</script>
         <script src="js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
