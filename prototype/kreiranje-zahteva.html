@@ -174,9 +174,36 @@
 		
 		<!--                                                                                                                                                     MEJL -->
 			
+
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered ">
+				<div class="modal-content bg-light">
+					<div class="modal-header border-light mt-3">
+						<h5 class="modal-title w-100 text-center ms-5" id="loginModalLabel">Kreiranje zahteva</h5>
+						<button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+                        
+						<form class="d-flex flex-column container justify-content-center">
+							<div class="form-floating">
+								<input class="form-control m-1" type="text" name="username" id="username" placeholder="Korisničko ime">
+								<label class="d-flex align-items-center" for="username">Korisničko ime</label>
+							</div>
+							<div class="form-floating">
+								<input class="form-control m-1" type="password" name="pass" id="password" placeholder="Lozinka">
+								<label class="d-flex align-items-center" for="pass">Lozinka</label>
+							</div>
+							<div class="form-floating">
+								<button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" onclick="onClick_Login()">Prijavi se</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 			<div class="col-sm-5 text-center">
 				<br><br>
-				<button class="btn btn-primary" type="button" style= "float:center; margin-bottom:10px; margin-right:25px; background-color:green; height:20%; width:80%">
+				<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#requestModal" style= "float:center; margin-bottom:10px; margin-right:25px; background-color:green; height:20%; width:80%">
 				Kreiraj zahtev</button><br><br><br>
 				
 				<h2 style="float:center">Pošalji poruku</h2>
