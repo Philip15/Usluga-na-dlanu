@@ -1,0 +1,163 @@
+<!--Autor: Filip Janjić-->
+<!DOCTYPE html>
+
+<html lang="sr" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Filip Janjic">
+
+        <link rel="icon"       type="image/png" href="res/favicon.png">
+        <link rel="stylesheet" type="text/css"  href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css"  href="css/style.css" />
+		<link rel="stylesheet" type="text/css"  href="css/reg.css" />
+		<link rel="stylesheet" type="text/css"  href="css/profile.css" />
+        <link rel="stylesheet" type="text/css" href="css/calendar.css" />
+
+		<script src="js/prototype.js"></script>
+		<script src="js/request.js"></script>
+
+        <title>Usluga na dlanu</title>
+    </head>
+
+    <body style="background-color: #062639;">
+
+        <header>
+            <nav class="navbar navbar-light bg-light px-3">
+                <a class="navbar-brand fw-bolder fs-3" href="administracija.html">
+                    <img src="res/Logot.png" height="50px"/>
+                    Usluga na dlanu
+                </a>
+                <div class="dropdown justify-content-end" id="userProfile">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="res/placeholder-user.jpg" width="40" height="40" class="rounded-circle">
+                            <span class="position-absolute top-0 start-40px translate-middle p-2 bg-danger border border-light rounded-circle" id="hasNotifications">
+                                <span class="visually-hidden">Nova Obaveštenja</span>
+                            </span>
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
+                    </ul>
+                </div>
+               
+            </nav>
+            <script>ls.user="lazar";header_Init(true);</script>
+            <script src="js/bootstrap.bundle.min.js"></script>
+        </header>
+
+        <div class="d-flex flex-column container justify-content-center bg-light rounded-3 px-4 my-5" id="k1">
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <div class="row">
+                        <label  class="form-label fs-4 fw-bold">Korisničko ime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Ime i prezime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Email:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Kategorija:</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <output class="fs-4 fw-bold mb-2 pruzalac">PeraPeric77</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Petar Peric</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">peraperic1977@gmail.com</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Vodoinstalater</output>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-3 justify-content-end">
+                <button type="button" class="btn btn-success  mx-1" onclick="onClick_AdminAcceptRequest(1)">Prihvati</button>
+                <button type="button" class="btn btn-danger mx-1" onclick="onClick_AdminDenyRequest(1)">Odbij</button>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column container justify-content-center bg-light rounded-3 px-4 my-5" id="k2">
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <div class="row">
+                        <label  class="form-label fs-4 fw-bold">Korisničko ime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Ime i prezime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Email:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Kategorija:</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <output class="fs-4 fw-bold mb-2 pruzalac">MileVratar65</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Milovan Radovanovic</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">milemile@gmail.com</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Vratar</output>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-3 justify-content-end">
+                <button type="button" class="btn btn-success  mx-1" onclick="onClick_AdminAcceptRequest(2)">Prihvati</button>
+                <button type="button" class="btn btn-danger mx-1" onclick="onClick_AdminDenyRequest(2)">Odbij</button>
+            </div>
+        </div>
+
+
+        <div class="d-flex flex-column container justify-content-center bg-light rounded-3 px-4 my-5" id="k3">
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <div class="row">
+                        <label  class="form-label fs-4 fw-bold">Korisničko ime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Ime i prezime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Email:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Kategorija:</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <output class="fs-4 fw-bold mb-2 pruzalac">DjokaMoler66</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Djordje Martic</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">djoka66@gmail.com</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Moler</output>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-3 justify-content-end">
+                <button type="button" class="btn btn-success  mx-1" onclick="onClick_AdminAcceptRequest(3)">Prihvati</button>
+                <button type="button" class="btn btn-danger mx-1" onclick="onClick_AdminDenyRequest(3)">Odbij</button>
+            </div>
+        </div>
+
+
+    </body>
+</html>
