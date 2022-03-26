@@ -1,5 +1,7 @@
 //Autor: Filip Janjic
 
+var hideFunc = -1;
+
 function onClick_NewRequest()
 {
     var sendButton = document.getElementById("sendRequestButton");
@@ -36,6 +38,11 @@ function onClick_RejectRequest()
     rejectButton.hidden = true;
 }
 
+function onClick_HideRequest()
+{
+    document.getElementById("k" + hideFunc).innerHTML = "";
+}
+
 function reloadPage()
 {
     location.reload();
@@ -49,11 +56,23 @@ function clearPage()
     emailBtn.disabled = true;
 }
 
-function disablePosaljiMejl(emailText)
+function disableSendMail(emailText)
 {
     var emailBtn = document.getElementById("emailBtn");
     if (emailText.value.trim() != "") emailBtn.disabled = false;
     else emailBtn.disabled = true;
+}
+
+function disableSendRequest(reqText)
+{
+    var reqBtn = document.getElementById("sendRequestButton");
+    if (reqText.value.trim() != "") reqBtn.disabled = false;
+    else reqBtn.disabled = true;
+}
+
+function onClick_AdminAcceptRequestDelay(admin)
+{
+    hideFunc = admin;
 }
 
 function onClick_AdminAcceptRequest(admin)
