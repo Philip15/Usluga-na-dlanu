@@ -24,7 +24,7 @@
 \title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
 \author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
 	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
-\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.0}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.1}
 \renewcommand{\contentsname}{Sadržaj}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -40,7 +40,7 @@
 \hline
  \inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
  \hline
- &  & &  \\
+ 25.03.2022. & 1.1  & Ispravljene slovne greške & \inicijalniautor \\
  \hline
  &  &  &  \\
  \hline
@@ -93,9 +93,9 @@ Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i te
         \item Korisnik unosi lozinku.
         \item Korisnik označava da li želi da bude pružalac usluge.
         \item Korisnik mora da označi saglasnost o uslovima korišćenja.
-        \item Sistem šalje verifikacioni kod na unetu korisničku email adresu, čijim daljim unosom korisnik potvrđuje da je uneta korektna email adresa. Unete informacije o korisniku i se upisuje u bazu zahteva za kreiranje naloga. 
+        \item Sistem šalje verifikacioni kod na unetu korisničku email adresu, čijim daljim unosom korisnik potvrđuje da je uneta korektna email adresa. Unete informacije o korisniku se upisuju u bazu zahteva za kreiranje naloga. 
         \item Korisnik unosi verifikacioni kod koji mu je dostavljen na email adresu.
-        \item Sistem unosi nalog korisnika u bazu.
+        \item Sistem unosi korisnikov nalog u bazu.
         \item Nakon 24h zahtev za kreiranje naloga korisnika se briše iz baze.
     \end{enumerate}
 
@@ -122,7 +122,7 @@ Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i te
                 \item Sistem prikazuje poruku da treba popuniti sva obavezna polja.
             \end{enumerate}
  
-        \item[6.2] Korisnik nije validnu email adresu.
+        \item[6.2] Korisnik nije uneo validnu email adresu.
              \begin{enumerate}[noitemsep,topsep=-8pt]
                 \item Sistem prikazuje poruku da uneta email adresa nije validna.
                 \item Korisnik se vraća u korak 2.
@@ -134,5 +134,5 @@ Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i te
 \subsection{Preduslovi}
     Potrebno je da korisnik poseduje email adresu. 
 \subsection{Posledice}
-    Nakon uspešno izvršene sekvence koraka, u bazu se trajno upisuje korsniko sa svojim informacijama i dalje može pristupati sajtu prijavom pomoću korisničkog imena i lozinke.
+    Nakon uspešno izvršene sekvence koraka, u bazu se trajno upisuje korisnik sa potrebnim informacijama. Korisnik dalje pristupa sajtu prijavom na sistem pomoću korisničkog imena i lozinke.
 \end{document}
