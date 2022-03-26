@@ -1,0 +1,81 @@
+<!--Autor: Filip Janjić-->
+<!DOCTYPE html>
+
+<html lang="sr" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Filip Janjic">
+
+        <link rel="icon"       type="image/png" href="res/favicon.png">
+        <link rel="stylesheet" type="text/css"  href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css"  href="css/style.css" />
+		<link rel="stylesheet" type="text/css"  href="css/reg.css" />
+		<link rel="stylesheet" type="text/css"  href="css/profile.css" />
+        <link rel="stylesheet" type="text/css" href="css/calendar.css" />
+
+		<script src="js/prototype.js"></script>
+		<script src="js/request.js"></script>
+        <script src="js/categories.js"></script>
+
+        <title>Usluga na dlanu</title>
+    </head>
+
+    <body style="background-color: #062639;">
+
+        <header>
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content bg-light">
+                        <div class="modal-header border-light mt-3">
+                            <h5 class="modal-title w-100 text-center ms-5" id="loginModalLabel">Prijava</h5>
+                            <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="d-flex flex-column container justify-content-center">
+                                <div class="form-floating">
+                                    <input class="form-control m-1" type="text" name="username" id="username" placeholder="Korisničko ime">
+                                    <label class="d-flex align-items-center" for="username">Korisničko ime</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control m-1" type="password" name="pass" id="password" placeholder="Lozinka">
+                                    <label class="d-flex align-items-center" for="pass">Lozinka</label>
+                                </div>
+                                <p class="px-2 mt-2 mb-0 text-danger dnone" id="wrongPassword">Pogrešno korisničko ime ili lozinka.</p>
+                                <div class="form-floating">
+                                    <button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" onclick="onClick_Login()">Prijavi se</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <nav class="navbar navbar-light bg-light px-3">
+                <a class="navbar-brand fw-bolder fs-3" href="administracija.html">
+                    <img src="res/Logot.png" height="50px"/>
+                    Usluga na dlanu
+                </a>
+                <div class="dropdown justify-content-end" id="userProfile">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="res/placeholder-user.jpg" width="40" height="40" class="rounded-circle">
+                            <span class="position-absolute top-0 start-40px translate-middle p-2 bg-danger border border-light rounded-circle" id="hasNotifications">
+                                <span class="visually-hidden">Nova Obaveštenja</span>
+                            </span>
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <script>ls.user="lazar";header_Init(true);</script>
+            <script src="js/bootstrap.bundle.min.js"></script>
+        </header>
+
+        <a href="administracija-uredjivanje-kategorija.html"><button class="btn btn-primary profile-button" type="button" style="background-color:#1abc9c; width:30%; height:100px; margin-top: 15%; margin-left: 20%">Uredi kategorije</button></a>
+        <a href="administracija-odobravanje-registracije.html"><button class="btn btn-primary profile-button" type="button" style="background-color:#1abc9c; width:30%; height:100px; margin-top: 15%;">Zahtevi</button></a>
+
+
+    </body>
+</html>
