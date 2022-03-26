@@ -14,6 +14,11 @@ function initLocalStorage()
         addOpenReview("Goran","22.03.2022.");
         addOpenReview("Mika","20.03.2022.");
         ls.removeItem("user");
+        ls.user="pruzalac";
+        addRequest();
+        addRequest();
+        addRequest();
+        ls.removeItem("user");
     }
     if(ls.providers === undefined)
     {
@@ -139,6 +144,33 @@ function getNumberOfNotifications()
     var users = JSON.parse(ls.users);
     if(users[ls.user]["notifications"]===undefined){return 0;}
     return users[ls.user]["notifications"];
+}
+
+function addRequest()
+{
+    var users = JSON.parse(ls.users);
+    if(users[ls.user]["requests"]===undefined)
+    {
+        users[ls.user]["requests"]=0;
+    }
+    users[ls.user]["requests"]++;
+    ls.users=JSON.stringify(users);
+}
+
+function clearRequests() 
+{
+    if(ls.user==undefined){return;}
+    var users = JSON.parse(ls.users);
+    users[ls.user]["requests"]=0;
+    ls.users=JSON.stringify(users);
+}
+
+function getNumberOfRequests() 
+{
+    if(ls.user===undefined){return 0;}
+    var users = JSON.parse(ls.users);
+    if(users[ls.user]["requests"]===undefined){return 0;}
+    return users[ls.user]["requests"];
 }
 
 function registerProvider(pathToPicture,name,category,lat,lon,description,rating)
@@ -339,23 +371,27 @@ function header_Init(redirect)
     {
         document.getElementById("loginButtons").style.display="none";
         var numnot = getNumberOfNotifications();
-        if(numnot === 0)
+        var numreq = getNumberOfRequests();
+        if(numnot+numreq === 0)
         {
             document.getElementById("hasNotifications").style.display="none";
         }
         else
         {
-            document.getElementById("numberOfNotifications").innerHTML=numnot;
+            if(numnot !== 0){document.getElementById("numberOfNotifications").innerHTML=numnot;}
+            if(numreq !== 0){document.getElementById("numberOfRequests").innerHTML=numreq;}
         }
         if(isGetUserType()=="provider")
         {
             document.getElementById("editUser").style.display="none";
             document.getElementById("editProvider").style.display="block";
+            document.getElementById("dropdownZahtevi").style.display="block";
         }
         else
         {
             document.getElementById("editUser").style.display="block";
             document.getElementById("editProvider").style.display="none";
+            document.getElementById("dropdownZahtevi").style.display="none";
         }
     }
     else 
