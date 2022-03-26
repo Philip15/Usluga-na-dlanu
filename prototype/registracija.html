@@ -1,3 +1,4 @@
+<!--Autor: Jana Pašajlić-->
 <!DOCTYPE html>
 <html lang="sr" class="h-100">
     <head>
@@ -12,6 +13,25 @@
     </head>
     <body>
         
+        <div class="modal fade" id="KODModal" tabindex="-1" aria-labelledby="KODModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content bg-light">
+                    <div class="modal-header border-light mt-3">
+                        <h5 class="modal-title w-100 text-center ms-5" id="KODModalLabel"> Poslat je verifikacioni kod na Vaš mail. Unesite kod: </h5>
+                        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <input type="text" name="" id="verifikacioniKod">
+                    </div>
+                    <div class="form-floating text-center">
+                        <button type="button" data-bs-dismiss="modal" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" style="width: 50%">Proveri</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <header>
             <div class="container-fullwidth">
                 <nav class="navbar">
@@ -61,15 +81,15 @@
                             <input class="input" type="password" name="pass2" placeholder="Lozinka">
                         </div>
     
-                        <!--div class="wrap-input">
-                            <input class="input-checkbox" id="ckb1" type="checkbox" name="remember-me">
+                        <div class="wrap-input">
+                            <input class="input-checkbox" id="ckb1" type="checkbox" name="uslovi koriscenja">
                             <label class="label-checkbox" for="ckb1">
-                                Zapamti me
+                                Slažem se sa uslovima korišćenja
                             </label>
-                        </div>-->
-    
+                        </div>
+                        
                         <div>
-                            <button class="btn-reg">
+                            <button class="btn-reg" data-bs-toggle="modal" data-bs-target="#KODModal" type="button">
                                 Registruj se
                             </button>
                         </div>
