@@ -1,3 +1,5 @@
+//Autor: Lazar Premovic
+
 var ls = window.localStorage
 
 /*We can initialize local storage here if we need to*/
