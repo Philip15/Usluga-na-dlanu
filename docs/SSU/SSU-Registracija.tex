@@ -83,7 +83,7 @@ Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i te
     
 \section{Scenario \genitivfunkcionalnosti}
 \subsection{Kratak opis}
-    Korisnik se registruje unošenjem jedinstvenog korisničkog imena, jedinstvene email adrese i lozinke. Bez registracije i kreiranja naloga korisnik nije u mogućnosti da vidi kontakt informacije o pružaocima usluga. Ukoliko korisnik želi da bude pružalac usluge, potrebno je da unese dodatne podatke (kategoriju usluge i adresu poslovanja). Nakon korektno unetih podataka, na email adresu korisnika se šalje verifikacioni kod čijim se unošenjem prilikom registracije potvrđuje ispravnost unete email adrese, kreira se nalog i korisnik se registruje na sajt. 
+    Korisnik se registruje unošenjem jedinstvenog korisničkog imena, jedinstvene email adrese i lozinke. Bez registracije i kreiranja naloga korisnik nije u mogućnosti da vidi kontakt informacije o pružaocima usluga. Nakon korektno unetih podataka, na email adresu korisnika se šalje verifikacioni kod čijim se unošenjem prilikom registracije potvrđuje ispravnost unete email adrese, kreira se nalog i korisnik se registruje na sajt. 
     \newpage
 \subsection{Tok događaja}
     \paragraph*{Osnovni uspešni scenario}
@@ -91,8 +91,8 @@ Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i te
         \item Korisnik unosi korisničko ime.
         \item Korisnik unosi email adresu.
         \item Korisnik unosi lozinku.
-        \item Korisnik označava da li želi da bude pružalac usluge.
         \item Korisnik mora da označi saglasnost o uslovima korišćenja.
+        \item Korisnik pritiska dugme ''Registruj se''.
         \item Sistem šalje verifikacioni kod na unetu korisničku email adresu, čijim daljim unosom korisnik potvrđuje da je uneta korektna email adresa. Unete informacije o korisniku se upisuju u bazu zahteva za kreiranje naloga. 
         \item Korisnik unosi verifikacioni kod koji mu je dostavljen na email adresu.
         \item Sistem unosi korisnikov nalog u bazu.
@@ -110,12 +110,6 @@ Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i te
         \begin{enumerate}[noitemsep,topsep=-8pt]
             \item Sistem prikazuje da je email adresa zauzeto.
         \end{enumerate}
-    
-        \item[4.1] Korisnik je označio da želi da bude pružalac usluge.
-            \begin{enumerate}[noitemsep,topsep=-8pt]
-                \item Korisnik bira kategorije usluga.
-                \item Korisnik unosi adresu poslovanja.
-            \end{enumerate}
     
         \item[6.1] Korisnik nije uneo sve obavezne informacije.
             \begin{enumerate}[noitemsep,topsep=-8pt]
