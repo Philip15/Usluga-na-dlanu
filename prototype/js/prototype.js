@@ -15,6 +15,9 @@ function initLocalStorage()
         addOpenReview("Zaki","25.03.2022.");
         addOpenReview("Goran","22.03.2022.");
         addOpenReview("Mika","20.03.2022.");
+        addRequest();
+        addRequest();
+        addRequest();
         ls.removeItem("user");
         ls.user="pruzalac";
         addRequest();
@@ -387,13 +390,13 @@ function header_Init(redirect)
         {
             document.getElementById("editUser").style.display="none";
             document.getElementById("editProvider").style.display="block";
-            document.getElementById("dropdownZahtevi").style.display="block";
+            document.getElementById("dropdownZahtevi").href="komandna-tabla-pruzalac.html";
         }
         else
         {
             document.getElementById("editUser").style.display="block";
             document.getElementById("editProvider").style.display="none";
-            document.getElementById("dropdownZahtevi").style.display="none";
+            document.getElementById("dropdownZahtevi").href="kreiranje-zahteva-potvrda-korisnika.html";
         }
     }
     else 
