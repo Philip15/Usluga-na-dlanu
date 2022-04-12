@@ -635,8 +635,9 @@ function onClick_Post(e)
 {
     if(e.parentElement.parentElement.getElementsByClassName("bi-star-fill").length>0)
     {
-        e.parentElement.parentElement.setAttribute('style', 'display:none !important');
+        //e.parentElement.parentElement.setAttribute('style', 'display:none !important');
         removeReview(e.parentElement.parentElement.getElementsByClassName("pruzalac")[0].innerHTML);
+        e.parentElement.parentElement.innerHTML='<p class="fw-bold fs-4 mt-3">Vaša recenzija je zabeležena, hvala na ovojenom vremenu. </p>';
     }
     else
     {
