@@ -390,13 +390,16 @@ function header_Init(redirect)
         {
             document.getElementById("editUser").style.display="none";
             document.getElementById("editProvider").style.display="block";
-            document.getElementById("dropdownZahtevi").href="komandna-tabla-pruzalac.html";
+            document.getElementById("dropdownZahtevi").href="kreiranje-zahteva-pruzalac.html";
+            document.getElementById("dropdownPrihvaceniZahtevi").style.display="block";
+            document.getElementById("dropdownZahtevi").innerHTML='Novi zahtevi <span class="badge bg-danger" id="numberOfRequests"></span>';
         }
         else
         {
             document.getElementById("editUser").style.display="block";
             document.getElementById("editProvider").style.display="none";
             document.getElementById("dropdownZahtevi").href="kreiranje-zahteva-potvrda-korisnika.html";
+            document.getElementById("dropdownPrihvaceniZahtevi").style.display="none";
         }
     }
     else 

@@ -24,7 +24,7 @@
 
         <header>
             <nav class="navbar navbar-light bg-light px-3">
-                <a class="navbar-brand fw-bolder fs-3" href="administracija.html">
+                <a class="navbar-brand fw-bolder fs-3" href="index.html">
                     <img src="res/Logot.png" height="50px"/>
                     Usluga na dlanu
                 </a>
@@ -36,11 +36,19 @@
                             </span>
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+                        <li><a class="dropdown-item" href="komandna-tabla.html">Recenzije <span class="badge bg-danger" id="numberOfNotifications"></span></a></li>
+                        <li><a class="dropdown-item" href="komandna-tabla-pruzalac.html" id="dropdownZahtevi">Zahtevi <span class="badge bg-danger" id="numberOfRequests"></span></a></li>
+                        <li><a class="dropdown-item" href="prihvaceni-zahtevi.html" id="dropdownPrihvaceniZahtevi">Prihvaćeni zahtevi <span class="badge bg-danger" id="numberOfRequests"></span></a></li>
+                        <li><a class="dropdown-item" href="uredjivanje-profila.html" id="editUser">Uređivanje profila</a></li>
+                        <li><a class="dropdown-item" href="uredjivanje-profila-pruzaoca.html" id="editProvider">Uređivanje profila</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
                     </ul>
                 </div>
-               
+                <div class="justify-content-end" id="loginButtons">
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Prijava</button>
+                    <a class="btn btn-primary" href="registracija.html" role="button">Registracija</a>
+                </div>
             </nav>
             <script>ls.user="lazar";header_Init(true);</script>
             <script src="js/bootstrap.bundle.min.js"></script>
