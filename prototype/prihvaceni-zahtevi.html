@@ -1,0 +1,198 @@
+<!--Autor: Jana Pašajlić-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="icon"       type="image/png" href="res/Logot.png"/>
+		<link rel="stylesheet" type="text/css"  href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css"  href="css/style.css"/>
+        <link rel="stylesheet" type="text/css"  href="css/calendar.css"/>
+        <link rel="stylesheet" type="text/css"  href="css/reg.css"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+		<title>Usluga na dlanu</title>
+
+		<script src="js/prototype.js"></script>
+        <script src="js/request.js"></script>
+	</head>
+    <body  class="d-flex flex-column h-100 bg-dark">
+        <header>
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content bg-light">
+                        <div class="modal-header border-light mt-3">
+                            <h5 class="modal-title w-100 text-center ms-5" id="loginModalLabel">Prijava</h5>
+                            <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="d-flex flex-column container justify-content-center">
+                                <div class="form-floating">
+                                    <input class="form-control m-1" type="text" name="username" id="username" placeholder="Korisničko ime">
+                                    <label class="d-flex align-items-center" for="username">Korisničko ime</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control m-1" type="password" name="pass" id="password" placeholder="Lozinka">
+                                    <label class="d-flex align-items-center" for="pass">Lozinka</label>
+                                </div>
+                                <p class="px-2 mt-2 mb-0 text-danger dnone" id="wrongPassword">Pogrešno korisničko ime ili lozinka.</p>
+                                <div class="form-floating">
+                                    <button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" onclick="onClick_Login()">Prijavi se</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="navbar navbar-light bg-light px-3">
+                <a class="navbar-brand fw-bolder fs-3" href="index.html">
+                    <img src="res/Logot.png" height="50px"/>
+                    Usluga na dlanu
+                </a>
+                <div class="dropdown justify-content-end" id="userProfile">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="res/placeholder-user.jpg" width="40" height="40" class="rounded-circle">
+                            <span class="position-absolute top-0 start-40px translate-middle p-2 bg-danger border border-light rounded-circle" id="hasNotifications">
+                                <span class="visually-hidden">Nova Obaveštenja</span>
+                            </span>
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+                        <li><a class="dropdown-item" href="komandna-tabla.html">Recenzije <span class="badge bg-danger" id="numberOfNotifications"></span></a></li>
+                        <li><a class="dropdown-item" href="komandna-tabla-pruzalac.html" id="dropdownZahtevi">Zahtevi <span class="badge bg-danger" id="numberOfRequests"></span></a></li>
+                        <li><a class="dropdown-item" href="uredjivanje-profila.html" id="editUser">Uređivanje profila</a></li>
+                        <li><a class="dropdown-item" href="uredjivanje-profila-pruzaoca.html" id="editProvider">Uređivanje profila</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
+                    </ul>
+                </div>
+                <div class="justify-content-end" id="loginButtons">
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Prijava</button>
+                    <a class="btn btn-primary" href="registracija.html" role="button">Registracija</a>
+                </div>
+            </nav>
+            <script>ls.user="pruzalac";clearRequests();header_Init(true);</script>
+        </header>
+
+
+        <script>dashboard_Init()</script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+
+        <div class="d-flex flex-column container justify-content-center bg-light rounded-3 px-4 my-5" id="k1">
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <div class="row">
+                        <label  class="form-label fs-4 fw-bold">Period:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Korisničko ime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Opis:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Hitno:</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <output class="fs-4 fw-bold mb-2 pruzalac">17. april 2022. - 18. april 2022.</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">zaki18</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Kopanje bunara u dvoristu za cesmu</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Da</output>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-3 justify-content-end">
+                <button type="button" class="btn btn-success  mx-1" onclick="onClick_AdminRealizedRequestDelay(1)" >Ostvari</button>
+                <button type="button" class="btn btn-danger mx-1" onclick="onClick_AdminDenyRequest(1)">Odbij</button>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column container justify-content-center bg-light rounded-3 px-4 my-5" id="k2">
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <div class="row">
+                        <label  class="form-label fs-4 fw-bold">Period:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Korisničko ime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Opis:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Hitno:</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <output class="fs-4 fw-bold mb-2 pruzalac">22. april 2022. - 22. april 2022.</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">dogFan17</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Zamena filtera u bazenu i popravljanje tus kabine</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Ne</output>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-3 justify-content-end">
+                <button type="button" class="btn btn-success  mx-1" onclick="onClick_AdminRealizedRequestDelay(2)">Ostvari</button>
+                <button type="button" class="btn btn-danger mx-1" onclick="onClick_AdminDenyRequest(2)">Odbij</button>
+            </div>
+        </div>
+
+
+        <div class="d-flex flex-column container justify-content-center bg-light rounded-3 px-4 my-5" id="k3">
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <div class="row">
+                        <label  class="form-label fs-4 fw-bold">Period:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Korisničko ime:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Opis:</label>
+                    </div>
+                    <div class="row">
+                        <label  class="form-label fs-5 fw-bold">Hitno:</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <output class="fs-4 fw-bold mb-2 pruzalac">15. april 2022. - 25. april 2022.</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">lepiJole22</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Manji radovi na cevima i otpusavanje lavaboa.</output>
+                    </div>
+                    <div class="row">
+                        <output class="fs-5 fw-bold mb-2" id="imeiprezime">Ne</output>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-3 justify-content-end">
+                <button type="button" class="btn btn-success  mx-1" onclick="onClick_AdminRealizedRequestDelay(3)">Ostvari</button>
+                <button type="button" class="btn btn-danger mx-1" onclick="onClick_AdminDenyRequest(3)">Odbij</button>
+            </div>
+        </div>
+
+
+
+
+    </body>
+</html>
