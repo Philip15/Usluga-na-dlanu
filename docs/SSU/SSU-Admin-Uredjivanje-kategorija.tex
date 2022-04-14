@@ -39,7 +39,7 @@
 				\hline
 				\inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
 				\hline
-				&  & &  \\
+				13.04.2022. & 1.1  & Dodati alternativni tokovi za greške & \inicijalniautor \\
 				\hline
 				&  &  &  \\
 				\hline
@@ -99,6 +99,16 @@
 							\item Iz baze se briše odgovarajuća kategorija.
 							\item Svi korisnici koji su pružaoci usluga date kategorije gube privilegije pružaoca za datu kategoriju.
 						\end{enumerate}
+					\item[4.1] Admin ostavio prazno polje za ime kategorije
+					\begin{enumerate}[noitemsep,topsep=-8pt]
+						\item Ispisuje se da polje mora biti popunjeno.
+						\item Povratak na korak 3.
+					\end{enumerate}
+					\item[4.2] Admin unosi ime kategorije koja već postoji
+					\begin{enumerate}[noitemsep,topsep=-8pt]
+						\item Ispisuje se da ime kategorije mora biti jedinstveno.
+						\item Povratak na korak 3.
+					\end{enumerate}
 				\end{enumerate}
 		\subsection{Posebni zahtevi}
 			Posebnu pažnju obratiti na efikasnost uklanjanja kategorije pri implementaciji, jer predstavlja vrlo vremenski zahtevnu operaciju.
