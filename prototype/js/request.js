@@ -84,3 +84,8 @@ function onClick_AdminDenyRequest(admin)
 {
     document.getElementById("k" + admin).innerHTML = "";
 }
+
+function onClick_AdminRealizedRequestDelay(admin)
+{
+    document.getElementById("k" + admin).innerHTML = "";
+}

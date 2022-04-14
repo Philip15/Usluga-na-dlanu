@@ -390,13 +390,16 @@ function header_Init(redirect)
         {
             document.getElementById("editUser").style.display="none";
             document.getElementById("editProvider").style.display="block";
-            document.getElementById("dropdownZahtevi").href="komandna-tabla-pruzalac.html";
+            document.getElementById("dropdownZahtevi").href="kreiranje-zahteva-pruzalac.html";
+            document.getElementById("dropdownPrihvaceniZahtevi").style.display="block";
+            document.getElementById("dropdownZahtevi").innerHTML='Novi zahtevi <span class="badge bg-danger" id="numberOfRequests"></span>';
         }
         else
         {
             document.getElementById("editUser").style.display="block";
             document.getElementById("editProvider").style.display="none";
             document.getElementById("dropdownZahtevi").href="kreiranje-zahteva-potvrda-korisnika.html";
+            document.getElementById("dropdownPrihvaceniZahtevi").style.display="none";
         }
     }
     else 
@@ -635,8 +638,9 @@ function onClick_Post(e)
 {
     if(e.parentElement.parentElement.getElementsByClassName("bi-star-fill").length>0)
     {
-        e.parentElement.parentElement.setAttribute('style', 'display:none !important');
+        //e.parentElement.parentElement.setAttribute('style', 'display:none !important');
         removeReview(e.parentElement.parentElement.getElementsByClassName("pruzalac")[0].innerHTML);
+        e.parentElement.parentElement.innerHTML='<p class="fw-bold fs-4 mt-3">Vaša recenzija je zabeležena, hvala na ovojenom vremenu. </p>';
     }
     else
     {

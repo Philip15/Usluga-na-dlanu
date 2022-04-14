@@ -23,7 +23,7 @@
 \title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
 \author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
 	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
-\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.1}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.2}
 \renewcommand{\contentsname}{Sadržaj}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -41,7 +41,7 @@
  \hline
  24.03.2022. & 1.1  & Ispravljene slovne greške i kratak opis & \inicijalniautor  \\
  \hline
- &  &  &  \\
+ 12.04.2022. & 1.2  & Korekcije nakon formalne inspekcije & \inicijalniautor  \\
  \hline
  &  &  &  \\
  \hline
@@ -70,7 +70,7 @@
     \hline
     \textbf{Redni broj} & \hspace{4cm} \textbf{Opis} & \textbf{Rešenje} \\ 
     \hline
-     1. & Da li dozvoliti izemnu email adrese korisnika? & \\
+     1. & Da li dozvoliti izmenu email adrese korisnika? & \\
      \hline
       & &   \\
      \hline
@@ -80,14 +80,14 @@
     \end{center}
 \section{Scenario \dativfunkcionalnosti}
 \subsection{Kratak opis}
-    Nakon prijave na sistem korisnik ima privilegije izmene svog profila. Svaki korisnik može izmeniti svoju profilnu sliku i korisničko ime, dok pružalac usluga može dodatno menjati adresu poslovanja, kategoriju usluge koju pruža, kalendar zauzetosti, kao i opis na profilu. Posle izmene željenih informacija korisnik ostaje prijavljen na sistem i može nastaviti sa korišćenjem sajta.
+    Nakon prijave na sistem korisnik ima privilegije izmene svog profila. Svaki korisnik može izmeniti ime, prezime, svoju profilnu sliku, korisničko ime i lozinku, dok pružalac usluga može dodatno menjati adresu poslovanja, kategoriju usluge koju pruža, kalendar zauzetosti, kao i opis na profilu. Posle izmene željenih informacija korisnik ostaje prijavljen na sistem i može nastaviti sa korišćenjem sajta.
 
 \subsection{Tok događaja}
     \paragraph*{Osnovni uspešni scenario}
     \begin{enumerate}
         \item Korisnik se prijavljuje na sistem.
         \item Korisnik vrši pregled svog profila.
-        \item Korisnik menja informacije i klikom na dugme Prijava ''Završi izmenu'' čuva izmene. 
+        \item Korisnik menja informacije i klikom na dugme Prijava ''Sačuvaj izmenu'' čuva izmene. 
         \item Korisnik nastavlja sa daljim korišćenjem sajta.
     \end{enumerate}
     
@@ -110,7 +110,7 @@
         \item Korisnik unosi novu adresu poslovanja i nastavlja sa korakom 2.
         \end{enumerate}
     
-        \item[2.4] Korisnik (pružalac usluge) je odabrao izmenu kategoirija usluga.
+        \item[2.4] Korisnik (pružalac usluge) je odabrao izmenu kategorija usluga.
         \begin{enumerate}[noitemsep,topsep=-8pt]
             \item Korisnik bira kategorije usluga i nastavlja sa korakom 2.
         \end{enumerate}
