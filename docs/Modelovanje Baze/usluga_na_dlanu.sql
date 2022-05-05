@@ -44,8 +44,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`korisnici` (
   `opis` VARCHAR(400) NULL,
   `pruzalac` TINYINT NOT NULL DEFAULT 0,
   `adresa` VARCHAR(100) NULL,
+  `lat` FLOAT NULL,
+  `lon` FLOAT NULL,
   `idKategorije` INT NULL,
   `administrator` TINYINT NOT NULL DEFAULT 0,
+  `korisnicicol` VARCHAR(45) NULL,
   PRIMARY KEY (`idKorisnika`),
   UNIQUE INDEX `korisnickoIme_UNIQUE` (`korisnickoIme` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
@@ -82,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`zahtevi` (
     REFERENCES `mydb`.`korisnici` (`idKorisnika`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idPruzaoca`
+  CONSTRAINT `idPruzaoca2`
     FOREIGN KEY (`idPruzaoca`)
     REFERENCES `mydb`.`korisnici` (`idKorisnika`)
     ON DELETE NO ACTION
