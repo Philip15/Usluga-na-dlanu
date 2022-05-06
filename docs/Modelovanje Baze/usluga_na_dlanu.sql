@@ -1,200 +1,125 @@
--- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
---
--- Host: localhost    Database: usluga_na_dlanu
--- ------------------------------------------------------
--- Server version	8.0.27
+-- MySQL Workbench Forward Engineering
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
---
--- Table structure for table `admin`
---
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
 
-DROP TABLE IF EXISTS `admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admin` (
-  `idAdm` int NOT NULL AUTO_INCREMENT,
-  `korisnicko_ime` varchar(45) NOT NULL,
-  `lozinka` varchar(45) NOT NULL,
-  PRIMARY KEY (`idAdm`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
 
---
--- Dumping data for table `admin`
---
+-- -----------------------------------------------------
+-- Table `mydb`.`kategorije`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`kategorije` ;
 
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE IF NOT EXISTS `mydb`.`kategorije` (
+  `idKategorije` INT NOT NULL AUTO_INCREMENT,
+  `naziv` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idKategorije`),
+  UNIQUE INDEX `naziv_UNIQUE` (`naziv` ASC) VISIBLE)
+ENGINE = InnoDB;
 
---
--- Table structure for table `kategorija`
---
 
-DROP TABLE IF EXISTS `kategorija`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kategorija` (
-  `idKat` int NOT NULL,
-  `naziv` varchar(45) NOT NULL,
-  PRIMARY KEY (`idKat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- -----------------------------------------------------
+-- Table `mydb`.`korisnici`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`korisnici` ;
 
---
--- Dumping data for table `kategorija`
---
+CREATE TABLE IF NOT EXISTS `mydb`.`korisnici` (
+  `idKorisnika` INT NOT NULL AUTO_INCREMENT,
+  `korisnickoIme` VARCHAR(45) NOT NULL,
+  `lozinka` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `ime` VARCHAR(45) NOT NULL,
+  `prezime` VARCHAR(45) NOT NULL,
+  `profilnaSlika` LONGBLOB NULL,
+  `opis` VARCHAR(400) NULL,
+  `pruzalac` TINYINT NOT NULL DEFAULT 0,
+  `adresa` VARCHAR(100) NULL,
+  `lat` FLOAT NULL,
+  `lon` FLOAT NULL,
+  `idKategorije` INT NULL,
+  `administrator` TINYINT NOT NULL DEFAULT 0,
+  `korisnicicol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idKorisnika`),
+  UNIQUE INDEX `korisnickoIme_UNIQUE` (`korisnickoIme` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  INDEX `idKategorije_idx` (`idKategorije` ASC) VISIBLE,
+  CONSTRAINT `idKategorije`
+    FOREIGN KEY (`idKategorije`)
+    REFERENCES `mydb`.`kategorije` (`idKategorije`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-LOCK TABLES `kategorija` WRITE;
-/*!40000 ALTER TABLE `kategorija` DISABLE KEYS */;
-/*!40000 ALTER TABLE `kategorija` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `korisnik`
---
+-- -----------------------------------------------------
+-- Table `mydb`.`zahtevi`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`zahtevi` ;
 
-DROP TABLE IF EXISTS `korisnik`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `korisnik` (
-  `idKor` int NOT NULL AUTO_INCREMENT,
-  `korsnicko_ime` varchar(45) NOT NULL,
-  `lozinka` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `ime` varchar(45) NOT NULL,
-  `prezime` varchar(45) NOT NULL,
-  `profilna_slika` longblob,
-  `opis` varchar(400) DEFAULT NULL,
-  `pruzalac` tinyint NOT NULL DEFAULT '0',
-  `adresa` varchar(100) DEFAULT NULL,
-  `idKategorija` int DEFAULT NULL,
-  PRIMARY KEY (`idKor`),
-  KEY `FK_idKategorija_korisnik_idx` (`idKategorija`),
-  CONSTRAINT `FK_idKategorija_korisnik` FOREIGN KEY (`idKategorija`) REFERENCES `kategorija` (`idKat`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE IF NOT EXISTS `mydb`.`zahtevi` (
+  `idZahteva` INT NOT NULL AUTO_INCREMENT,
+  `idKorisnika` INT NOT NULL,
+  `idPruzaoca` INT NOT NULL,
+  `stanje` TINYINT NOT NULL,
+  `opis` VARCHAR(400) NOT NULL,
+  `hitno` TINYINT NOT NULL,
+  `cena` DOUBLE NULL,
+  `komentar` VARCHAR(400) NULL,
+  `ocena` INT NULL,
+  `recenzija` VARCHAR(400) NULL,
+  PRIMARY KEY (`idZahteva`),
+  INDEX `idPruzaoca_idx` (`idPruzaoca` ASC) VISIBLE,
+  INDEX `idKorisnika_idx` (`idKorisnika` ASC) VISIBLE,
+  CONSTRAINT `idKorisnika`
+    FOREIGN KEY (`idKorisnika`)
+    REFERENCES `mydb`.`korisnici` (`idKorisnika`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idPruzaoca2`
+    FOREIGN KEY (`idPruzaoca`)
+    REFERENCES `mydb`.`korisnici` (`idKorisnika`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
---
--- Dumping data for table `korisnik`
---
 
-LOCK TABLES `korisnik` WRITE;
-/*!40000 ALTER TABLE `korisnik` DISABLE KEYS */;
-/*!40000 ALTER TABLE `korisnik` ENABLE KEYS */;
-UNLOCK TABLES;
+-- -----------------------------------------------------
+-- Table `mydb`.`termini`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`termini` ;
 
---
--- Table structure for table `recenzija`
---
+CREATE TABLE IF NOT EXISTS `mydb`.`termini` (
+  `idTermina` INT NOT NULL AUTO_INCREMENT,
+  `idPruzaoca` INT NOT NULL,
+  `datumVremePocetka` DATETIME NOT NULL,
+  `trajanje` INT NOT NULL,
+  `idZahteva` INT NULL,
+  PRIMARY KEY (`idTermina`),
+  INDEX `idPruzaoca_idx` (`idPruzaoca` ASC) VISIBLE,
+  INDEX `idZahteva_idx` (`idZahteva` ASC) VISIBLE,
+  CONSTRAINT `idPruzaoca`
+    FOREIGN KEY (`idPruzaoca`)
+    REFERENCES `mydb`.`korisnici` (`idKorisnika`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idZahteva`
+    FOREIGN KEY (`idZahteva`)
+    REFERENCES `mydb`.`zahtevi` (`idZahteva`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `recenzija`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recenzija` (
-  `idRec` int NOT NULL AUTO_INCREMENT,
-  `idKorisnik` int NOT NULL,
-  `idPruzalac` int NOT NULL,
-  `ostavljena` tinyint NOT NULL DEFAULT '0',
-  `ocena` int NOT NULL,
-  `komentar` varchar(400) NOT NULL,
-  `datum` date NOT NULL,
-  PRIMARY KEY (`idRec`),
-  KEY `FK_idKorisnik_idx` (`idKorisnik`),
-  KEY `FK_idPruzalac_idx` (`idPruzalac`),
-  CONSTRAINT `FK_idKorisnik_recenzija` FOREIGN KEY (`idKorisnik`) REFERENCES `korisnik` (`idKor`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_idPruzalac_recenzija` FOREIGN KEY (`idPruzalac`) REFERENCES `korisnik` (`idKor`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `recenzija`
---
-
-LOCK TABLES `recenzija` WRITE;
-/*!40000 ALTER TABLE `recenzija` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recenzija` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `termin`
---
-
-DROP TABLE IF EXISTS `termin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `termin` (
-  `idTer` int NOT NULL AUTO_INCREMENT,
-  `idZahtev` int DEFAULT NULL,
-  `datum_vreme_pocetak` datetime NOT NULL,
-  `trajanje` int NOT NULL,
-  PRIMARY KEY (`idTer`),
-  KEY `FK_idZah_termin_idx` (`idZahtev`),
-  CONSTRAINT `FK_idZah_termin` FOREIGN KEY (`idZahtev`) REFERENCES `zahtev` (`idZah`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `termin`
---
-
-LOCK TABLES `termin` WRITE;
-/*!40000 ALTER TABLE `termin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `termin` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `zahtev`
---
-
-DROP TABLE IF EXISTS `zahtev`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `zahtev` (
-  `idZah` int NOT NULL AUTO_INCREMENT,
-  `idKorisnik` int NOT NULL,
-  `idPruzalac` int NOT NULL,
-  `cena` double DEFAULT NULL,
-  `komentar` varchar(400) DEFAULT NULL,
-  `stanje` int NOT NULL DEFAULT '0',
-  `opis` varchar(400) NOT NULL,
-  `hitno` tinyint NOT NULL DEFAULT '0',
-  PRIMARY KEY (`idZah`),
-  KEY `FK_idKorisnik_zahtev_idx` (`idKorisnik`),
-  KEY `FK_idPruzalac_zahtev_idx` (`idPruzalac`),
-  CONSTRAINT `FK_idKorisnik_zahtev` FOREIGN KEY (`idKorisnik`) REFERENCES `korisnik` (`idKor`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_idPruzalac_zahtev` FOREIGN KEY (`idPruzalac`) REFERENCES `korisnik` (`idKor`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `zahtev`
---
-
-LOCK TABLES `zahtev` WRITE;
-/*!40000 ALTER TABLE `zahtev` DISABLE KEYS */;
-/*!40000 ALTER TABLE `zahtev` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2022-04-16 18:29:59
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
