@@ -1,0 +1,65 @@
+Models:
+KorisnikModel
+ZahtevModel
+TerminModel
+KategorijaModel
+
+Views:
+Header(Gost,User,Provider,Admin)(Ovo mozda moze da bude jedan header pa da js/php prikazuje sta treba?)
+Footer
+index
+profile(Gost,User)
+register
+requests(User,Provider)
+reviews
+editProfile(User,Provider)
+timetable(User,Provider)
+categories
+accountRequests
+
+Controllers:
+BaseController
+ GostController
+ UserController
+  ProviderController
+  AdminController
+
+Endpoints:
+BaseController/index
+BaseController/AJAXGetProviders?cat=&tFrom=&tTo=
+BaseController/profile
+
+GostController/OPLogin
+GostController/register
+GostController/OPRegister
+GostController/OPVerifyemail
+
+UserController/OPLogout
+UserController/profile
+UserController/OPCreateRequest
+UserController/requests
+UserController/OPAcceptRequest
+UserController/OPRejectRequest
+UserController/reviews
+UserController/OPPostReview
+UserController/OPRemoveReview
+UserController/editProfile
+UserController/OPUpdateProfile
+UserController/OPConvertProfile
+
+ProviderController/requests
+ProviderController/OPAcceptRequest
+ProviderController/OPRealizeRequest
+ProviderController/OPRejectRequest
+ProviderController/editProfile
+ProviderController/OPUpdateProfile
+ProviderController/timetable
+ProviderController/OPReserveTime
+ProviderController/OPFreeTime
+
+AdminController/categories
+AdminController/OPAddCategory
+AdminController/OPRemoveCategory
+AdminController/accountRequests
+AdminController/OPApproveRequest
+AdminController/OPDenyRequest
