@@ -8,13 +8,13 @@ class KategorijaModel extends Model
     protected $primaryKey = 'idKategorije';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'object';
+    protected $returnType     = 'KategorijaModel';
 
     protected $allowedFields = [];
 
-    public function linkPruzaoci($kategorija)
+    public function linkPruzaoci()
     {
         $korsnikM = new KorisnikModel();
-        $kategorija->pruzaoci = $korsnikM->where('idKategorije',$kategorija->idKategorije)->find();
+        $this->pruzaoci = $korsnikM->where('idKategorije',$this->idKategorije)->find();
     }
 }

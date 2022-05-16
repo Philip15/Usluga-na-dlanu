@@ -8,19 +8,19 @@ class TerminModel extends Model
     protected $primaryKey = 'idTermina';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'object';
+    protected $returnType     = 'TerminModel';
 
     protected $allowedFields = [];
 
-    public function linkPruzalac($termin)
+    public function linkPruzalac()
     {
         $korsnikM = new KorisnikModel();
-        $termin->pruzalac = $korsnikM->find($termin->idPruzaoca);
+        $this->pruzalac = $korsnikM->find($this->idPruzaoca);
     }
 
-    public function linkZahtev($termin)
+    public function linkZahtev()
     {
         $zahtevM = new ZahtevModel();
-        $termin->zahtev = $zahtevM->find($termin->idZahteva);
+        $this->zahtev = $zahtevM->find($this->idZahteva);
     }
 }

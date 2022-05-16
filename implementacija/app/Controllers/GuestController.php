@@ -6,6 +6,6 @@ class GuestController extends BaseController
 {
     public function index()
     {
-        echo 'Guest';
+        return view('mainpage');
     }
 }

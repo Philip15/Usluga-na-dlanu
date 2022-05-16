@@ -8,25 +8,25 @@ class ZahtevModel extends Model
     protected $primaryKey = 'idZahteva';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'object';
+    protected $returnType     = 'ZahtevModel';
 
     protected $allowedFields = [];
 
-    public function linkTermini($zahtev)
+    public function linkTermini()
     {
         $terminM = new TerminModel();
-        $zahtev->termini = $terminM->where('idZahteva',$zahtev->idZahteva)->findAll();
+        $this->termini = $terminM->where('idZahteva',$this->idZahteva)->findAll();
     }
 
-    public function linkKorisnik($zahtev)
+    public function linkKorisnik()
     {
         $korisnikM = new KorisnikModel();
-        $zahtev->korisnik = $korisnikM->find($zahtev->idKorisnika);
+        $this->korisnik = $korisnikM->find($this->idKorisnika);
     }
 
-    public function linkPruzalac($zahtev)
+    public function linkPruzalac()
     {
         $korisnikM = new KorisnikModel();
-        $zahtev->korisnik = $korisnikM->find($zahtev->idPruzaoca);
+        $this->korisnik = $korisnikM->find($this->idPruzaoca);
     }
 }

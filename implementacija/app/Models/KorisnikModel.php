@@ -8,31 +8,31 @@ class KorisnikModel extends Model
     protected $primaryKey = 'idKorisnika';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'object';
+    protected $returnType     = 'KorisnikModel';
 
     protected $allowedFields = [];
 
-    public function linkKategorija($korisnik)
+    public function linkKategorija()
     {
         $kategorijaM = new KategorijaModel();
-        $korisnik->kategorija=$kategorijaM->find($korisnik->idKategorije);
+        $this->kategorija=$kategorijaM->find($this->idKategorije);
     }
 
-    public function linkUpuceniZahtevi($korisnik)
+    public function linkUpuceniZahtevi()
     {
         $zahtevM = new ZahtevModel();
-        $korisnik->upuceniZahtevi=$zahtevM->where('idKorisnika',$korisnik->idKorisnika)->findAll();
+        $this->upuceniZahtevi=$zahtevM->where('idKorisnika',$this->idKorisnika)->findAll();
     }
 
-    public function linkPrimljeniZahtevi($korisnik)
+    public function linkPrimljeniZahtevi()
     {
         $zahtevM = new ZahtevModel();
-        $korisnik->primljeniZahtevi=$zahtevM->where('idPruzaoca',$korisnik->idKorisnika)->findAll();
+        $this->primljeniZahtevi=$zahtevM->where('idPruzaoca',$this->idKorisnika)->findAll();
     }
 
-    public function linkManuelnoZauzetiTermini($korisnik)
+    public function linkManuelnoZauzetiTermini()
     {
         $terminM = new TerminModel();
-        $korisnik->manuelnoZauzetiTermini=$terminM->where('idPruzaoca',$korisnik->idKorisnika)->findAll();
+        $this->manuelnoZauzetiTermini=$terminM->where('idPruzaoca',$this->idKorisnika)->findAll();
     }
 }
