@@ -8,51 +8,58 @@
 <div class="reg">
     <div class="container-reg">
         <div class="wrap-reg">
-            <form>
+            <form method="POST" action="<?= base_url('GuestController/OPregister')?>">
                 <span class="reg-title p-b-34 p-t-27">
-                    Registracija
+                    <?=lang('App.registerTitle')?>
                 </span>
 
                 <div class="wrap-input">
-                    Email adresa
-                    <input class="input" type="email" name="email" placeholder="email@email.com">
+                <?=lang('App.regEmailAddress')?>
+                    <input class="input" type="email" name="email" placeholder="<?=lang('App.regEmail')?>">
                 </div>
 
                 <div class="wrap-input">
-                    Ime
-                    <input class="input" type="text" name="ime" placeholder="Ime">
+                    <?=lang('App.name')?>
+                    <input class="input" type="text" name="ime" placeholder="<?=lang('App.name')?>">
                 </div>
 
                 <div class="wrap-input">
-                    Prezime
-                    <input class="input" type="text" name="prezime" placeholder="Prezime">
+                    <?=lang('App.surname')?>
+                    <input class="input" type="text" name="prezime" placeholder="<?=lang('App.surname')?>">
                 </div>
 
                 <div class="wrap-input">
-                    Korisničko ime
-                    <input class="input" type="text" name="username" placeholder="Korisničko ime">
+                    <?=lang('App.username')?>
+                    <input class="input" type="text" name="username" placeholder="<?=lang('App.username')?>">
                 </div>
 
                 <div class="wrap-input">
-                    Lozinka
-                    <input class="input" type="password" name="pass" placeholder="Lozinka">
+                    <?=lang('App.password')?>
+                    <input class="input" type="password" name="password" placeholder="<?=lang('App.password')?>">
                 </div>
 
                 <div class="wrap-input">
-                    Ponovi lozinku
-                    <input class="input" type="password" name="pass2" placeholder="Lozinka">
+                    <?=lang('App.regPasswordAgain')?>
+                    <input class="input" type="password" name="password2" placeholder="<?=lang('App.password')?>">
                 </div>
 
                 <div class="wrap-input">
-                    <input class="input-checkbox" id="ckb1" type="checkbox" name="uslovi koriscenja">
+                    <input class="input-checkbox" id="ckb1" type="checkbox" name="uslovi_koriscenja">
                     <label class="label-checkbox" for="ckb1">
-                        Slažem se sa uslovima korišćenja
+                    <?=lang('App.termsOfUse')?>
                     </label>
                 </div>
-                
+                <?php
+                    if(session('errorText') !== null)
+                    {
+                       echo '<p class="px-2 mt-2 mb-0 text-danger">'.esc(session('errorText')).'</p>.</br>';
+
+                    }
+                ?>
+            
                 <div>
-                    <button class="btn-reg" data-bs-toggle="modal" data-bs-target="#KODModal" type="button">
-                        Registruj se
+                    <button type="submit" class="btn-reg" type="button">
+                        <?=lang('App.register')?>
                     </button>
                 </div>
             </form>

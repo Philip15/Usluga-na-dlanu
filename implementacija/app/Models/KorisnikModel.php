@@ -10,7 +10,8 @@ class KorisnikModel extends Model
 
     protected $returnType     = 'App\Models\KorisnikModel';
 
-    protected $allowedFields = [];
+    protected $allowedFields = ['korisnickoIme', 'lozinka', 'email', 'ime', 'prezime', 'profilnaSlika',  'opis', 
+            'pruzalac', 'adresa', 'lat', 'lon', 'idKategorije', 'administrator'];
 
     public function linkKategorija()
     {

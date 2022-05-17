@@ -14,4 +14,11 @@ return [
     'team'                      => 'Tim',
     'teamName'                  => 'Under pressure',
     'blank'                     => '',
+    'regEmail'                  => 'example@gmail.com',
+    'name'                      => 'Ime',
+    'surname'                   => 'Prezime',
+    'regEmailAddress'           => 'Email adresa',
+    'regPasswordAgain'          => 'Ponovi lozinku',
+    'termsOfUse'                => 'Slažem se sa uslovima korišćenja',
+    'register'                  => 'Registruj se'
 ];
