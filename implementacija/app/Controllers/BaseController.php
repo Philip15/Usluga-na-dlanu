@@ -46,7 +46,11 @@ class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
-
         $this->session = \Config\Services::session();
+    }
+
+    public function index()
+    {
+        return view('mainpage');
     }
 }

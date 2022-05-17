@@ -8,7 +8,7 @@ class KorisnikModel extends Model
     protected $primaryKey = 'idKorisnika';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'KorisnikModel';
+    protected $returnType     = 'App\Models\KorisnikModel';
 
     protected $allowedFields = [];
 

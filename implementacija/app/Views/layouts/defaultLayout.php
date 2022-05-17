@@ -9,23 +9,30 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         
         <!--Custom CSS-->
-        <link rel="stylesheet" type="text/css"  href="css/style.css"/>
+        <link rel="stylesheet" type="text/css"  href="<?=base_url('css/style.css')?>"/>
 
         <!--Location picker dependencies-->
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
-        <script src="js/locationpicker.jquery.min.js"></script>
+        <script src="<?=base_url('js/locationpicker.jquery.min.js')?>"></script>
 
         <!--Custom JS-->
-        <script src="js/script.js"></script>
+        <script src="<?=base_url('js/script.js')?>"></script>
 
-        <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+        <link rel="icon" type="image/x-icon" href="<?=base_url('favicon.ico')?>"/>
         <title><?php if(isset($title) && !empty($title)){echo esc($title).' - ';} echo lang('App.title');?></title>
+
+        <!--Additional head tags-->
+        <?= $this->renderSection('additionalhead') ?>
+
 </head>
 <body class="d-flex flex-column h-100 bg-dark">
         
         <!--Header-->
         <?= $this->include('components/header') ?>
+
+        <!--Content-->
+        <?= $this->renderSection('content') ?>
 
         <!--Footer-->
         <?= $this->include('components/footer') ?>

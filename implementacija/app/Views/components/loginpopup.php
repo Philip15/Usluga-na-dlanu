@@ -15,7 +15,12 @@
                         <input class="form-control m-1" type="password" name="password" id="password" placeholder="<?=lang('App.password')?>">
                         <label class="d-flex align-items-center" for="password"><?=lang('App.password')?></label>
                     </div>
-                    <p class="px-2 mt-2 mb-0 text-danger dnone" id="wrongPassword"><?=lang('App.wrongLogin')?></p>
+                    <?php
+                    if(session('errorText') !== null)
+                    {
+                       echo '<p class="px-2 mt-2 mb-0 text-danger" id="wrongPassword">'.esc(session('errorText')).'</p>';
+                    }
+                    ?>
                     <div class="form-floating">
                         <button type="submit" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2"><?=lang('App.login')?></button>
                     </div>
