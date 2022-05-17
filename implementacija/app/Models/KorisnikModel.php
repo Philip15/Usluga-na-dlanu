@@ -35,4 +35,11 @@ class KorisnikModel extends Model
         $terminM = new TerminModel();
         $this->manuelnoZauzetiTermini=$terminM->where('idPruzaoca',$this->idKorisnika)->findAll();
     }
+
+    public function role() 
+    {
+        if ($this->administrator == 1) return 'admin';
+        else if ($this->pruzalac == 1) return 'provider';
+        else return 'user';
+    }
 }
