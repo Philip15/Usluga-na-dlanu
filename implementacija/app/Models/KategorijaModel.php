@@ -8,7 +8,7 @@ class KategorijaModel extends Model
     protected $primaryKey = 'idKategorije';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'KategorijaModel';
+    protected $returnType     = 'App\Models\KategorijaModel';
 
     protected $allowedFields = [];
 
@@ -16,5 +16,11 @@ class KategorijaModel extends Model
     {
         $korsnikM = new KorisnikModel();
         $this->pruzaoci = $korsnikM->where('idKategorije',$this->idKategorije)->find();
+    }
+
+    public static function getAll()
+    {
+        $kategorijaM = new  KategorijaModel();
+        return $kategorijaM->orderBy('idKategorije','ASC')->findAll();
     }
 }

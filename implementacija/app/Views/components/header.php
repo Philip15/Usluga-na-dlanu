@@ -8,7 +8,7 @@
         <?=lang('App.title')?>
     </a>
 
-    <?php if(isset($user)){
+    <?php if(session('user')!==null){
         echo $this->include('components/userdropdown');
     }else{
         echo $this->include('components/loginregisterbuttons');

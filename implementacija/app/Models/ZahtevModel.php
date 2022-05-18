@@ -8,7 +8,7 @@ class ZahtevModel extends Model
     protected $primaryKey = 'idZahteva';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'ZahtevModel';
+    protected $returnType     = 'App\Models\ZahtevModel';
 
     protected $allowedFields = [];
 
