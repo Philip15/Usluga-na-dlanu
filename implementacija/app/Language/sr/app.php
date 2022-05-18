@@ -20,5 +20,12 @@ return [
     'regEmailAddress'           => 'Email adresa',
     'regPasswordAgain'          => 'Ponovi lozinku',
     'termsOfUse'                => 'Slažem se sa uslovima korišćenja',
-    'register'                  => 'Registruj se'
+    'register'                  => 'Registruj se',
+    'addNewCategory'            => 'Unesite naziv kategorije',
+    'newCategory'               => 'Nova kategorija',
+    'addCategory'               => '+Dodaj kategoriju',
+    'removeCategory'            => 'Ukloni',
+    'add'                       => 'Dodaj',
+    'deny'                      => 'Odbij',
+    'approve'                    => 'Prihvati'
 ];

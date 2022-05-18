@@ -8,7 +8,7 @@ class TerminModel extends Model
     protected $primaryKey = 'idTermina';
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'TerminModel';
+    protected $returnType     = 'App\Models\TerminModel';
 
     protected $allowedFields = [];
 
