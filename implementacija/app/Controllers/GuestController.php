@@ -6,39 +6,36 @@ use App\Models\KorisnikModel;
 
 class GuestController extends BaseController
 {
-    public function index()
+    public function register()
     {
-        echo view('index.php');
+        return view('register');
     }
 
-    protected function prikaz($page, $data)
+    public function OPlogin() 
     {
-        $data['controller']='GostController';
-        echo view('sablon/header_gost');
-        echo view("stranice/$page", $data);
-        echo view('sablon/footer');
-    }
-
-    public function login() 
-    {
-        if (!$this->validate(['username'=>'required', 'pass'=> 'required'])) {
-            return $this->prikaz('index', ['errors'=>'Niste uneli sva polja!']);
+        if (!$this->validate(['username'=>'required', 'password'=> 'required'])) 
+        {
+            $this->session->setFlashdata('errorText', 'Niste uneli sva polja!');
+            return redirect()->to(base_url());
         }
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->find($this->request->getVar('username'));
+        $korisnik = $korisnikModel->where('korisnickoIme',$this->request->getVar('username'))->findAll();
         if ($korisnik == null)
-            return $this->prikaz('index', ['errors'=>'Korisnik ne postoji!']);
-        if ($korisnik->lozinka != $this->request->getVar('pass'))
-            return $this->prikaz('index', ['errors'=>'Nije ispravna lozinka!']);
-        $this->session->set('korisnik', $korisnik);
-        if ($korisnikModel->linkKategorija($korisnik) != null) {
-            return redirect()->to(site_url('ProviderController'));
+        {
+            $this->session->setFlashdata('errorText', 'Korisnik ne postoji!');
+            return redirect()->to(base_url());
         }
-        else 
-            return redirect()->to(site_url('UserController'));
+        $korisnik=$korisnik[0];
+        if ($korisnik->lozinka != $this->request->getVar('password'))
+        {
+            $this->session->setFlashdata('errorText', 'Nije ispravna lozinka!');
+            return redirect()->to(base_url());
+        }
+        $this->session->set('user', $korisnik);
+        return redirect()->back();
     }
 
-    public function register() 
+    public function OPregister() 
     {
         if (!$this->validate(['email'=>'required', 'ime'=>'required', 'prezime'=> 'required', 'username'=>'required', 'pass'=> 'required', 'pass2'=> 'required'])) {
             return $this->prikaz('registracija', ['errors'=>'Niste uneli sva obavezna polja!']);
@@ -100,7 +97,7 @@ class GuestController extends BaseController
             ]);
         }
         else {
-            return $this->prikaz('registracija', ['errors'=>'Niste uneli dobar verifikacioni kod.']);
+            return /*$this->prikaz('registracija', ['errors'=>'Niste uneli dobar verifikacioni kod.'])*/;
         }
     }
 }

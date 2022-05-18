@@ -2,10 +2,7 @@
 
 namespace App\Controllers;
 
-class UserController extends BaseController
+class ProviderController extends BaseController
 {
-    public function index()
-    {
-        return view('Provider');
-    }
+
 }

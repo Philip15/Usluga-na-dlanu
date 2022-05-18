@@ -2,10 +2,7 @@
 
 namespace App\Controllers;
 
-class UserController extends BaseController
+class AdminController extends BaseController
 {
-    public function index()
-    {
-        return view('Admin');
-    }
+    
 }

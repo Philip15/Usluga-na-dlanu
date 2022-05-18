@@ -18,11 +18,10 @@ categories
 accountRequests
 
 Controllers:
-BaseController
- GostController
- UserController
-  ProviderController
-  AdminController
+GuestController
+UserController
+ProviderController
+AdminController
 
 Endpoints:
 BaseController/index
