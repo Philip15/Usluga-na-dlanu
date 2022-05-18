@@ -180,7 +180,7 @@ function displayProviders(res)
         var elem=`<div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
         <img src="${res[i].profilnaSlika}" class="card-img-top mt-2 h-294px"/>
         <div class="card-body d-flex flex-column">
-            <h5 class="card-title">${res[i].ime} ${res[i].prezime}</h5>
+            <h5 class="card-title" value="${res[i].idKorisnika}">${res[i].ime} ${res[i].prezime}</h5>
             <h6 class="card-subtitle mb-2 text-muted">${res[i].kategorija + (getSearchParam("sort")==1?" "+distance(res[i].lat,res[i].lon,getSearchParam("lat"),getSearchParam("lon"))+"km":"")}</h6>
             <p class="card-text">${res[i].opis}</p>
             <p class="card-text mt-auto h-1d5rem">${stars(res[i].ocena)}</p>
@@ -341,5 +341,6 @@ function locationChangedCallback(currentLocation, radius, isMarkerDropped) {
 
 function onClick_Card(e)
 {
-    window.location.href="kontaktiranje-pruzaoca.html?name="+e.getElementsByClassName("card-title")[0].innerHTML;
+    var url = new URL(window.location.href).origin;
+    window.location.href=url+"/BaseController/profile?id="+e.getElementsByClassName("card-title")[0].getAttribute('value');
 }

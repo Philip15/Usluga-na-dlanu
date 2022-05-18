@@ -83,7 +83,9 @@ class BaseController extends Controller
                 else
                 {
                     $resobj->profilnaSlika = base_url('res/placeholder-avatar.jpg');
+                
                 }
+                $resobj->idKorisnika = $provider->idKorisnika;
                 $resobj->ime = $provider->ime;
                 $resobj->prezime = $provider->prezime;
                 $provider->linkKategorija();
