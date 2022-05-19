@@ -9,8 +9,7 @@ class AdminController extends BaseController
 {
     public function categories()
     {   
-        $kategorijaModel = new KategorijaModel();
-        $data['categories'] = $kategorijaModel->findAll();
+        $data['categories']=KategorijaModel::getAll();
         //$data['categories'] = KategorijaModel::getAll();
         return view('categories', $data);
     }
