@@ -10,7 +10,7 @@ class KategorijaModel extends Model
 
     protected $returnType     = 'App\Models\KategorijaModel';
 
-    protected $allowedFields = [];
+    protected $allowedFields = ['naziv'];
 
     public function linkPruzaoci()
     {
@@ -23,4 +23,5 @@ class KategorijaModel extends Model
         $kategorijaM = new  KategorijaModel();
         return $kategorijaM->orderBy('idKategorije','ASC')->findAll();
     }
+
 }

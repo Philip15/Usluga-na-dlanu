@@ -25,7 +25,7 @@ class GuestController extends BaseController
             $this->session->setFlashdata('errorText', 'Korisnik ne postoji!');
             return redirect()->to(base_url());
         }
-        $korisnik=$korisnik[0];
+        $korisnik = $korisnik[0];
         if ($korisnik->lozinka != $this->request->getVar('password'))
         {
             $this->session->setFlashdata('errorText', 'Nije ispravna lozinka!');
@@ -37,26 +37,48 @@ class GuestController extends BaseController
 
     public function OPregister() 
     {
-        if (!$this->validate(['email'=>'required', 'ime'=>'required', 'prezime'=> 'required', 'username'=>'required', 'pass'=> 'required', 'pass2'=> 'required'])) {
-            return $this->prikaz('registracija', ['errors'=>'Niste uneli sva obavezna polja!']);
+        $korisnikPodaci = [
+            'korisnickoIme' => $this->request->getVar('username'),
+            'lozinka' => $this->request->getVar('password'),
+            'lozinka2' => $this->request->getVar('password2'),
+            'email' =>  $this->request->getVar('email'),
+            'ime' =>  $this->request->getVar('ime'),
+            'prezime' =>  $this->request->getVar('prezime')
+        ];
+
+        if (!$this->validate(['email'=>'required', 'ime'=>'required', 'prezime'=> 'required', 'username'=>'required', 'password'=> 'required', 'password2'=> 'required'])) 
+        {
+            $this->session->setFlashdata('podaci', $korisnikPodaci);
+            $this->session->setFlashdata('errorText', 'Niste uneli sva polja!');
+            return redirect()->to(site_url('GuestController/register'));
         }
-        if ($this->request->getVar('uslovi_koriscenja') !=  "on") {
-            return $this->prikaz('registracija', ['errors'=>'Niste prihvatili uslove korišćenja!']);
+        if ($this->request->getVar('uslovi_koriscenja') !=  "on") 
+        {
+            $this->session->setFlashdata('podaci', $korisnikPodaci);
+            $this->session->setFlashdata('errorText', 'Niste prihvatili uslove korišćenja!');
+            return redirect()->to(site_url('GuestController/register'));
         }
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->find($this->request->getVar('username'));
-        if ($korisnik != null) {
-            return $this->prikaz('registracija', ['errors'=>'Korisničko ime postoji!']);
+        $korisnik = $korisnikModel->where('korisnickoIme', $korisnikPodaci['korisnickoIme'])->findAll();
+        if ($korisnik != null) 
+        {
+            $this->session->setFlashdata('podaci', $korisnikPodaci);
+            $this->session->setFlashdata('errorText', 'Korisničko ime postoji!');
+            return redirect()->to(site_url('GuestController/register'));
         }
-        if ($this->request->getVar('pass') != $this->request->getVar('pass2')) {
-            return $this->prikaz('registracija', ['errors'=>'Lozinke moraju biti iste!']);
+        if ($korisnikPodaci['lozinka'] != $korisnikPodaci['lozinka']) 
+        {
+            $this->session->setFlashdata('podaci', $korisnikPodaci);
+            $this->session->setFlashdata('errorText', 'Lozinke moraju biti iste!');
+            return redirect()->to(site_url('GuestController/register'));
         }
 
-        $this->session->set('username', $this->request->getVar('username'));
-        $this->session->set('lozinka',$this->request->getVar('lozinka'));
+        /*$this->session->set('username', $this->request->getVar('username'));
+        $this->session->set('lozinka',$this->request->getVar('password'));
         $this->session->set('email', $this->request->getVar('email'));
         $this->session->set('ime', $this->request->getVar('ime'));
         $this->session->set('prezime',$this->request->getVar('prezime'));
+
 
         $imeKorisnika = $this->request->getVar('ime');
         $emailKorisnika = $this->request->getVar('email');
@@ -67,9 +89,16 @@ class GuestController extends BaseController
 			if ($option == 0) $code .= chr(rand(48, 57));
 			else if ($option == 1) $code .= chr(rand(65, 90));
 			else $code .= chr(rand(97, 122));
-		}
+		}*/
 
-		$message = "Zdravo " . $imeKorisnika . ",";
+        unset($korisnikPodaci['password2']);
+
+        $korisnikModel->save($korisnikPodaci);
+
+        $this->session->setFlashdata('errorText', 'Uspešno ste registrovani!');
+        return redirect()->to(site_url('GuestController/register'));
+
+		/*$message = "Zdravo " . $imeKorisnika . ",";
 		$message .= "\n\nOvaj maik je poslat na zahtev registracije naloga sa sajta Usluga na dlanu. Kod koji je potrebno da unesete u predviđeno polje je: ". $code;
 
 		$email = \Config\Services::email();
@@ -82,11 +111,11 @@ class GuestController extends BaseController
 
 		$email->send();
 
-        $this->session->set('code', $code);
+        $this->session->set('code', $code);*/
     }
 
     public function confirmCode() {
-        if ($this->get->var('verifikacioniKod') != $this->session->get('code')) {
+        /*if ($this->get->var('verifikacioniKod') != $this->session->get('code')) {
             $korisnikModel = new KorisnikModel();
             $korisnikModel->save([
                 'korisnickoIme' => $this->session->get('username'),
@@ -97,7 +126,7 @@ class GuestController extends BaseController
             ]);
         }
         else {
-            return /*$this->prikaz('registracija', ['errors'=>'Niste uneli dobar verifikacioni kod.'])*/;
-        }
+            return /*$this->prikaz('registracija', ['errors'=>'Niste uneli dobar verifikacioni kod.']);
+        }*/
     }
 }

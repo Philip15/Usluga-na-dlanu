@@ -2,6 +2,10 @@
 
 namespace Config;
 
+use App\Filters\AdminFilter;
+use App\Filters\UserFilter;
+use App\Filters\GuestFilter;
+use App\Filters\ProviderFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -23,6 +27,11 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'guest'         => GuestFilter::class,
+        'user'          => UserFilter::class, 
+        'provider'      => ProviderFilter::class,
+        'admin'         => AdminFilter::class,
+        
     ];
 
     /**
@@ -64,5 +73,10 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'guest' => ['before' => ['GuestController/*', 'GuestController']],
+        'user' => ['before' => ['UserController/*', 'UserController']],
+        'provider' => ['before' => ['ProviderController/*', 'ProviderController']],
+        'admin' => ['before' => ['AdminController/*', 'AdminController']]
+    ];
 }

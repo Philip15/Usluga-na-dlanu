@@ -14,7 +14,8 @@ class KorisnikModel extends Model
 
     protected $returnType     = 'App\Models\KorisnikModel';
 
-    protected $allowedFields = [];
+    protected $allowedFields = ['korisnickoIme', 'lozinka', 'email', 'ime', 'prezime', 'profilnaSlika',  'opis', 
+            'pruzalac', 'adresa', 'lat', 'lon', 'idKategorije', 'administrator'];
 
     public function linkKategorija()
     {
@@ -40,11 +41,11 @@ class KorisnikModel extends Model
         $this->manuelnoZauzetiTermini=$terminM->where('idPruzaoca',$this->idKorisnika)->findAll();
     }
 
-    public function role()
+    public function role() 
     {
-        if($this->pruzalac==1){return 'provider';}
-        if($this->administrator==1){return 'admin';}
-        return 'user';
+        if ($this->administrator == 1) return 'admin';
+        else if ($this->pruzalac == 1) return 'provider';
+        else return 'user';
     }
 
     public function requestNotifications()
