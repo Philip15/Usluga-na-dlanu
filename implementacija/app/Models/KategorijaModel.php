@@ -18,4 +18,10 @@ class KategorijaModel extends Model
         $this->pruzaoci = $korsnikM->where('idKategorije',$this->idKategorije)->find();
     }
 
+    public static function getAll()
+    {
+        $kategorijaM = new  KategorijaModel();
+        return $kategorijaM->orderBy('idKategorije','ASC')->findAll();
+    }
+
 }

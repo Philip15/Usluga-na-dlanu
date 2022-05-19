@@ -11,11 +11,6 @@
         <!--Custom CSS-->
         <link rel="stylesheet" type="text/css"  href="<?=base_url('css/style.css')?>"/>
 
-        <!--Location picker dependencies-->
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
-        <script src="<?=base_url('js/locationpicker.jquery.min.js')?>"></script>
-
         <!--Custom JS-->
         <script src="<?=base_url('js/script.js')?>"></script>
 
@@ -37,9 +32,12 @@
         <!--Footer-->
         <?= $this->include('components/footer') ?>
         
-        <!--Custom JS Init-->
-        <?php if(isset($jsinit)){echo '<script>'.esc($jsinit).'_Init();</script>';}?>
-        
         <!--Bootstrap JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+        <!--Header JS Init-->
+        <script>header_Init();</script>
+
+        <!--Custom JS Init-->
+        <?php if(isset($jsinit)){echo '<script>'.esc($jsinit).'_Init();</script>';}?>
 </body>
