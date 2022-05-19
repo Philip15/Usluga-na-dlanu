@@ -1,10 +1,5 @@
 <?= $this->extend('layouts/defaultLayout') ?>
 
-<?= $this->section('additionalhead') ?>
-<link rel="stylesheet" type="text/css" href="<?= base_url('css/calendar.css') ?>" />
-<link rel="stylesheet" type="text/css" href="<?= base_url('css/profile.css') ?>" />
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
     <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
@@ -34,15 +29,21 @@
         <?php
         foreach ($categories as $category) {
             echo
+            '<li class="list-group-item" style="background-color:#1abc9c; width:30%">' . esc(ucfirst($category->naziv)) . 
             '<form method="POST" action="' . esc(base_url('AdminController/OPRemoveCategory/?id=' . esc($category->idKategorije))) . '">
-            <li class="list-group-item" style="background-color:#1abc9c; width:30%">' . esc(ucfirst($category->naziv)) . '<input name=' . esc($category->idKategorije) . ' class="btn btn-primary profile-button" type="submit" style="background-color:red; width:30%; float:right" value=' . lang('App.removeCategory') . '></input></li>
-            </form>';
+            <input name=' . esc($category->idKategorije) . ' class="btn btn-primary profile-button" type="submit" style="background-color:red; width:30%; float:right" value=' . lang('App.removeCategory') . '></input>
+            </form></li>';
         }
         ?>
     </ul>
 
 
-    <button class="btn btn-primary profile-button" type="submit" style="background-color:#1abc9c; width:18%; float:center; margin-left:40%" data-bs-toggle="modal" data-bs-target="#categoryModal"><?= lang('App.addCategory') ?></button>
+    <button class="btn btn-primary profile-button" type="submit" style="background-color:#1abc9c; width:18%; float:center; margin-left:40%" data-bs-toggle="modal" data-bs-target="#categoryModal">+ <?= lang('App.addCategory') ?></button>
 
-
+    <?php if (session('errorText') != null) 
+    {
+        echo '<script > alert("'.session('errorText').'")</script>';
+    }
+    ?>
+    
 <?= $this->endSection() ?>

@@ -9,38 +9,38 @@
     <div class="container-reg">
         <div class="wrap-reg">
             <form method="POST" action="<?= base_url('GuestController/OPregister')?>">
-                <span class="reg-title p-b-34 p-t-27">
+                <span class="reg-title">
                     <?=lang('App.registerTitle')?>
                 </span>
-
+            
                 <div class="wrap-input">
-                <?=lang('App.regEmailAddress')?>
-                    <input class="input" type="email" name="email" placeholder="<?=lang('App.regEmail')?>">
+                <?=lang('App.emailAddress')?>
+                    <input class="input" type="email" name="email" placeholder="<?=lang('App.regEmail')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['email']?>">
                 </div>
 
                 <div class="wrap-input">
                     <?=lang('App.name')?>
-                    <input class="input" type="text" name="ime" placeholder="<?=lang('App.name')?>">
+                    <input class="input" type="text" name="ime" placeholder="<?=lang('App.name')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['ime']?>">
                 </div>
 
                 <div class="wrap-input">
                     <?=lang('App.surname')?>
-                    <input class="input" type="text" name="prezime" placeholder="<?=lang('App.surname')?>">
+                    <input class="input" type="text" name="prezime" placeholder="<?=lang('App.surname')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['prezime']?>">
                 </div>
 
                 <div class="wrap-input">
                     <?=lang('App.username')?>
-                    <input class="input" type="text" name="username" placeholder="<?=lang('App.username')?>">
+                    <input class="input" type="text" name="username" placeholder="<?=lang('App.username')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['korisnickoIme']?>">
                 </div>
 
                 <div class="wrap-input">
                     <?=lang('App.password')?>
-                    <input class="input" type="password" name="password" placeholder="<?=lang('App.password')?>">
+                    <input class="input" type="password" name="password" placeholder="<?=lang('App.password')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['lozinka']?>">
                 </div>
 
                 <div class="wrap-input">
                     <?=lang('App.regPasswordAgain')?>
-                    <input class="input" type="password" name="password2" placeholder="<?=lang('App.password')?>">
+                    <input class="input" type="password" name="password2" placeholder="<?=lang('App.password')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['lozinka2']?>">
                 </div>
 
                 <div class="wrap-input">

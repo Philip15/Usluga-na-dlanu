@@ -17,15 +17,17 @@ return [
     'regEmail'                  => 'example@gmail.com',
     'name'                      => 'Ime',
     'surname'                   => 'Prezime',
-    'regEmailAddress'           => 'Email adresa',
+    'emailAddress'              => 'Email adresa',
     'regPasswordAgain'          => 'Ponovi lozinku',
     'termsOfUse'                => 'Slažem se sa uslovima korišćenja',
     'register'                  => 'Registruj se',
     'addNewCategory'            => 'Unesite naziv kategorije',
     'newCategory'               => 'Nova kategorija',
-    'addCategory'               => '+Dodaj kategoriju',
+    'addCategory'               => 'Dodaj kategoriju',
     'removeCategory'            => 'Ukloni',
     'add'                       => 'Dodaj',
     'deny'                      => 'Odbij',
-    'approve'                    => 'Prihvati'
+    'approve'                   => 'Prihvati',
+    'firstAndLastName'          => 'Ime i prezime',
+    'category'                  => 'Kategorija'
 ];

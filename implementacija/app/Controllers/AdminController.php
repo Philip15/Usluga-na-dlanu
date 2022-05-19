@@ -11,6 +11,7 @@ class AdminController extends BaseController
     {   
         $kategorijaModel = new KategorijaModel();
         $data['categories'] = $kategorijaModel->findAll();
+        //$data['categories'] = KategorijaModel::getAll();
         return view('categories', $data);
     }
 
@@ -30,9 +31,13 @@ class AdminController extends BaseController
        
         $kategorijaModel = new KategorijaModel();
         $korisnikModel = new KorisnikModel();
-        $pruzaoci = $korisnikModel->where('idKategorije',$this->request->getVar('id'))->find();
+        $pruzaoci = $korisnikModel->where('idKategorije',$this->request->getVar('id'))->findAll();
         if($pruzaoci == null) {
             $kategorijaModel->delete($this->request->getVar('id'));
+        }
+        else {
+            $this->session->setFlashdata('errorText', 'Ne možete ukloniti kategoriju koja ima pružaoce.');
+            return redirect()->to(base_url('AdminController/categories'));
         }
         
         return redirect()->to(base_url('AdminController/categories'));
@@ -42,19 +47,17 @@ class AdminController extends BaseController
     {
         $korisnikModel = new KorisnikModel();
         $requests = $korisnikModel->where('pruzalac', 2)->findAll();
-        $data['requests'] = $requests;
-        $kategorijaModel = new KategorijaModel();
         foreach ($requests as $req) {
-            $naziviKategorija[] = $kategorijaModel->find($req->idKategorije)->naziv;
+            $req->linkKategorija();
         }
-        $data['naziviKategorija'] = $naziviKategorija;
+        $data['requests'] = $requests;
         return view('accountrequests', $data);
     }
 
     public function OPApproveRequest()
     {
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->where('korisnickoIme', $this->request->getVar('korisnickoime'));
+        $korisnik = $korisnikModel->find($this->request->getVar('id'));
         $korisnikModel->update($korisnik->idKorisnika, ['pruzalac' => 1]);
         return redirect()->to(base_url('AdminController/accountrequests'));
     }
@@ -62,7 +65,7 @@ class AdminController extends BaseController
     public function OPDenyRequest()
     {
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->where('korisnickoIme', $this->request->getVar('korisnickoime'));
+        $korisnik = $korisnikModel->find($this->request->getVar('id'));
         $korisnikModel->update($korisnik->idKorisnika, ['pruzalac' => 0]);
         return redirect()->to(base_url('AdminController/accountrequests'));
     }
