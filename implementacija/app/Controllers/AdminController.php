@@ -10,12 +10,16 @@ class AdminController extends BaseController
     public function categories()
     {   
         $data['categories']=KategorijaModel::getAll();
-        //$data['categories'] = KategorijaModel::getAll();
         return view('categories', $data);
     }
 
     public function OPAddCategory()
     {
+        if (!$this->validate(['category'=>'required'])) 
+        {
+            $this->session->setFlashdata('errorText', 'Ime kategorije ne sme biti prazno.');
+            return self::safeRedirectBack();
+        }
         $kategorijaModel = new KategorijaModel();
         $kategorijaNaziv = $this->request->getVar('category');
         $kategorijaModel->save([
@@ -30,7 +34,7 @@ class AdminController extends BaseController
        
         $kategorijaModel = new KategorijaModel();
         $korisnikModel = new KorisnikModel();
-        $pruzaoci = $korisnikModel->where('idKategorije',$this->request->getVar('id'))->findAll();
+        $pruzaoci = $korisnikModel::getProviders($this->request->getVar('id'));
         if($pruzaoci == null) {
             $kategorijaModel->delete($this->request->getVar('id'));
         }
@@ -56,16 +60,14 @@ class AdminController extends BaseController
     public function OPApproveRequest()
     {
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->find($this->request->getVar('id'));
-        $korisnikModel->update($korisnik->idKorisnika, ['pruzalac' => 1]);
+        $korisnikModel->update($this->request->getVar('id'), ['pruzalac' => 1]);
         return redirect()->to(base_url('AdminController/accountrequests'));
     }
 
     public function OPDenyRequest()
     {
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->find($this->request->getVar('id'));
-        $korisnikModel->update($korisnik->idKorisnika, ['pruzalac' => 0]);
+        $korisnikModel->update($this->request->getVar('id'), ['pruzalac' => 0]);
         return redirect()->to(base_url('AdminController/accountrequests'));
     }
 }

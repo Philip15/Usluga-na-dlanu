@@ -2,7 +2,6 @@
 
 <?= $this->section('additionalhead') ?>
 <!--Location picker dependencies-->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
 <script src="<?=base_url('js/locationpicker.jquery.min.js')?>"></script>
 <?= $this->endSection() ?>
@@ -14,7 +13,7 @@
 </section>
 
 <div class="d-flex">
-    <aside class="d-flex flex-column flex-shrink-0 p-3 border-end text-light border-light" style="width:280px;">
+    <aside class="d-flex flex-column flex-shrink-0 p-3 border-end text-light border-light w-280px">
         <h5><?=lang('App.serviceCategories')?>:</h5>
         <ul class="flex-column nav" id="categories">
             <li class="nav-item">

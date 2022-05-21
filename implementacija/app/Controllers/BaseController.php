@@ -104,4 +104,16 @@ class BaseController extends Controller
             ->setStatusCode(200)
             ->setJSON(json_encode($result));
     }
+
+    public static function safeRedirectBack()
+    {
+        if(str_contains(previous_url(),'/AJAX') || str_contains(previous_url(),'/OP'))
+        {
+            return redirect()->to(base_url('/'));
+        }
+        else
+        {
+            return redirect()->back();
+        }
+    }
 }

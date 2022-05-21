@@ -15,24 +15,24 @@ class GuestController extends BaseController
     {
         if (!$this->validate(['username'=>'required', 'password'=> 'required'])) 
         {
-            $this->session->setFlashdata('errorText', 'Niste uneli sva polja!');
-            return redirect()->to(base_url());
+            $this->session->setFlashdata('loginErrorText', 'Niste uneli sva polja!');
+            return self::safeRedirectBack();
         }
         $korisnikModel = new KorisnikModel();
         $korisnik = $korisnikModel->where('korisnickoIme',$this->request->getVar('username'))->findAll();
         if ($korisnik == null)
         {
-            $this->session->setFlashdata('errorText', 'Korisnik ne postoji!');
-            return redirect()->to(base_url());
+            $this->session->setFlashdata('loginErrorText', 'Korisnik ne postoji!');
+            return self::safeRedirectBack();
         }
         $korisnik = $korisnik[0];
         if ($korisnik->lozinka != $this->request->getVar('password'))
         {
-            $this->session->setFlashdata('errorText', 'Nije ispravna lozinka!');
-            return redirect()->to(base_url());
+            $this->session->setFlashdata('loginErrorText', 'Nije ispravna lozinka!');
+            return self::safeRedirectBack();
         }
         $this->session->set('user', $korisnik);
-        return redirect()->back();
+        return self::safeRedirectBack();
     }
 
     public function OPregister() 
@@ -95,6 +95,7 @@ class GuestController extends BaseController
 
         $korisnikModel->save($korisnikPodaci);
 
+        //TODO Temp
         $this->session->setFlashdata('errorText', 'Uspešno ste registrovani!');
         return redirect()->to(site_url('GuestController/register'));
 

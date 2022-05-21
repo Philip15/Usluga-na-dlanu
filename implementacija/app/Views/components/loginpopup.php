@@ -16,9 +16,9 @@
                         <label class="d-flex align-items-center" for="password"><?=lang('App.password')?></label>
                     </div>
                     <?php
-                    if(session('errorText') !== null)
+                    if(session('loginErrorText') !== null)
                     {
-                       echo '<p class="px-2 mt-2 mb-0 text-danger" id="wrongPassword">'.esc(session('errorText')).'</p>';
+                       echo '<p class="px-2 mt-2 mb-0 text-danger" id="wrongPassword">'.esc(session('loginErrorText')).'</p>';
                     }
                     ?>
                     <div class="form-floating">

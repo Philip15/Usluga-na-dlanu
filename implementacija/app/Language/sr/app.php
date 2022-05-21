@@ -30,7 +30,6 @@ return [
     'from'                      => 'Od',
     'to'                        => 'Do',
     'search'                    => 'Pretraži',
-    'blank'                     => '',
     'regEmail'                  => 'example@gmail.com',
     'name'                      => 'Ime',
     'surname'                   => 'Prezime',
@@ -46,5 +45,7 @@ return [
     'deny'                      => 'Odbij',
     'approve'                   => 'Prihvati',
     'firstAndLastName'          => 'Ime i prezime',
-    'category'                  => 'Kategorija'
+    'category'                  => 'Kategorija',
+    'nameN'                     => 'Naziv',
+    'blank'                     => '',
 ];
