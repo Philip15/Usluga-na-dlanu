@@ -49,4 +49,12 @@
             </form>
         </div>
     </div>
+
+    <?php 
+        if (session('alertErrorText') != null) 
+        {
+            echo '<script > window.onload = window.setTimeout(function(){alert("'.esc(session('alertErrorText')).'");window.location.href=new URL(window.location.href).origin}, 100);</script>';
+        }
+    ?>
+
 <?= $this->endSection() ?>
