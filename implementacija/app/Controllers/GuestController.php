@@ -15,20 +15,19 @@ class GuestController extends BaseController
     {
         if (!$this->validate(['username'=>'required', 'password'=> 'required'])) 
         {
-            $this->session->setFlashdata('loginErrorText', 'Niste uneli sva polja!');
+            $this->session->setFlashdata('loginErrorText', lang('App.errFieldEmpty'));
             return self::safeRedirectBack();
         }
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->where('korisnickoIme',$this->request->getVar('username'))->findAll();
+        $korisnik = $korisnikModel->where('korisnickoIme',$this->request->getVar('username'))->first();
         if ($korisnik == null)
         {
-            $this->session->setFlashdata('loginErrorText', 'Korisnik ne postoji!');
+            $this->session->setFlashdata('loginErrorText', lang('App.errUserNotFound'));
             return self::safeRedirectBack();
         }
-        $korisnik = $korisnik[0];
         if ($korisnik->lozinka != $this->request->getVar('password'))
         {
-            $this->session->setFlashdata('loginErrorText', 'Nije ispravna lozinka!');
+            $this->session->setFlashdata('loginErrorText', lang('App.errWrongPassword'));
             return self::safeRedirectBack();
         }
         $this->session->set('user', $korisnik);
@@ -49,13 +48,19 @@ class GuestController extends BaseController
         if (!$this->validate(['email'=>'required', 'ime'=>'required', 'prezime'=> 'required', 'username'=>'required', 'password'=> 'required', 'password2'=> 'required'])) 
         {
             $this->session->setFlashdata('podaci', $korisnikPodaci);
-            $this->session->setFlashdata('errorText', 'Niste uneli sva polja!');
+            $this->session->setFlashdata('errorText', lang('App.errFieldEmpty'));
+            return redirect()->to(site_url('GuestController/register'));
+        }
+        if (!$this->validate(['email'=>'valid_email'])) 
+        {
+            $this->session->setFlashdata('podaci', $korisnikPodaci);
+            $this->session->setFlashdata('errorText', lang('App.errInvalidEmail'));
             return redirect()->to(site_url('GuestController/register'));
         }
         if ($this->request->getVar('uslovi_koriscenja') !=  "on") 
         {
             $this->session->setFlashdata('podaci', $korisnikPodaci);
-            $this->session->setFlashdata('errorText', 'Niste prihvatili uslove korišćenja!');
+            $this->session->setFlashdata('errorText', lang('App.errNotTNC'));
             return redirect()->to(site_url('GuestController/register'));
         }
         $korisnikModel = new KorisnikModel();
@@ -63,13 +68,13 @@ class GuestController extends BaseController
         if ($korisnik != null) 
         {
             $this->session->setFlashdata('podaci', $korisnikPodaci);
-            $this->session->setFlashdata('errorText', 'Korisničko ime postoji!');
+            $this->session->setFlashdata('errorText', lang('App.errUserAlreadyExists'));
             return redirect()->to(site_url('GuestController/register'));
         }
         if ($korisnikPodaci['lozinka'] != $korisnikPodaci['lozinka']) 
         {
             $this->session->setFlashdata('podaci', $korisnikPodaci);
-            $this->session->setFlashdata('errorText', 'Lozinke moraju biti iste!');
+            $this->session->setFlashdata('errorText', lang('App.errPasswordConfirmation'));
             return redirect()->to(site_url('GuestController/register'));
         }
 
@@ -96,7 +101,7 @@ class GuestController extends BaseController
         $korisnikModel->save($korisnikPodaci);
 
         //TODO Temp
-        $this->session->setFlashdata('errorText', 'Uspešno ste registrovani!');
+        $this->session->setFlashdata('errorText', lang('App.successfulRegistration'));
         return redirect()->to(site_url('GuestController/register'));
 
 		/*$message = "Zdravo " . $imeKorisnika . ",";
@@ -115,7 +120,8 @@ class GuestController extends BaseController
         $this->session->set('code', $code);*/
     }
 
-    public function confirmCode() {
+    public function confirmCode() 
+    {
         /*if ($this->get->var('verifikacioniKod') != $this->session->get('code')) {
             $korisnikModel = new KorisnikModel();
             $korisnikModel->save([

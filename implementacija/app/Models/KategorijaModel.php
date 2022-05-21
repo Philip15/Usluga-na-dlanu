@@ -24,4 +24,10 @@ class KategorijaModel extends Model
         return $kategorijaM->orderBy('idKategorije','ASC')->findAll();
     }
 
+    public static function get($name)
+    {
+        $kategorijaM = new  KategorijaModel();
+        return $kategorijaM->where('naziv',$name)->first();
+    }
+
 }

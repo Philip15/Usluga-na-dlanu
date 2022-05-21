@@ -9,27 +9,27 @@
                 </div>
                 <div class="mb-3">
                     <?=lang('App.emailAddress')?>
-                    <input class="form-control" type="email" name="email" placeholder="<?=lang('App.regEmail')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['email']?>">
+                    <input class="form-control" type="email" name="email" placeholder="<?=lang('App.regEmail')?>" value="<?=empty(session('podaci')) ? '' : esc(session('podaci')['email'])?>">
                 </div>
                 <div class="mb-3">
                     <?=lang('App.name')?>
-                    <input class="form-control" type="text" name="ime" placeholder="<?=lang('App.name')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['ime']?>">
+                    <input class="form-control" type="text" name="ime" placeholder="<?=lang('App.name')?>" value="<?=empty(session('podaci')) ? '' : esc(session('podaci')['ime'])?>">
                 </div>
                 <div class="mb-3">
                     <?=lang('App.surname')?>
-                    <input class="form-control" type="text" name="prezime" placeholder="<?=lang('App.surname')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['prezime']?>">
+                    <input class="form-control" type="text" name="prezime" placeholder="<?=lang('App.surname')?>" value="<?=empty(session('podaci')) ? '' : esc(session('podaci')['prezime'])?>">
                 </div>
                 <div class="mb-3">
                     <?=lang('App.username')?>
-                    <input class="form-control" type="text" name="username" placeholder="<?=lang('App.username')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['korisnickoIme']?>">
+                    <input class="form-control" type="text" name="username" placeholder="<?=lang('App.username')?>" value="<?=empty(session('podaci')) ? '' : esc(session('podaci')['korisnickoIme'])?>">
                 </div>
                 <div class="mb-3">
                     <?=lang('App.password')?>
-                    <input class="form-control" type="password" name="password" placeholder="<?=lang('App.password')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['lozinka']?>">
+                    <input class="form-control" type="password" name="password" placeholder="<?=lang('App.password')?>" value="<?=empty(session('podaci')) ? '' : esc(session('podaci')['lozinka'])?>">
                 </div>
                 <div class="mb-3">
                     <?=lang('App.regPasswordAgain')?>
-                    <input class="form-control" type="password" name="password2" placeholder="<?=lang('App.password')?>" value="<?=empty(session('podaci')) ? '' : session('podaci')['lozinka2']?>">
+                    <input class="form-control" type="password" name="password2" placeholder="<?=lang('App.password')?>" value="<?=empty(session('podaci')) ? '' : esc(session('podaci')['lozinka2'])?>">
                 </div>
                 <div class="mb-3">
                     <input class="form-check-input" id="ckb1" type="checkbox" name="uslovi_koriscenja">
@@ -38,8 +38,7 @@
                 <?php
                     if(session('errorText') !== null)
                     {
-                    echo '<p class="px-2 mt-2 mb-0 text-danger">'.esc(session('errorText')).'</p></br>';
-
+                        echo '<p class="px-2 mt-2 mb-0 text-danger">'.esc(session('errorText')).'</p></br>';
                     }
                 ?>
                 <div>

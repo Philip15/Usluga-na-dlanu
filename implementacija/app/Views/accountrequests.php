@@ -3,7 +3,8 @@
 <?= $this->section('content') ?>
     <div>
         <?php
-            for ($i=0; $i<count($requests); $i++) {
+            for ($i=0; $i<count($requests); $i++) 
+            {
                 $req = $requests[$i];
                 echo 
                 '<div class="d-flex flex-column container justify-content-center bg-light rounded-3 px-4 my-5">

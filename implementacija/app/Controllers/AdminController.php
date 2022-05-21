@@ -17,11 +17,16 @@ class AdminController extends BaseController
     {
         if (!$this->validate(['category'=>'required'])) 
         {
-            $this->session->setFlashdata('errorText', 'Ime kategorije ne sme biti prazno.');
+            $this->session->setFlashdata('errorText', lang('App.errEmptyCategory'));
+            return self::safeRedirectBack();
+        }
+        $kategorijaNaziv = strtolower($this->request->getVar('category'));
+        if(KategorijaModel::get($kategorijaNaziv)!==null)
+        {
+            $this->session->setFlashdata('errorText', lang('App.errCategoryAlreadyExists'));
             return self::safeRedirectBack();
         }
         $kategorijaModel = new KategorijaModel();
-        $kategorijaNaziv = $this->request->getVar('category');
         $kategorijaModel->save([
             'naziv' => $kategorijaNaziv
         ]);
@@ -31,15 +36,16 @@ class AdminController extends BaseController
 
     public function OPRemoveCategory()
     {
-       
         $kategorijaModel = new KategorijaModel();
         $korisnikModel = new KorisnikModel();
         $pruzaoci = $korisnikModel::getProviders($this->request->getVar('id'));
-        if($pruzaoci == null) {
+        if($pruzaoci == null) 
+        {
             $kategorijaModel->delete($this->request->getVar('id'));
         }
-        else {
-            $this->session->setFlashdata('errorText', 'Ne možete ukloniti kategoriju koja ima pružaoce.');
+        else 
+        {
+            $this->session->setFlashdata('errorText', lang('App.errCategoryHasProviders'));
             return redirect()->to(base_url('AdminController/categories'));
         }
         
@@ -50,7 +56,8 @@ class AdminController extends BaseController
     {
         $korisnikModel = new KorisnikModel();
         $requests = $korisnikModel->where('pruzalac', 2)->findAll();
-        foreach ($requests as $req) {
+        foreach ($requests as $req) 
+        {
             $req->linkKategorija();
         }
         $data['requests'] = $requests;

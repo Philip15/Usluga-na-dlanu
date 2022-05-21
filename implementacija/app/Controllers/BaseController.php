@@ -72,8 +72,9 @@ class BaseController extends Controller
         $providers=KorisnikModel::getProviders($cat);
         $result = [];
 
-        foreach ($providers as $provider) {
-            if($tFrom==null || $provider->available($tFrom,$tTo,$dFrom,$dTo))
+        foreach ($providers as $provider) 
+        {
+            if($tFrom==null || $tTo==null || $dFrom==null || $dTo==null || $provider->available($tFrom,$tTo,$dFrom,$dTo))
             {
                 $resobj=new stdClass();
                 if(isset($provider->profilnaSlika) && $provider->profilnaSlika !== null)
@@ -83,17 +84,16 @@ class BaseController extends Controller
                 else
                 {
                     $resobj->profilnaSlika = base_url('res/placeholder-avatar.jpg');
-                
                 }
-                $resobj->idKorisnika = $provider->idKorisnika;
-                $resobj->ime = $provider->ime;
-                $resobj->prezime = $provider->prezime;
+                $resobj->idKorisnika = esc($provider->idKorisnika);
+                $resobj->ime = esc($provider->ime);
+                $resobj->prezime = esc($provider->prezime);
                 $provider->linkKategorija();
-                $resobj->kategorija = ucfirst($provider->kategorija->naziv);
-                $resobj->lat = $provider->lat;
-                $resobj->lon = $provider->lon;
-                $resobj->opis = $provider->opis;
-                $resobj->ocena = $provider->rating();
+                $resobj->kategorija = esc(ucfirst($provider->kategorija->naziv));
+                $resobj->lat = esc($provider->lat);
+                $resobj->lon = esc($provider->lon);
+                $resobj->opis = esc($provider->opis);
+                $resobj->ocena = esc($provider->rating());
 
                 array_push($result,$resobj);
             }

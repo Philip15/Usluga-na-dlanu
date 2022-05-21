@@ -34,7 +34,7 @@
     <?php 
         if (session('errorText') != null) 
         {
-            echo '<script > window.onload = window.setTimeout(function(){alert("'.session('errorText').'");}, 100);</script>';
+            echo '<script > window.onload = window.setTimeout(function(){alert("'.esc(session('errorText')).'");}, 100);</script>';
         }
     ?>
 

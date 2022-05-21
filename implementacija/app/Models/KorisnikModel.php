@@ -43,9 +43,9 @@ class KorisnikModel extends Model
 
     public function role() 
     {
-        if ($this->administrator == 1) return 'admin';
-        else if ($this->pruzalac == 1) return 'provider';
-        else return 'user';
+        if ($this->administrator == 1) { return 'admin';    }
+        elseif  ($this->pruzalac == 1) { return 'provider'; }
+        else                           { return 'user';     }
     }
 
     public function requestNotifications()
@@ -137,7 +137,8 @@ class KorisnikModel extends Model
     public function shortTermini()
     {
         $res = [];
-        foreach ($this->manuelnoZauzetiTermini as $termin) {
+        foreach ($this->manuelnoZauzetiTermini as $termin) 
+        {
             $obj=new stdClass();
             $dt=new DateTime($termin->datumVremePocetka);
             $obj->date = $dt->format('Y-m-d');

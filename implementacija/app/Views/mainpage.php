@@ -55,7 +55,6 @@
                     <div class="col-12 ps-0 pe-2 mt-2">
                         <button class="btn btn-secondary w-100" type="button" onclick="onClick_DateFilter()"><?=lang('App.search')?></button>
                     </div>
-                    
                 </div>  
             </div>
         </form>
@@ -77,11 +76,13 @@
     </aside>
 
     <main class="w-100 mx-4 my-4" >
+        <h5 class="text-light dnone" id="providerNotFound"><?=lang('App.providerNotFound')?></h5>
         <div class="row" id="cardContainer">
-            
         </div>    
     </main>
 
 </div>
+
+<p class="dnone" id="invalidTime"><?=lang('App.invalidTime')?></p>
 
 <?= $this->endSection() ?>

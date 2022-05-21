@@ -9,5 +9,4 @@ class UserController extends BaseController
         $this->session->destroy();
         return self::safeRedirectBack();
     }
-
 }
