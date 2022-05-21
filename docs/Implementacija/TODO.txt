@@ -39,9 +39,9 @@ UserController/OPCreateRequest
 UserController/requests
 UserController/OPAcceptRequest
 UserController/OPRejectRequest
-UserController/reviews
-UserController/OPPostReview
-UserController/OPRemoveReview
+	UserController/reviews
+	UserController/OPPostReview
+	UserController/OPRemoveReview
 UserController/editProfile
 UserController/OPUpdateProfile
 UserController/OPConvertProfile
