@@ -1,40 +1,40 @@
 Models:
-KorisnikModel
-ZahtevModel
-TerminModel
-KategorijaModel
+    KorisnikModel
+    ZahtevModel
+    TerminModel
+    KategorijaModel
 
 Views:
-Header(Gost,User,Provider,Admin)(Ovo mozda moze da bude jedan header pa da js/php prikazuje sta treba?)
-Footer
-index
-profile(Gost,User)
-register
+    Header
+    Footer
+    index
+profile(Guest,User)
+    register
 requests(User,Provider)
 reviews
 editProfile(User,Provider)
 timetable(User,Provider)
-categories
-accountRequests
+    categories
+    accountRequests
 
 Controllers:
-GuestController
-UserController
-ProviderController
-AdminController
+    BaseController
+    GuestController
+    UserController
+    ProviderController
+    AdminController
 
 Endpoints:
-BaseController/index
-BaseController/AJAXGetProviders?cat=&tFrom=&tTo=
+    BaseController/index
+    BaseController/AJAXGetProviders?cat=&tFrom=&tTo=
 BaseController/profile
 
-GostController/OPLogin
-GostController/register
-GostController/OPRegister
+    GostController/OPLogin
+    GostController/register
+    GostController/OPRegister
 GostController/OPVerifyemail
 
-UserController/OPLogout
-UserController/profile
+    UserController/OPLogout
 UserController/OPCreateRequest
 UserController/requests
 UserController/OPAcceptRequest
@@ -50,15 +50,13 @@ ProviderController/requests
 ProviderController/OPAcceptRequest
 ProviderController/OPRealizeRequest
 ProviderController/OPRejectRequest
-ProviderController/editProfile
-ProviderController/OPUpdateProfile
 ProviderController/timetable
 ProviderController/OPReserveTime
 ProviderController/OPFreeTime
 
-AdminController/categories
-AdminController/OPAddCategory
-AdminController/OPRemoveCategory
-AdminController/accountRequests
-AdminController/OPApproveRequest
-AdminController/OPDenyRequest
+    AdminController/categories
+    AdminController/OPAddCategory
+    AdminController/OPRemoveCategory
+    AdminController/accountRequests
+    AdminController/OPApproveRequest
+    AdminController/OPDenyRequest

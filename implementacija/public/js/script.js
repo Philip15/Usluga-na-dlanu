@@ -163,6 +163,16 @@ function getProviders(query)
 function displayProviders(res)
 {
     var containter = document.getElementById("cardContainer");
+    containter.innerHTML="";
+    if(res.length==0)
+    {
+        document.getElementById("providerNotFound").style.display="block";
+        return;
+    }
+    else
+    {
+        document.getElementById("providerNotFound").style.display="none";
+    }
     if(getSearchParam("sort")==0)
     {
         res.sort(sortOcena);
@@ -171,21 +181,19 @@ function displayProviders(res)
     {
         res.sort(sortUdaljenost);
     }
-    containter.innerHTML="";
-    if(res.length==0)
-    {
-        containter.innerHTML=`<h5 class="text-light">Ne postoji nijedan ponuđač koji ispunjava uslove pretrage, molimo proširite kriterijum pretrage.</h5>`;
-    }
+    var url = new URL(window.location.href).origin;
     for (let i = 0; i < res.length; i++) {
-        var elem=`<div class="card w-20rem col-xs-auto m-3" onclick="onClick_Card(this)">
-        <img src="${res[i].profilnaSlika}" class="card-img-top mt-2 h-294px"/>
-        <div class="card-body d-flex flex-column">
-            <h5 class="card-title" value="${res[i].idKorisnika}">${res[i].ime} ${res[i].prezime}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">${res[i].kategorija + (getSearchParam("sort")==1?" "+distance(res[i].lat,res[i].lon,getSearchParam("lat"),getSearchParam("lon"))+"km":"")}</h6>
-            <p class="card-text">${res[i].opis}</p>
-            <p class="card-text mt-auto h-1d5rem">${stars(res[i].ocena)}</p>
-        </div>
-    </div>`;
+        var elem=
+        `<div class="card w-20rem col-xs-auto m-3 position-relative">
+            <a href="${url}/BaseController/profile?id=${res[i].idKorisnika}"><span class="magic-link"></span></a>
+            <img src="${res[i].profilnaSlika}" class="card-img-top mt-2 h-294px"/>
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${res[i].ime} ${res[i].prezime}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${res[i].kategorija + (getSearchParam("sort")==1?" "+distance(res[i].lat,res[i].lon,getSearchParam("lat"),getSearchParam("lon"))+"km":"")}</h6>
+                <p class="card-text">${res[i].opis}</p>
+                <p class="card-text mt-auto h-1d5rem">${stars(res[i].ocena)}</p>
+            </div>
+        </div>`;
         containter.innerHTML+=elem;
     }
 }
@@ -305,7 +313,7 @@ function onClick_DateFilter()
     var sdateTo = document.getElementById("dateTo").value;
     if(stimeFrom == '' || stimeTo == '' || sdateFrom == '' || sdateTo == '')
     {
-        alert("Vremenski period nije validan");
+        alert(document.getElementById("invalidTime").innerHTML);
         return;
     }
     setSearchParam("timeFrom",stimeFrom);
@@ -337,10 +345,4 @@ function locationChangedCallback(currentLocation, radius, isMarkerDropped) {
     setSearchParam("lon",currentLocation.longitude);
     displayProviders(window.providers);
     updateView();
-}
-
-function onClick_Card(e)
-{
-    var url = new URL(window.location.href).origin;
-    window.location.href=url+"/BaseController/profile?id="+e.getElementsByClassName("card-title")[0].getAttribute('value');
 }

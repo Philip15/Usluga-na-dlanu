@@ -20,7 +20,7 @@ class HeaderLib
             $res = $res.self::menuItem(base_url('AdminController/categories'),lang('App.editCategories'));
             $res = $res.self::menuItem(base_url('AdminController/accountRequests'),lang('App.accountRequests'),$user->accountNotifications());
         }
-        $res = $res.self::menuDivider('','');
+        $res = $res.self::menuDivider();
         $res = $res.self::menuItem(base_url('UserController/OPLogout'),lang('App.logout'));
         return $res;
     }
@@ -30,7 +30,7 @@ class HeaderLib
         $res = '<li><a class="dropdown-item d-flex justify-content-between" href="'.esc($href).'">'.esc($string);
         if($notifCount!==null && $notifCount!=0)
         {
-            $res = $res.' <span class="badge bg-danger ms-2">'.$notifCount.'</span>';
+            $res = $res.' <span class="badge bg-danger ms-2">'.esc($notifCount).'</span>';
         }
         $res = $res.'</a></li>';
         return $res;
