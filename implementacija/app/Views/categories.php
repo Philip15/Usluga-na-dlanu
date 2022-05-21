@@ -32,9 +32,9 @@
     </div>
 
     <?php 
-        if (session('errorText') != null) 
+        if (session('alertErrorText') != null) 
         {
-            echo '<script > window.onload = window.setTimeout(function(){alert("'.esc(session('errorText')).'");}, 100);</script>';
+            echo '<script > window.onload = window.setTimeout(function(){alert("'.esc(session('alertErrorText')).'");}, 100);</script>';
         }
     ?>
 

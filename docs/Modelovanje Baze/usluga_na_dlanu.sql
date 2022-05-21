@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `korisnici`;
 CREATE TABLE IF NOT EXISTS `korisnici` (
   `idKorisnika` int NOT NULL AUTO_INCREMENT,
   `korisnickoIme` varchar(45) NOT NULL,
-  `lozinka` varchar(45) NOT NULL,
+  `lozinka` varchar(255) NOT NULL,
   `email` varchar(45) NOT NULL,
   `ime` varchar(45) NOT NULL,
   `prezime` varchar(45) NOT NULL,
@@ -80,19 +80,19 @@ CREATE TABLE IF NOT EXISTS `korisnici` (
 --
 
 INSERT INTO `korisnici` (`idKorisnika`, `korisnickoIme`, `lozinka`, `email`, `ime`, `prezime`, `profilnaSlika`, `opis`, `pruzalac`, `adresa`, `lat`, `lon`, `idKategorije`, `administrator`) VALUES
-(1, 'lazar', 'qwerty', 'pl190091d@student.etf.bg.ac.rs', 'Lazar', 'Premović', NULL, NULL, 0, NULL, NULL, NULL, NULL, 1),
-(2, 'mika', 'mika123', 'mika@gmail.com', 'Mika', 'Mikić', NULL, 'Najbolji vodoinstalater u gradu.', 1, 'Ulica 1', -35.7274, -28.2477, 1, 0),
-(3, 'pera', 'pera123', 'pera@gmail.com', 'Pera', 'Perić', NULL, 'Najbolji moler u gradu.', 1, 'Ulica 2', -54.9029, -36.0484, 2, 0),
-(4, 'zoki', 'zoki123', 'zoki@gmail.com', 'Zoki', 'Zokić', NULL, 'Najbolji električar u gradu.', 1, 'Ulica 3', 15.2273, 178.892, 3, 0),
-(5, 'misko', 'misko123', 'misko@gmail.com', 'Miško', 'Mišković', NULL, 'Pomoćnik najboljeg električara u gradu.', 1, 'Ulica 4', 30.0326, -109.302, 3, 0),
-(6, 'luka', 'luka123', 'luka@gmail.com', 'Luka', 'Luković', NULL, 'Jednom sam sebi okrečio sobu.', 1, 'Ulica 5', -39.7139, -46.4114, 2, 0),
-(7, 'zika', 'zika123', 'zika@gmail.com', 'Žika', 'Žikić', NULL, 'Umem da otpušim wc šolju.', 1, 'Ulica 6', 2.80141, -1.42037, 1, 0),
-(8, 'marko', 'marko123', 'marko@gmail.com', 'Marko', 'Marković', NULL, 'Najbolji bravar u gradu.', 1, 'Ulica 7', 18.6576, 114.699, 4, 0),
-(9, 'slavko', 'slavko123', 'slavko@gmail.com', 'Slavko', 'Slavković', NULL, 'Ne sinko, ne radi se to tako.', 1, 'Ulica 7', 2.51104, 33.5089, 3, 0),
-(10, 'mirko', 'mirko123', 'mirko@gmail.com', 'Mirko', 'Mirković', NULL, 'Ni tile mi nije ravan.', 1, 'Ulica 8', -17.5943, -17.5943, 4, 0),
-(11, 'zaki', 'zaki123', 'zaki@gmail.com', 'Zaki', 'Radivojević', NULL, 'DOBAR DAN!', 1, 'Ulica 9', 22.4755, -161.464, 4, 0),
-(12, 'ivan', 'ivan123', 'ivan@gmail.com', 'Ivan', 'Ivanović', NULL, 'A je l\' ste možda čuli za EESTEC?', 1, 'Ulica 10', -16.4401, -159.081, 1, 0),
-(13, 'goran', 'goran123', 'goran@gmail.com', 'Goran', 'Goranović', NULL, 'Nemoj Gorane, ići ćeš u zatvor.', 1, 'Ulica 11', 7.33367, -83.1155, 2, 0);
+(1, 'lazar', '$2y$10$kg1Az2VKJz/D8WLIDqEPbuxAnIHteh3zFrvy20U.v4Zr96qMOipTe', 'pl190091d@student.etf.bg.ac.rs', 'Lazar', 'Premović', NULL, NULL, 0, NULL, NULL, NULL, NULL, 1),										/*pass:qwerty*/
+(2, 'mika',  '$2y$10$OpcvPi5xznpqYvZxiMG9OOvBG3by9/OFB8fOQtDTIY9QFKUMtZ2tK', 'mika@gmail.com', 'Mika', 'Mikić', NULL, 'Najbolji vodoinstalater u gradu.', 1, 'Ulica 1', -35.7274, -28.2477, 1, 0),					/*pass:mika123*/
+(3, 'pera',  '$2y$10$z0SYNvcWknERoG0ABIuD7Op7kWz7MF7n9/lMUyFKHu12eeXQ.WaY2', 'pera@gmail.com', 'Pera', 'Perić', NULL, 'Najbolji moler u gradu.', 1, 'Ulica 2', -54.9029, -36.0484, 2, 0),							/*pass:pera123*/
+(4, 'zoki',  '$2y$10$eP.L1nBI7VxsmETAv.yZcuKqN1d2Zu.xGsjXjzHTbKMbvjw2v.Czi', 'zoki@gmail.com', 'Zoki', 'Zokić', NULL, 'Najbolji električar u gradu.', 1, 'Ulica 3', 15.2273, 178.892, 3, 0),						/*pass:zoki123*/
+(5, 'misko', '$2y$10$2nL8uS6pT6q9LnfVj5tb2OLncfFjIKVorEXddEt93s1ThtU63w4t6', 'misko@gmail.com', 'Miško', 'Mišković', NULL, 'Pomoćnik najboljeg električara u gradu.', 1, 'Ulica 4', 30.0326, -109.302, 3, 0),		/*pass:misko123*/
+(6, 'luka',  '$2y$10$9Y1KKwTdfVDmhN0fno5UYuadvi54lLbWaEwsz0p2yV5FtUAdcEr0G', 'luka@gmail.com', 'Luka', 'Luković', NULL, 'Jednom sam sebi okrečio sobu.', 1, 'Ulica 5', -39.7139, -46.4114, 2, 0),					/*pass:luka123*/
+(7, 'zika',  '$2y$10$SbMPB.TeoOimcxgl3fgoYOOD8O5LvoT.GnEVXiEfnXBG4pVww53iS', 'zika@gmail.com', 'Žika', 'Žikić', NULL, 'Umem da otpušim wc šolju.', 1, 'Ulica 6', 2.80141, -1.42037, 1, 0),							/*pass:zika123*/
+(8, 'marko', '$2y$10$7rtS5WyEpETSks6uAd7YCOIdyF7c2/X08WevBtBmevacM0PEl4MoG', 'marko@gmail.com', 'Marko', 'Marković', NULL, 'Najbolji bravar u gradu.', 1, 'Ulica 7', 18.6576, 114.699, 4, 0),						/*pass:marko123*/
+(9, 'slavko','$2y$10$ECNny3Yx5n6Vm99KT9aLTO94DHNTIDcGJv7UGRdHgLelaa9Rw6GEi', 'slavko@gmail.com', 'Slavko', 'Slavković', NULL, 'Ne sinko, ne radi se to tako.', 1, 'Ulica 7', 2.51104, 33.5089, 3, 0),				/*pass:slavko123*/
+(10, 'mirko','$2y$10$Fuim4w03mCd07J.LHPHIQ.KbKEx1/1NyBc.MnrjbFFs8pqw3mX57i', 'mirko@gmail.com', 'Mirko', 'Mirković', NULL, 'Ni tile mi nije ravan.', 1, 'Ulica 8', -17.5943, -17.5943, 4, 0),						/*pass:mirko123*/
+(11, 'zaki', '$2y$10$6JB.FydTPuTpSdsjBMe7aOWIvREp8F1isPUoCb4zcPLBFUBI1rmkC', 'zaki@gmail.com', 'Zaki', 'Radivojević', NULL, 'DOBAR DAN!', 1, 'Ulica 9', 22.4755, -161.464, 4, 0),									/*pass:zaki123*/
+(12, 'ivan', '$2y$10$Zk94IH1kaoiFEO7ilpBKuuRYxvh.5QsXyUumVOrkVSzGcxpR43ifu', 'ivan@gmail.com', 'Ivan', 'Ivanović', NULL, 'A je l ste možda čuli za EESTEC?', 1, 'Ulica 10', -16.4401, -159.081, 1, 0),			/*pass:ivan123*/
+(13, 'goran','$2y$10$kJn32AgYcL3HEmL/YEXuW.TlHvM6ntZRp5c5q5sdCL.n8dAwUKC8G', 'goran@gmail.com', 'Goran', 'Goranović', NULL, 'Nemoj Gorane, ići ćeš u zatvor.', 1, 'Ulica 11', 7.33367, -83.1155, 2, 0);			/*pass:goran123*/
 
 -- --------------------------------------------------------
 

@@ -346,3 +346,57 @@ function locationChangedCallback(currentLocation, radius, isMarkerDropped) {
     displayProviders(window.providers);
     updateView();
 }
+
+function reviews_Init()
+{
+    var elems =document.getElementsByClassName("stars");
+    for (let index = 0; index < elems.length; index++) {
+        elems[index].addEventListener("mouseover",onMouseOver_StarSelector);
+        elems[index].addEventListener("mouseout",onMouseOut_StarSelector);
+        elems[index].addEventListener("click",onClick_StarSelector);
+    }
+}
+
+function onMouseOver_StarSelector(e) 
+{
+    var stars=Math.min(Math.floor(e.offsetX/20)+1,5);
+    SetStars(e.currentTarget, stars);
+}
+
+function onMouseOut_StarSelector(e) 
+{
+    SetStars(e.currentTarget, 0);
+}
+
+function onClick_StarSelector(e)
+{
+    var stars=Math.min(Math.floor(e.offsetX/20)+1,5);
+    e.currentTarget.getElementsByClassName('rating')[0].value=stars;
+    SetStars(e.currentTarget,0);
+}
+
+function SetStars(elem, stars)
+{
+    var elems =elem.children;
+    var clickedStars =elem.getElementsByClassName('rating')[0].value;
+    for (let index = 0; index < elems.length; index++) {
+        if(stars>index || clickedStars>index)
+        {
+            elems[index].classList.remove("bi-star");
+            elems[index].classList.add("bi-star-fill");
+        }
+        else
+        {
+            elems[index].classList.remove("bi-star-fill");
+            elems[index].classList.add("bi-star");
+        }
+    }
+}
+
+function onClick_Remove(q,l)
+{
+    if(confirm(q))
+    {
+        window.location.href=l;
+    }
+}

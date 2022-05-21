@@ -17,13 +17,13 @@ class AdminController extends BaseController
     {
         if (!$this->validate(['category'=>'required'])) 
         {
-            $this->session->setFlashdata('errorText', lang('App.errEmptyCategory'));
+            $this->session->setFlashdata('alertErrorText', lang('App.errEmptyCategory'));
             return self::safeRedirectBack();
         }
         $kategorijaNaziv = strtolower($this->request->getVar('category'));
         if(KategorijaModel::get($kategorijaNaziv)!==null)
         {
-            $this->session->setFlashdata('errorText', lang('App.errCategoryAlreadyExists'));
+            $this->session->setFlashdata('alertErrorText', lang('App.errCategoryAlreadyExists'));
             return self::safeRedirectBack();
         }
         $kategorijaModel = new KategorijaModel();
@@ -45,7 +45,7 @@ class AdminController extends BaseController
         }
         else 
         {
-            $this->session->setFlashdata('errorText', lang('App.errCategoryHasProviders'));
+            $this->session->setFlashdata('alertErrorText', lang('App.errCategoryHasProviders'));
             return redirect()->to(base_url('AdminController/categories'));
         }
         
