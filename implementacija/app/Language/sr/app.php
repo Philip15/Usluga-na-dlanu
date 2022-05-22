@@ -46,5 +46,17 @@ return [
     'deny'                      => 'Odbij',
     'approve'                   => 'Prihvati',
     'firstAndLastName'          => 'Ime i prezime',
-    'category'                  => 'Kategorija'
+    'category'                  => 'Kategorija',
+    'profileOverview'           => 'Pregled profila',
+    'chooseProfilePicture'      => 'Izaberi sliku',
+    'changeProfilePicture'      => 'Izmeni profilnu sliku',
+    'additionalInformation'     => 'Dodatne informacije',
+    'saveChanges'               => 'Sačuvaj izmene',
+    'profileUpdate'             => 'Izmena profila u pružaoca usluge',
+    'providerCategory'          => 'Kategorija usluge',
+    'choose'                    => 'Izaberite',
+    'providerAddress'           => 'Adresa poslovanja',
+    'profileAddress'            => 'Ulica i broj, grad',
+    'changeCalendar'            => 'Izmena kalendara',
+    'calendar'                  => 'Calendar'
 ];
