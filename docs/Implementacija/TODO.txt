@@ -11,7 +11,7 @@ Views:
 profile(Guest,User)
     register
 requests(User,Provider)
-reviews
+	reviews
 editProfile(User,Provider)
 timetable(User,Provider)
     categories
@@ -32,7 +32,6 @@ BaseController/profile
     GostController/OPLogin
     GostController/register
     GostController/OPRegister
-GostController/OPVerifyemail
 
     UserController/OPLogout
 UserController/OPCreateRequest
