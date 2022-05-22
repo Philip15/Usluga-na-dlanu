@@ -8,11 +8,16 @@
         <?=lang('App.title')?>
     </a>
 
-    <?php if(session('user')!==null){
-        echo $this->include('components/userdropdown');
-    }else{
-        echo $this->include('components/loginregisterbuttons');
-    }?>
+    <?php 
+        if(session('user')!==null)
+        {
+            echo $this->include('components/userdropdown');
+        }
+        else
+        {
+            echo $this->include('components/loginregisterbuttons');
+        }
+    ?>
 
 </nav>
 </header>

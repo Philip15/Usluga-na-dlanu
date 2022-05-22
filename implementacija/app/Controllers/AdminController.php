@@ -10,14 +10,23 @@ class AdminController extends BaseController
     public function categories()
     {   
         $data['categories']=KategorijaModel::getAll();
-        //$data['categories'] = KategorijaModel::getAll();
         return view('categories', $data);
     }
 
     public function OPAddCategory()
     {
+        if (!$this->validate(['category'=>'required'])) 
+        {
+            $this->session->setFlashdata('alertErrorText', lang('App.errEmptyCategory'));
+            return self::safeRedirectBack();
+        }
+        $kategorijaNaziv = strtolower($this->request->getVar('category'));
+        if(KategorijaModel::get($kategorijaNaziv)!==null)
+        {
+            $this->session->setFlashdata('alertErrorText', lang('App.errCategoryAlreadyExists'));
+            return self::safeRedirectBack();
+        }
         $kategorijaModel = new KategorijaModel();
-        $kategorijaNaziv = $this->request->getVar('category');
         $kategorijaModel->save([
             'naziv' => $kategorijaNaziv
         ]);
@@ -27,15 +36,16 @@ class AdminController extends BaseController
 
     public function OPRemoveCategory()
     {
-       
         $kategorijaModel = new KategorijaModel();
         $korisnikModel = new KorisnikModel();
-        $pruzaoci = $korisnikModel->where('idKategorije',$this->request->getVar('id'))->findAll();
-        if($pruzaoci == null) {
+        $pruzaoci = $korisnikModel::getProviders($this->request->getVar('id'));
+        if($pruzaoci == null) 
+        {
             $kategorijaModel->delete($this->request->getVar('id'));
         }
-        else {
-            $this->session->setFlashdata('errorText', 'Ne možete ukloniti kategoriju koja ima pružaoce.');
+        else 
+        {
+            $this->session->setFlashdata('alertErrorText', lang('App.errCategoryHasProviders'));
             return redirect()->to(base_url('AdminController/categories'));
         }
         
@@ -46,7 +56,8 @@ class AdminController extends BaseController
     {
         $korisnikModel = new KorisnikModel();
         $requests = $korisnikModel->where('pruzalac', 2)->findAll();
-        foreach ($requests as $req) {
+        foreach ($requests as $req) 
+        {
             $req->linkKategorija();
         }
         $data['requests'] = $requests;
@@ -56,16 +67,14 @@ class AdminController extends BaseController
     public function OPApproveRequest()
     {
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->find($this->request->getVar('id'));
-        $korisnikModel->update($korisnik->idKorisnika, ['pruzalac' => 1]);
+        $korisnikModel->update($this->request->getVar('id'), ['pruzalac' => 1]);
         return redirect()->to(base_url('AdminController/accountrequests'));
     }
 
     public function OPDenyRequest()
     {
         $korisnikModel = new KorisnikModel();
-        $korisnik = $korisnikModel->find($this->request->getVar('id'));
-        $korisnikModel->update($korisnik->idKorisnika, ['pruzalac' => 0]);
+        $korisnikModel->update($this->request->getVar('id'), ['pruzalac' => 0]);
         return redirect()->to(base_url('AdminController/accountrequests'));
     }
 }

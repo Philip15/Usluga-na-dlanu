@@ -4,6 +4,7 @@ use CodeIgniter\Model;
 use DateTime;
 use DateInterval;
 use DatePeriod;
+use Exception;
 use stdClass;
 
 class KorisnikModel extends Model
@@ -43,9 +44,9 @@ class KorisnikModel extends Model
 
     public function role() 
     {
-        if ($this->administrator == 1) return 'admin';
-        else if ($this->pruzalac == 1) return 'provider';
-        else return 'user';
+        if ($this->administrator == 1) { return 'admin';    }
+        elseif  ($this->pruzalac == 1) { return 'provider'; }
+        else                           { return 'user';     }
     }
 
     public function requestNotifications()
@@ -103,11 +104,18 @@ class KorisnikModel extends Model
     {
         $this->linkManuelnoZauzetiTermini();
         $availArr = $this->shortTermini();
-        $tFrom = intval(explode(":",$tFrom)[0]*60) + intval(explode(":",$tFrom)[1]);
-        $tTo = intval(explode(":",$tTo)[0]*60) + intval(explode(":",$tTo)[1]);
+        try
+        {
+            $tFrom = intval(explode(":",$tFrom)[0]*60) + intval(explode(":",$tFrom)[1]);
+            $tTo = intval(explode(":",$tTo)[0]*60) + intval(explode(":",$tTo)[1]);
 
-        $begin = new DateTime($dFrom);
-        $end = new DateTime($dTo);
+            $begin = new DateTime($dFrom);
+            $end = new DateTime($dTo);
+        }
+        catch (Exception  $ex)
+        {
+            return false;
+        }
 
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end->add($interval));
@@ -137,7 +145,8 @@ class KorisnikModel extends Model
     public function shortTermini()
     {
         $res = [];
-        foreach ($this->manuelnoZauzetiTermini as $termin) {
+        foreach ($this->manuelnoZauzetiTermini as $termin) 
+        {
             $obj=new stdClass();
             $dt=new DateTime($termin->datumVremePocetka);
             $obj->date = $dt->format('Y-m-d');
@@ -149,8 +158,19 @@ class KorisnikModel extends Model
         return $res;
     }
 
-    public static function getProviders($cat=null)
+    public function getReviews()
     {
+        $zahtevM = new ZahtevModel();
+        $reviews = $this->upuceniZahtevi=$zahtevM->where('idKorisnika',$this->idKorisnika)->where('stanje',4)->orderBy('idZahteva','DSC')->findAll();
+        foreach ($reviews as $review) {
+            $review->linkTermini();
+            $review->linkPruzalac();
+        }
+        return $reviews;
+    }
+
+    public static function getProviders($cat=null)
+    {    
         $korisnikM = new KorisnikModel();
         $korisnikM = $korisnikM->where('pruzalac',1);
         if($cat!=null && $cat!=-1)

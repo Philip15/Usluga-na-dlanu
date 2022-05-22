@@ -10,12 +10,12 @@ class ZahtevModel extends Model
 
     protected $returnType     = 'App\Models\ZahtevModel';
 
-    protected $allowedFields = [];
+    protected $allowedFields = ['idKorisnika','idPruzaoca','stanje','opis','hitno','cena','komentar','ocena','recenzija'];
 
     public function linkTermini()
     {
         $terminM = new TerminModel();
-        $this->termini = $terminM->where('idZahteva',$this->idZahteva)->findAll();
+        $this->termini = $terminM->where('idZahteva',$this->idZahteva)->orderBy('datumVremePocetka','ASC')->findAll();
     }
 
     public function linkKorisnik()
@@ -27,6 +27,12 @@ class ZahtevModel extends Model
     public function linkPruzalac()
     {
         $korisnikM = new KorisnikModel();
-        $this->korisnik = $korisnikM->find($this->idPruzaoca);
+        $this->pruzalac = $korisnikM->find($this->idPruzaoca);
+    }
+
+    public static function findById($id)
+    {
+        $zahtevM = new ZahtevModel();
+        return $zahtevM->find($id);
     }
 }
