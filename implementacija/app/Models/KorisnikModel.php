@@ -180,4 +180,10 @@ class KorisnikModel extends Model
         $providers = $korisnikM->findAll();
         return $providers;
     }
+
+    public static function findById($id)
+    {
+        $korisnikM = new KorisnikModel();
+        return $korisnikM->find($id);
+    }
 }
