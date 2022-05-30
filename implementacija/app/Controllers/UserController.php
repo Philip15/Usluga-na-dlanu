@@ -40,7 +40,7 @@ class UserController extends BaseController
         if (session('user')->role() == "user") 
         {
             
-            if (!$this->validate(['email'=>'required', 'ime'=>'required', 'prezime'=> 'required', 'username'=>'required', 'password'=> 'required']))
+            if (!$this->validate(['email'=>'required', 'ime'=>'required', 'prezime'=> 'required', 'username'=>'required']))
             {
                 $this->session->setFlashdata('podaci', $korisnikPodaci);
                 $this->session->setFlashdata('errorText', 'Obavezna polja ne smeju biti prazna!');
