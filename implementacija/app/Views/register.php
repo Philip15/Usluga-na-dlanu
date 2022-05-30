@@ -42,7 +42,7 @@
                     }
                 ?>
                 <div>
-                    <button type="submit" class="btn btn-outline-primary px-3 py-2" type="button">
+                    <button type="submit" class="btn btn-outline-primary px-3 py-2">
                         <?=lang('App.register')?>
                     </button>
                 </div>
