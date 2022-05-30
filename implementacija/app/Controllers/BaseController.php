@@ -163,9 +163,16 @@ class BaseController extends Controller
                         {
                             if(strtotime($termin->datumVremePocetka) == $i)
                             {
-                                $termin->linkZahtev();
-                                $termin->zahtev->linkKorisnik();
-                                $termin = $termin->idTermina.'%'.$termin->zahtev->korisnik->ime.' '.$termin->zahtev->korisnik->prezime.' - '.$termin->zahtev->opis;
+                                if($termin->idZahteva!=null)
+                                {
+                                    $termin->linkZahtev();
+                                    $termin->zahtev->linkKorisnik();
+                                    $termin = $termin->idTermina.'%'.$termin->zahtev->korisnik->ime.' '.$termin->zahtev->korisnik->prezime.' - '.$termin->zahtev->opis;
+                                }
+                                else
+                                {
+                                    $termin = $termin->idTermina.'%'.lang('App.manuallyReservedSlot');
+                                }
                             }
                             else
                             {

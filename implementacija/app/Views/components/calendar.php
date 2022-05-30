@@ -17,7 +17,7 @@
             </table>
         </div>
     </div>
-    <div class="col-auto p-3 bg-light">
+    <div class="<?=($calendaranon??'false')=='true'?'col-auto':'w-500px'?> p-3 bg-light">
         <table class="table table-bordered bg-white m-0" id="calendarDayHeader">
             <thead><tr><th class="p-4 text-center" colspan=2>PLACEHOLDER</th></tr></thead>
         </table>

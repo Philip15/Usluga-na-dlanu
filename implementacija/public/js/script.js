@@ -186,7 +186,7 @@ function displayProviders(res)
     for (let i = 0; i < res.length; i++) {
         var elem=
         `<div class="card w-20rem col-xs-auto m-3 position-relative">
-            <a href="${url}/BaseController/profile?id=${res[i].idKorisnika}"><span class="magic-link"></span></a>
+            <a href="${url}/profile?id=${res[i].idKorisnika}"><span class="magic-link"></span></a>
             <img src="${res[i].profilnaSlika}" class="card-img-top mt-2 h-294px"/>
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${res[i].ime} ${res[i].prezime}</h5>
@@ -400,4 +400,31 @@ function onClick_Remove(q,l)
     {
         window.location.href=l;
     }
+}
+
+function newReservedSlot(startTime, maxLen)
+{
+    var startDate=new Date(startTime*1000);
+    document.getElementById("dateDisp").innerHTML=startDate.getDate()+"/"+(startDate.getMonth()+1)+"/"+startDate.getFullYear();
+    document.getElementById("startTimeDisp").innerHTML=startDate.getHours()+":"+(startDate.getMinutes()+"").padStart(2,"0");
+    document.getElementById("duration").value=30;
+    document.getElementById("duration").max=maxLen;
+    document.getElementById("startTime").value=startTime;
+    document.getElementById("newReservedSlotModalButton").click()
+}
+
+function slotInfo(slotId)
+{
+    var xhr = new XMLHttpRequest();
+    var url = new URL(window.location.href).origin+"/ProviderController/AJAXGetSlotInfo?slot="+slotId;
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+                document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
+                document.getElementById("requestInfoModalButton").click()
+        }
+    }
+    xhr.send();
 }

@@ -204,8 +204,24 @@
     width: 500px;
 }
 
+.w-100px {
+    width: 100px;
+}
+
 .h-438 {
     height: 438px;
+}
+
+.mt-3px {
+    margin-top: 3px;
+}
+
+.mb-3px {
+    margin-bottom: 3px;
+}
+
+.ms-10px {
+    margin-left: 10px;
 }
 
 .scroll-y {
