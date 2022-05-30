@@ -15,14 +15,13 @@ class UserController extends BaseController
         return self::safeRedirectBack();
     }
 
-
     public function editProfile()
     {
         $data['categories'] = KategorijaModel::getAll();
         $korisnikModel = new KorisnikModel();
         $korisnik = $korisnikModel->find(session('user')->idKorisnika);
-        $kategorijaModel = new KategorijaModel();
-        $data['userCategory'] = $kategorijaModel->find($korisnik->idKategorije);
+        $korisnik->linkKategorija();
+        $this->session->set('user', $korisnik);
         return view('editprofile', $data);
     }
 
@@ -39,7 +38,8 @@ class UserController extends BaseController
         
         $korisnikModel = new KorisnikModel();
 
-        if (session('user')->role() == "user") {
+        if (session('user')->role() == "user") 
+        {
             
             if (!$this->validate(['email'=>'required', 'ime'=>'required', 'prezime'=> 'required', 'username'=>'required', 'password'=> 'required']))
             {
@@ -50,27 +50,82 @@ class UserController extends BaseController
             else {
                 $korisnikModel->update(session('user')->idKorisnika, $korisnikPodaci);
                 $this->session->setFlashdata('podaci', $korisnikPodaci);
+                $this->session->setFlashdata('alertErrorText', lang('App.successfulProfileUpdate'));
                 return redirect()->to(site_url('UserController/editProfile'));
             }
         }
-        else {
+        else 
+        {
             $korisnikPodaci[] = [
                 'adresa' => $this->request->getVar('adresa'),
                 'kategorija' => $this->request->getVar('kategorija')
             ];
             $korisnikModel->update(session('user')->idKorisnika, $korisnikPodaci);
             $this->session->setFlashdata('podaci', $korisnikPodaci);
+            $this->session->setFlashdata('alertErrorText', lang('App.successfulProfileUpdate'));
             return redirect()->to(site_url('UserController/editProfile'));
         }
-        
     }
 
     public function OPchangeProfilePicture()
     {
-        var_dump($_FILES);
-        $img = file_get_contents($_FILES['profilePicture']['tmp_name']);
+        if ($_FILES['profilePicture']['tmp_name'] != "") 
+        {
+            $img = file_get_contents($_FILES['profilePicture']['tmp_name']);
+            $korisnikModel = new KorisnikModel();
+            $korisnikModel->update(session('user')->idKorisnika, ['profilnaSlika' => $img]);
+            $korisnik = $korisnikModel->find(session('user')->idKorisnika);
+            $this->session->set('user', $korisnik);
+            $this->session->setFlashdata('alertErrorText', lang('App.successfulPictureChange'));
+        }
+        return redirect()->to(site_url('UserController/editProfile'));
+    }
+
+    public function OPconvertProfile()
+    {
+        $korisnikPodaci = [
+            'idKategorije' => $this->request->getVar('kategorija'),
+            'adresa' => $this->request->getVar('adresaPoslovanja'),
+            'pruzalac' => 2
+        ];
+
+        if (!$this->validate(['kategorija'=>'required', 'adresaPoslovanja'=>'required']))
+        {
+            $this->session->setFlashdata('podaciKonverzija', $korisnikPodaci);
+            $this->session->setFlashdata('errorTextConversion', lang('App.errEmptyFieldsConversion'));
+            return redirect()->to(site_url('UserController/editProfile'));
+        }
         $korisnikModel = new KorisnikModel();
-        $korisnikModel->update(session('user')->idKorisnika, ['profilnaSlika' => $img]);
+        $korisnikModel->update(session('user')->idKorisnika, $korisnikPodaci);
+        $this->session->setFlashdata('podaciKonverzija', $korisnikPodaci);
+        $this->session->setFlashdata('alertErrorText', lang('App.successfulConversion'));
+        return redirect()->to(site_url('UserController/editProfile'));
+    }
+
+    public function OPudpatePassword()
+    {
+        $korisnikPodaci = [
+            'lozinka' => $this->request->getVar('newPassword'),
+            'lozinka2' => $this->request->getVar('newPasswordAgain')
+        ];
+        if (!$this->validate(['newPassword'=>'required', 'newPasswordAgain'=>'required']))
+        {
+            $this->session->setFlashdata('podacilozinka', $korisnikPodaci);
+            $this->session->setFlashdata('errorTextNewPassword', lang('App.errFieldEmpty'));
+            return redirect()->to(site_url('UserController/editProfile'));
+        }
+        if ($korisnikPodaci['lozinka'] != $korisnikPodaci['lozinka2']) 
+        {
+            $this->session->setFlashdata('podacilozinka', $korisnikPodaci);
+            $this->session->setFlashdata('errorTextNewPassword', lang('App.errPasswordConfirmation'));
+            return redirect()->to(site_url('UserController/editProfile'));
+        }
+        unset($korisnikPodaci['lozinka2']);
+        $korisnikPodaci['lozinka'] = password_hash($korisnikPodaci['lozinka'], PASSWORD_DEFAULT);
+
+        $korisnikModel = new KorisnikModel();
+        $korisnikModel->update(session('user')->idKorisnika, $korisnikPodaci);
+        $this->session->setFlashdata('alertErrorText', lang('App.successfulPasswordChange'));
         return redirect()->to(site_url('UserController/editProfile'));
     }
 

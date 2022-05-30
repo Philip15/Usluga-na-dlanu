@@ -57,13 +57,20 @@ class GuestController extends BaseController
             $this->session->setFlashdata('errorText', lang('App.errInvalidEmail'));
             return redirect()->to(site_url('GuestController/register'));
         }
+        $korisnikModel = new KorisnikModel();
+        $korisnik = $korisnikModel->where('email', $korisnikPodaci['email'])->findAll();
+        if ($korisnik != null) {
+            $this->session->setFlashdata('podaci', $korisnikPodaci);
+            $this->session->setFlashdata('errorText', lang('App.errEmailAlreadyExists'));
+            return redirect()->to(site_url('GuestController/register'));
+        }
         if ($this->request->getVar('uslovi_koriscenja') !=  "on") 
         {
             $this->session->setFlashdata('podaci', $korisnikPodaci);
             $this->session->setFlashdata('errorText', lang('App.errNotTNC'));
             return redirect()->to(site_url('GuestController/register'));
         }
-        $korisnikModel = new KorisnikModel();
+
         $korisnik = $korisnikModel->where('korisnickoIme', $korisnikPodaci['korisnickoIme'])->findAll();
         if ($korisnik != null) 
         {
