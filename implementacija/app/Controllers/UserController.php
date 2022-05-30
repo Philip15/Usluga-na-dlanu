@@ -105,13 +105,20 @@ class UserController extends BaseController
     public function OPudpatePassword()
     {
         $korisnikPodaci = [
+            'staraLozinka' => $this->request->getVar('oldPassword'),
             'lozinka' => $this->request->getVar('newPassword'),
             'lozinka2' => $this->request->getVar('newPasswordAgain')
         ];
-        if (!$this->validate(['newPassword'=>'required', 'newPasswordAgain'=>'required']))
+        if (!$this->validate(['oldPassword' => 'required', 'newPassword'=>'required', 'newPasswordAgain'=>'required']))
         {
             $this->session->setFlashdata('podacilozinka', $korisnikPodaci);
             $this->session->setFlashdata('errorTextNewPassword', lang('App.errFieldEmpty'));
+            return redirect()->to(site_url('UserController/editProfile'));
+        }
+        if (!password_verify($korisnikPodaci['staraLozinka'], session('user')->lozinka))
+        {
+            $this->session->setFlashdata('podacilozinka', $korisnikPodaci);
+            $this->session->setFlashdata('errorTextNewPassword', lang('App.errOldPassword'));
             return redirect()->to(site_url('UserController/editProfile'));
         }
         if ($korisnikPodaci['lozinka'] != $korisnikPodaci['lozinka2']) 
@@ -120,6 +127,7 @@ class UserController extends BaseController
             $this->session->setFlashdata('errorTextNewPassword', lang('App.errPasswordConfirmation'));
             return redirect()->to(site_url('UserController/editProfile'));
         }
+        unset($korisnikPodaci['staraLozinka']);
         unset($korisnikPodaci['lozinka2']);
         $korisnikPodaci['lozinka'] = password_hash($korisnikPodaci['lozinka'], PASSWORD_DEFAULT);
 

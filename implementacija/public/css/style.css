@@ -212,3 +212,14 @@
     left: 0;
     z-index: 1;
 }
+
+.labels {
+    font-size: 14px;
+    padding-top: 13px;
+    padding-bottom: 3px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #062639;
+}

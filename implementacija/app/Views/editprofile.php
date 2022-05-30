@@ -1,9 +1,5 @@
 <?= $this->extend('layouts/defaultLayout') ?>
 
-<?= $this->section('additionalhead') ?>
-<link rel="stylesheet" type="text/css" href="<?= base_url('css/profile.css') ?>" />
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 
 <?php $user = session('user'); ?>
@@ -24,7 +20,7 @@
         </div>
         <?php
         if ($user->role() == 'provider') {
-            echo '<div class="col-md-6 border-right">';
+            echo '<div class="col-md-7 border-right">';
         } else {
             echo '<div class="col-md-5 border-right">';
         }
@@ -88,18 +84,22 @@
             }
             ?>
                 <div class="mt-5 text-center">
-                    <button class="btn btn-primary profile-button" type="submit"><?= lang('App.saveChanges') ?></button>
+                    <button class="btn btn-primary" type="submit"><?= lang('App.saveChanges') ?></button>
                 </div>
             </form>
             <form method="POST" action="<?= base_url('UserController/OPudpatePassword') ?>">
                 <div class="row mt-3">
                     <div class="col-md-12">
+                        <label class="labels"><?= lang('App.oldPassword') ?></label>
+                        <input type="text" name="oldPassword" class="form-control input" placeholder="<?= lang('App.oldPassword') ?>" value="<?= empty(session('podacilozinka')) || session('podacilozinka')['staraLozinka'] == null ? "" : session('podacilozinka')['staraLozinka'] ?>">
+                    </div>
+                    <div class="col-md-12">
                         <label class="labels"><?= lang('App.newPassword') ?></label>
-                        <input type="text" name="newPassword" class="form-control input" placeholder="<?= lang('App.newPassword') ?>" value="<?= empty(session('podaciNovaLozinka')) || session('podaciNovaLozinka')['lozinka'] == null ? "" : session('podaciNovaLozinka')['lozinka'] ?>">
+                        <input type="text" name="newPassword" class="form-control input" placeholder="<?= lang('App.newPassword') ?>" value="<?= empty(session('podacilozinka')) || session('podacilozinka')['lozinka'] == null ? "" : session('podacilozinka')['lozinka'] ?>">
                     </div>
                     <div class="col-md-12"><label class="labels">
                         <?= lang('App.newPasswordAgain') ?></label>
-                        <input type="text" name="newPasswordAgain" class="form-control input" placeholder="<?= lang('App.newPasswordAgain') ?>" value="<?= empty(session('podaciNovaLozinka')) || session('podaciNovaLozinka')['lozinka2'] == null ? "" : session('podaciNovaLozinka')['lozinka2'] ?>">
+                        <input type="text" name="newPasswordAgain" class="form-control input" placeholder="<?= lang('App.newPasswordAgain') ?>" value="<?= empty(session('podacilozinka')) || session('podacilozinka')['lozinka2'] == null ? "" : session('podacilozinka')['lozinka2'] ?>">
                     </div>
                 </div>
                 <?php 
@@ -109,7 +109,7 @@
                 }
                 ?>
                 <div class="mt-5 text-center">
-                    <button class="btn btn-primary profile-button" type="submit"><?= lang('App.updateNewPassword')?> </button>
+                    <button class="btn btn-primary" type="submit"><?= lang('App.updateNewPassword')?> </button>
                 </div>
             </form>
         </div>
@@ -143,7 +143,7 @@
                         echo empty(session('podaciKonverzija')) || session('podaciKonverzija')['adresa'] == null ? lang('App.profileAddress') : session('podaciKonverzija')['adresa'];
                         echo '"></div>
                         <div class="mt-5 text-center">
-                            <button class="btn btn-primary profile-button" type="submit">' . lang('App.convertProfile') . '</button>
+                            <button class="btn btn-primary" type="submit">' . lang('App.convertProfile') . '</button>
                         </div>
                     </div>
                 </form>';
