@@ -31,7 +31,6 @@ class UserController extends BaseController
             'ime' =>  $this->request->getVar('ime'),
             'prezime' =>  $this->request->getVar('prezime'),
             'korisnickoIme' => $this->request->getVar('username'),
-            'lozinka' => $this->request->getVar('password'),
             'email' =>  $this->request->getVar('email'),
             'opis' => $this->request->getVar('dodatneInformacije')
         ];
