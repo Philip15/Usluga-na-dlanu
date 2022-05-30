@@ -30,6 +30,11 @@ class ZahtevModel extends Model
         $this->pruzalac = $korisnikM->find($this->idPruzaoca);
     }
 
+    public function descriptiveState()
+    {
+        return lang('App.requestState'.$this->stanje);
+    }
+
     public static function findById($id)
     {
         $zahtevM = new ZahtevModel();

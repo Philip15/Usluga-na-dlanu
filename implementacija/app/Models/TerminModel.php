@@ -10,7 +10,7 @@ class TerminModel extends Model
 
     protected $returnType     = 'App\Models\TerminModel';
 
-    protected $allowedFields = [];
+    protected $allowedFields = ['idPruzaoca','datumVremePocetka','trajanje','idZahteva'];
 
     public function linkPruzalac()
     {
@@ -22,5 +22,11 @@ class TerminModel extends Model
     {
         $zahtevM = new ZahtevModel();
         $this->zahtev = $zahtevM->find($this->idZahteva);
+    }
+
+    public static function findById($id)
+    {
+        $terminM = new TerminModel();
+        return $terminM->find($id);
     }
 }

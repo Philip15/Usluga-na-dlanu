@@ -204,6 +204,51 @@
     width: 500px;
 }
 
+.w-100px {
+    width: 100px;
+}
+
+.h-438 {
+    height: 438px;
+}
+
+.mt-3px {
+    margin-top: 3px;
+}
+
+.mb-3px {
+    margin-bottom: 3px;
+}
+
+.ms-10px {
+    margin-left: 10px;
+}
+
+.scroll-y {
+    overflow-y: scroll;
+}
+
+.text-black-25 {
+    --bs-text-opacity: 1;
+    color: rgba(0,0,0,.25)!important;
+}
+
+.inside-border-info-4 {
+    box-shadow:inset 0px 0px 0px 4px var(--bs-info) !important;
+}
+
+.bbd {
+    border-bottom-style: dotted;
+}
+
+.btd {
+    border-top-style: dotted;
+}
+
+.btdn {
+    border-top: 1px double rgba(0, 0, 0, 0) !important;
+}
+
 .magic-link {
     position:absolute; 
     width:100%;

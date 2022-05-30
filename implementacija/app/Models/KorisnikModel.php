@@ -158,6 +158,29 @@ class KorisnikModel extends Model
         return $res;
     }
 
+    public function overlap($start,$end)
+    {
+        date_default_timezone_set('Europe/Belgrade');
+        $startDate= new DateTime();
+        $startDate->setTimestamp($start);
+        $startHM = $startDate->format('H')*60 + $startDate->format('i');
+        $endDate= new DateTime();
+        $endDate->setTimestamp($end);
+        $endHM = $endDate->format('H')*60 + $endDate->format('i');
+        if($startHM<8*60 || $endHM>20*60){return true;}
+        $this->linkManuelnoZauzetiTermini();
+        foreach($this->manuelnoZauzetiTermini as $slot)
+        {
+            $dt=new DateTime($slot->datumVremePocetka);
+            $ts=intval($dt->format('U'));
+            if(($ts+$slot->trajanje) > $start and $end > $ts)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function getReviews()
     {
         $zahtevM = new ZahtevModel();
@@ -179,5 +202,11 @@ class KorisnikModel extends Model
         }
         $providers = $korisnikM->findAll();
         return $providers;
+    }
+
+    public static function findById($id)
+    {
+        $korisnikM = new KorisnikModel();
+        return $korisnikM->find($id);
     }
 }

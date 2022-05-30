@@ -13,9 +13,11 @@
 
         <!--Custom CSS-->
         <link rel="stylesheet" type="text/css"  href="<?=base_url('css/style.css')?>"/>
+        <!--<?=isset($calendarid)?'<link rel="stylesheet" type="text/css"  href="'.base_url('css/calendar.css').'"/>':''?>-->
 
         <!--Custom JS-->
         <script src="<?=base_url('js/script.js')?>"></script>
+        <?=isset($calendarid)?'<script src="'.base_url('js/calendar.js').'"></script>':''?>
 
         <link rel="icon" type="image/x-icon" href="<?=base_url('favicon.ico')?>"/>
         <title><?php if(isset($title) && !empty($title)){echo esc($title).' - ';} echo lang('App.title');?></title>
@@ -40,6 +42,7 @@
 
         <!--Header JS Init-->
         <script>header_Init();</script>
+        <?=isset($calendarid)?'<script>calendar_Init('.esc($calendarid).','.esc($calendaranon??'false').','.esc($calendarfree??'null').','.esc($calendarbusy??'null').');</script>':''?>
 
         <!--Custom JS Init-->
         <?php if(isset($jsinit)){echo '<script>'.esc($jsinit).'_Init();</script>';}?>
