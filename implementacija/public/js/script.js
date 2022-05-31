@@ -402,7 +402,6 @@ function onClick_Remove(q,l)
     }
 }
 
-<<<<<<< HEAD
 function newRequest()
 {
     
@@ -420,8 +419,18 @@ function onClick_AcceptRequest(id, i, pr)
     {
         url = new URL(window.location.href).origin+"/UserController/OPAcceptRequest?id="+id;
     }
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            document.getElementById("k" + i).innerHTML = "";
+        }
+    }
+    xhr.send();
+}
     
-=======
+
 function newReservedSlot(startTime, maxLen)
 {
     var startDate=new Date(startTime*1000);
@@ -437,18 +446,18 @@ function slotInfo(slotId)
 {
     var xhr = new XMLHttpRequest();
     var url = new URL(window.location.href).origin+"/ProviderController/AJAXGetSlotInfo?slot="+slotId;
->>>>>>> origin/master
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () 
     {
         if (this.readyState == 4 && this.status == 200) 
         {
-<<<<<<< HEAD
-            document.getElementById("k" + i).innerHTML = "";
+            document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
+            document.getElementById("requestInfoModalButton").click()
         }
     }
     xhr.send();
 }
+
 
 function onClick_DenyRequest(id, i, pr)
 {
@@ -469,10 +478,6 @@ function onClick_DenyRequest(id, i, pr)
         if (this.readyState == 4 && this.status == 200) 
         {
             document.getElementById("k" + i).innerHTML = "";
-=======
-                document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
-                document.getElementById("requestInfoModalButton").click()
->>>>>>> origin/master
         }
     }
     xhr.send();
