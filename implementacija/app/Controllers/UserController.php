@@ -116,11 +116,8 @@ class UserController extends BaseController
 
         $zahtevModel->update($id, ['stanje' => 3]);
 
-        return redirect()->to(base_url('UserController/requests'));
-
     }
 
-    //TODO
     public function OPRejectRequest()
     {
         $id = $this->request->getGet('id');

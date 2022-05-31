@@ -4,7 +4,7 @@
 <div>
         <?php
             echo '<hr style=";border:none;border-top: 10px solid #adefd1;">';
-            function showRequests($naslov, $requests)
+            function showRequests($naslov, $requests, $op)
             {
                 static $cnt = 0;
                 echo
@@ -15,6 +15,8 @@
                     echo '<hr style=";border:none;border-top: 10px solid #adefd1;">';
                     return;
                 }
+                $btnAccept = lang("App.approve");
+                if($op == 3) $btnAccept = lang("App.realise");
                 for ($i=0; $i<count($requests); $i++) 
                 {
                     $req = $requests[$i];
@@ -32,13 +34,18 @@
                             </div>
                             <div class="row">
                                 <label  class="form-label fs-5 fw-bold">'.lang('App.period').':</label>
-                            </div>
+                            </div>';
+                        if ($op != 1)
+                            echo '
                             <div class="row">
                                 <label  class="form-label fs-5 fw-bold">'.lang('App.price').':</label>
-                            </div>
+                            </div>';
+                        if ($op != 1)
+                            echo '
                             <div class="row">
                                 <label  class="form-label fs-5 fw-bold">'.lang('App.comment').':</label>
-                            </div>
+                            </div>';
+                            echo'
                         </div>
                         <div class="col-auto">
                             <div class="row">
@@ -49,28 +56,35 @@
                             </div>
                             <div class="row">
                                 <output class="fs-4 fw-bold mb-2 pruzalac">'.esc($req->stanje).'</output>
-                            </div>
-                            <div class="row">
-                                <output class="fs-5 fw-bold mb-2">'.esc($req->cena).'</output>
-                            </div>
-                            <div class="row">
-                                <output class="fs-5 fw-bold mb-2">'.esc($req->opis).'</output>
-                            </div>
+                            </div>';
+                            if ($op != 1)
+                            echo '
+                                <div class="row">
+                                    <output class="fs-5 fw-bold mb-2">'.esc($req->cena).'</output>
+                                </div>';
+                            if ($op != 1)
+                            echo '
+                                <div class="row">
+                                    <output class="fs-5 fw-bold mb-2">'.esc($req->opis).'</output>
+                                </div>';
+                        echo'
                         </div>
                     </div>
-                    <div class="d-flex mb-3 justify-content-end">
-                        <button type="submit" name="btnAcc" class="btn btn-success  mx-1" onclick="onClick_AcceptRequest('.esc($req->idZahteva).', '.$cnt.', 1)">Prihvati</button>
-                        <button type="submit" name="btnRej" class="btn btn-danger mx-1" onclick="onClick_DenyRequest('.esc($req->idZahteva).', '.$cnt.', 1)">Odbij</button>
-                        
-                    </div>
+                    <div class="d-flex mb-3 justify-content-end">';
+                    if ($op != 2 && $op != 7)
+                        echo '<button type="submit" name="btnAcc" class="btn btn-success  mx-1" onclick="onClick_AcceptRequest('.esc($req->idZahteva).', '.$cnt.', 1)">'.$btnAccept.'</button>';
+                    if ($op != 2 && $op != 7)
+                        echo '<button type="submit" name="btnRej" class="btn btn-danger mx-1" onclick="onClick_DenyRequest('.esc($req->idZahteva).', '.$cnt.', 1)">'.lang("App.deny").'</button>';                        
+                    echo
+                    '</div>
                     </div>';
                 }
                 echo '<hr style=";border:none;border-top: 10px solid #adefd1;">';
             }
-            showRequests(lang('App.arrivedRequests'), $requests1);
-            showRequests(lang('App.madeOffers'),      $requests2);
-            showRequests(lang('App.acceptedOffers'),  $requests3);
-            showRequests(lang('App.rejectedOffers'),  $requests7);
+            showRequests(lang('App.arrivedRequests'), $requests1, 1);
+            showRequests(lang('App.madeOffers'),      $requests2, 2);
+            showRequests(lang('App.acceptedOffers'),  $requests3, 3);
+            showRequests(lang('App.rejectedOffers'),  $requests7, 7);
         ?>
 </div>
 <?= $this->endSection() ?>  

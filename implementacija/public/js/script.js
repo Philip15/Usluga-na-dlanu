@@ -406,14 +406,32 @@ function newRequest()
     
 }
 
-function onClick_AcceptRequest(admin, i)
+function onClick_AcceptRequest(id, i, pr)
 {
-    document.getElementById("k" + i).innerHTML = "";
+    var xhr = new XMLHttpRequest();
+    var url;
+    if(pr == 1)
+    {
+        url = new URL(window.location.href).origin+"/ProviderController/OPrealiseRequest?id="+id;
+    }
+    else
+    {
+        url = new URL(window.location.href).origin+"/UserController/OPAcceptRequest?id="+id;
+    }
+    
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            document.getElementById("k" + i).innerHTML = "";
+        }
+    }
+    xhr.send();
 }
 
 function onClick_DenyRequest(id, i, pr)
 {
-    
     var xhr = new XMLHttpRequest();
     var url;
     if(pr == 1)

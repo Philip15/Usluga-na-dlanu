@@ -20,13 +20,13 @@ class ProviderController extends BaseController
     }
 
     //TODO
-    public function OPcreateOffer()
+    public function OPCreateOffer()
     {
         // kreiranje ponude iz primljenog zahteva                                       ( prelazak 1 -> 2 )
     }
 
     //TODO
-    public function OPrejectRequest()
+    public function OPRejectRequest()
     {
         // odbijanje zahteva u bilo kom trenutku                                        ( prelazak 1 -> 6, 3 -> 6 )
         $id = $this->request->getGet('id');
@@ -35,8 +35,7 @@ class ProviderController extends BaseController
         $zahtevModel->update($id, ['stanje' => 6]);
     }
 
-    //TODO
-    public function OPrealiseRequest()
+    public function OPRealizeRequest()
     {
         // oznacavanje zahteva kao realizovanog, slanje na recenziju                    ( prelazak 3 -> 4 )
         $id = $this->request->getGet('id');
@@ -45,7 +44,6 @@ class ProviderController extends BaseController
         $zahtevModel->update($id, ['stanje' => 4]);
     }
 
-    //TODO
     public function OPcheckRejection()
     {
         // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 6 -> 8 )

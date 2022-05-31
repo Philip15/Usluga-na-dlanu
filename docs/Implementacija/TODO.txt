@@ -11,6 +11,7 @@ Views:
 profile(Guest,User)
     register
 requests(User,Provider)
+incomingRequests
 	reviews
 editProfile(User,Provider)
 timetable(User,Provider)
@@ -46,7 +47,8 @@ UserController/OPUpdateProfile
 UserController/OPConvertProfile
 
 ProviderController/requests
-ProviderController/OPAcceptRequest
+ProviderController/incoming_requests
+ProviderController/OPCreateOffer
 ProviderController/OPRealizeRequest
 ProviderController/OPRejectRequest
 ProviderController/timetable

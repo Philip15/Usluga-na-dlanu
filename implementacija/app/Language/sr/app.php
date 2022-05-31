@@ -82,4 +82,5 @@ return [
     'madeOffers'                => 'Upućene ponude',
     'acceptedOffers'            => 'Prihvaćene ponude',
     'rejectedOffers'            => 'Odbijeni zahtevi',
+    'realise'                   => 'Realizuj',
 ];
