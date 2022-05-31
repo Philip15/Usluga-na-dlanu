@@ -34,6 +34,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'BaseController::index');
 $routes->get('/index', 'BaseController::index');
 $routes->get('/AJAXGetProviders', 'BaseController::AJAXGetProviders');
+$routes->get('/AJAXGetCalendarData', 'BaseController::AJAXGetCalendarData');
+$routes->get('/AJAXGetDayData', 'BaseController::AJAXGetDayData');
 $routes->get('/profile', 'BaseController::profile');
 
 /*

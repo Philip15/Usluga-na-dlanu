@@ -152,7 +152,8 @@ function getProviders(query)
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () 
     {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState == 4 && this.status == 200) 
+        {
             window.providers=JSON.parse(this.responseText);
             displayProviders(window.providers);
         }
@@ -401,6 +402,7 @@ function onClick_Remove(q,l)
     }
 }
 
+<<<<<<< HEAD
 function newRequest()
 {
     
@@ -419,11 +421,29 @@ function onClick_AcceptRequest(id, i, pr)
         url = new URL(window.location.href).origin+"/UserController/OPAcceptRequest?id="+id;
     }
     
+=======
+function newReservedSlot(startTime, maxLen)
+{
+    var startDate=new Date(startTime*1000);
+    document.getElementById("dateDisp").innerHTML=startDate.getDate()+"/"+(startDate.getMonth()+1)+"/"+startDate.getFullYear();
+    document.getElementById("startTimeDisp").innerHTML=startDate.getHours()+":"+(startDate.getMinutes()+"").padStart(2,"0");
+    document.getElementById("duration").value=30;
+    document.getElementById("duration").max=maxLen;
+    document.getElementById("startTime").value=startTime;
+    document.getElementById("newReservedSlotModalButton").click()
+}
+
+function slotInfo(slotId)
+{
+    var xhr = new XMLHttpRequest();
+    var url = new URL(window.location.href).origin+"/ProviderController/AJAXGetSlotInfo?slot="+slotId;
+>>>>>>> origin/master
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () 
     {
         if (this.readyState == 4 && this.status == 200) 
         {
+<<<<<<< HEAD
             document.getElementById("k" + i).innerHTML = "";
         }
     }
@@ -449,6 +469,10 @@ function onClick_DenyRequest(id, i, pr)
         if (this.readyState == 4 && this.status == 200) 
         {
             document.getElementById("k" + i).innerHTML = "";
+=======
+                document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
+                document.getElementById("requestInfoModalButton").click()
+>>>>>>> origin/master
         }
     }
     xhr.send();

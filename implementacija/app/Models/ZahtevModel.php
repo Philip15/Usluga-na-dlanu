@@ -37,6 +37,11 @@ class ZahtevModel extends Model
         $kategorijaM = new KategorijaModel();
         $this->kategorija = $kategorijaM->find($korisnikM->find($this->idPruzaoca)->idKategorije);
     }
+    
+    public function descriptiveState()
+    {
+        return lang('App.requestState'.$this->stanje);
+    }
 
     public static function findById($id)
     {

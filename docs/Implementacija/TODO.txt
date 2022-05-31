@@ -51,9 +51,9 @@ ProviderController/incoming_requests
 ProviderController/OPCreateOffer
 ProviderController/OPRealizeRequest
 ProviderController/OPRejectRequest
-ProviderController/timetable
-ProviderController/OPReserveTime
-ProviderController/OPFreeTime
+	ProviderController/timetable
+	ProviderController/OPReserveTime
+	ProviderController/OPFreeTime
 
     AdminController/categories
     AdminController/OPAddCategory

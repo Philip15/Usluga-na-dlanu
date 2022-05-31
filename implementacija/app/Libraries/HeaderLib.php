@@ -12,7 +12,7 @@ class HeaderLib
         if($user->role()=='provider')
         {
             $res = $res.self::menuItem(base_url('ProviderController/requests'),lang('App.incomingRequests'),$user->incomingNotifications());
-            $res = $res.self::menuItem(base_url('ProviderController/acceptedRequests'),lang('App.acceptedRequests'),$user->acceptedNotifications());
+            $res = $res.self::menuItem(base_url('ProviderController/timetable'),lang('App.timetable'),$user->acceptedNotifications());
         }
         $res = $res.self::menuItem(base_url('UserController/editProfile'),lang('App.editProfile'));
         if($user->role()=='admin')

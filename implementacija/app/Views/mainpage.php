@@ -82,6 +82,7 @@
     </main>
 
 </div>
+<div class="h-100 w-280px border-end border-light"></div>
 
 <p class="dnone" id="invalidTime"><?=lang('App.invalidTime')?></p>
 

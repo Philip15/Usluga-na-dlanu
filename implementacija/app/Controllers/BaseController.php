@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\KategorijaModel;
 use App\Models\KorisnikModel;
 use App\Models\ZahtevModel;
+use App\Models\TerminModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -99,6 +100,100 @@ class BaseController extends Controller
                 array_push($result,$resobj);
             }
         }
+
+        return $this->response
+            ->setContentType('application/json')
+            ->setStatusCode(200)
+            ->setJSON(json_encode($result));
+    }
+
+    public function AJAXGetCalendarData()
+    {
+        $id=$this->request->getGet('id');
+        $date=$this->request->getGet('date');
+        $day=24*60*60;
+
+        $result = [];
+
+        if($id!=null && $date!=null)
+        {
+            $requestedUser = KorisnikModel::findById($id);
+            if($requestedUser!=null && $requestedUser->pruzalac==1)
+            {
+                for ($i=$date; $i <($date+(7*6*$day)) ; $i+=$day) { 
+                    $terminM = new TerminModel();
+                    $trajanje = intval($terminM->selectSum('trajanje')->where('idPruzaoca',$id)->where('unix_timestamp(datumVremePocetka)>',$i)->where('unix_timestamp(datumVremePocetka)<',$i+$day)->first()->trajanje ?? 0);
+                    $trajanje=$trajanje/(12*60);
+                    
+                    array_push($result,$trajanje);
+                }
+            }
+        }
+
+
+        return $this->response
+            ->setContentType('application/json')
+            ->setStatusCode(200)
+            ->setJSON(json_encode($result));
+    }
+
+    public function AJAXGetDayData()
+    {
+        date_default_timezone_set('Europe/Belgrade');
+        $id=$this->request->getGet('id');
+        $date=$this->request->getGet('date');
+        $anon=$this->request->getGet('anon');
+        $day=24*60*60;
+        $date = $date + (2*60*60);
+        $date = intval($date/$day)*$day;
+        $date = $date + (6*60*60);
+
+        $result = [];
+
+        if($id!=null && $date!=null)
+        {
+            $requestedUser = KorisnikModel::findById($id);
+            if($requestedUser!=null && $requestedUser->pruzalac==1)
+            {
+                for ($i=$date; $i <($date+(12*60*60)) ; $i+=30*60) { 
+                    $terminM = new TerminModel();
+                    $termin = $terminM->where('idPruzaoca',$id)->where('unix_timestamp(datumVremePocetka)<=',$i)->where('(unix_timestamp(datumVremePocetka)+(trajanje*60))>=',$i+(30*60))->first();
+                    if($this->session->get('user')!=null && $this->session->get('user')->idKorisnika==$id && $anon==null)
+                    {
+                        if($termin!=null)
+                        {
+                            if(strtotime($termin->datumVremePocetka) == $i)
+                            {
+                                if($termin->idZahteva!=null)
+                                {
+                                    $termin->linkZahtev();
+                                    $termin->zahtev->linkKorisnik();
+                                    $termin = $termin->idTermina.'%'.$termin->zahtev->korisnik->ime.' '.$termin->zahtev->korisnik->prezime.' - '.$termin->zahtev->opis;
+                                }
+                                else
+                                {
+                                    $termin = $termin->idTermina.'%'.lang('App.manuallyReservedSlot');
+                                }
+                            }
+                            else
+                            {
+                                $termin=0;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if($termin!=null)
+                        {
+                            $termin=0;
+                        }
+                    }
+
+                    array_push($result,$termin);
+                }
+            }
+        }
+
 
         return $this->response
             ->setContentType('application/json')
