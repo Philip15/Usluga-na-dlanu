@@ -185,7 +185,7 @@ function displayProviders(res)
     for (let i = 0; i < res.length; i++) {
         var elem=
         `<div class="card w-20rem col-xs-auto m-3 position-relative">
-            <a href="${url}/BaseController/profile?id=${res[i].idKorisnika}"><span class="magic-link"></span></a>
+            <a href="${url}/profile?id=${res[i].idKorisnika}"><span class="magic-link"></span></a>
             <img src="${res[i].profilnaSlika}" class="card-img-top mt-2 h-294px"/>
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${res[i].ime} ${res[i].prezime}</h5>
@@ -399,4 +399,39 @@ function onClick_Remove(q,l)
     {
         window.location.href=l;
     }
+}
+
+function newRequest()
+{
+    
+}
+
+function onClick_AcceptRequest(admin, i)
+{
+    document.getElementById("k" + i).innerHTML = "";
+}
+
+function onClick_DenyRequest(id, i, pr)
+{
+    
+    var xhr = new XMLHttpRequest();
+    var url;
+    if(pr == 1)
+    {
+        url = new URL(window.location.href).origin+"/ProviderController/OPRejectRequest?id="+id;
+    }
+    else
+    {
+        url = new URL(window.location.href).origin+"/UserController/OPRejectRequest?id="+id;
+    }
+    
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            document.getElementById("k" + i).innerHTML = "";
+        }
+    }
+    xhr.send();
 }

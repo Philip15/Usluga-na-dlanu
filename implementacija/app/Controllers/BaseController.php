@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\KategorijaModel;
 use App\Models\KorisnikModel;
+use App\Models\ZahtevModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -111,9 +112,30 @@ class BaseController extends Controller
         {
             return redirect()->to(base_url('/'));
         }
-        else
+        else 
         {
             return redirect()->back();
         }
     }
+
+    public function profile()
+    {
+        $id = $this->request->getGet("id");
+        $user = $this->session->get('user');
+
+        $providerM = new KorisnikModel();
+        $provider = $providerM->find($id);
+        $provider->linkKategorija();
+        $zahtevM = new ZahtevModel();
+        $komentari = $zahtevM->findAllReviewsForProvider($id);
+
+        if($user !== null)
+        {
+            return view('profile-user', ['provider' => $provider, 'komentari'=>$komentari]);
+        }
+
+        return view('profile-guest', ['provider' => $provider, 'komentari'=>$komentari]);
+
+    }
+
 }

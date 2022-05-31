@@ -180,4 +180,34 @@ class KorisnikModel extends Model
         $providers = $korisnikM->findAll();
         return $providers;
     }
+
+    public function getRequestsUser($st)
+    {
+        $zahtevM = new ZahtevModel();
+        $requests = $this->upuceniZahtevi=$zahtevM->where('idKorisnika',$this->idKorisnika)->where('stanje', $st)->orderBy('idZahteva','DSC')->findAll();
+
+        foreach ($requests as $request) {
+            $request->linkTermini();
+            $request->linkPruzalac();
+            $request->linkKorisnik();
+            $request->linkKategorijaPruzaoca();
+        }
+
+        return $requests;
+    }
+
+    public function getRequestsProvider($st)
+    {
+        $zahtevM = new ZahtevModel();
+        $requests = $this->upuceniZahtevi=$zahtevM->where('idPruzaoca',$this->idKorisnika)->where('stanje', $st)
+        ->groupBy('stanje')->orderBy('idZahteva','DSC')->findAll();
+        foreach ($requests as $request) {
+            $request->linkTermini();
+            $request->linkPruzalac();
+            $request->linkKorisnik();
+            $request->linkKategorijaPruzaoca();
+        }
+        return $requests;
+    }
+
 }

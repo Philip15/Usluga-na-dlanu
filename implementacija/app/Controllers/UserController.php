@@ -20,7 +20,7 @@ class UserController extends BaseController
         return view('reviews',$data);
     }   
     
-    public function OPpostReview()
+    public function OPpostReview()                                                                  //( prelazak 4 -> 5 )
     {
         $id = $this->request->getPost('id');
         $rating = $this->request->getPost('rating');
@@ -86,4 +86,61 @@ class UserController extends BaseController
         
         return redirect()->to(base_url('UserController/reviews'));
     }
+
+    //TODO
+    public function requests()
+    {
+        // prikaz view-a user-requests.php
+        $korisnik = $this->session->get('user');
+        $data['requests1'] = $korisnik->getRequestsUser(1);
+        $data['requests2'] = $korisnik->getRequestsUser(2);
+        $data['requests3'] = $korisnik->getRequestsUser(3);
+        $data['requests6'] = $korisnik->getRequestsUser(6);
+        return view('user-requests',$data);
+    }
+
+    //TODO
+    public function OPCreateRequest()
+    {
+        // kreiranje zahteva za uslugom od strane korisnika                         ( kreiranje u stanju 1 )
+        $newRequest = new ZahtevModel();
+        
+    }
+
+    //TODO
+    public function OPAcceptRequest()
+    {
+        // prihvatanje ponude                                                       ( prelazak 2 -> 3 )
+        $id = $this->request->getGet('id');
+        $zahtevModel = new ZahtevModel();
+
+        $zahtevModel->update($id, ['stanje' => 3]);
+
+        return redirect()->to(base_url('UserController/requests'));
+
+    }
+
+    //TODO
+    public function OPRejectRequest()
+    {
+        $id = $this->request->getGet('id');
+        // odbijanje zahteva u bilo kom trenutku                                    ( prelazak 2 -> 7 )
+        $zahtevModel = new ZahtevModel();
+
+        $zahtevModel->update($id, ['stanje' => 7]);
+
+    }
+
+    //TODO
+    public function OPcheckRejection()
+    {
+        // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 7 -> 8 )
+        $id = $this->request->getGet('id');
+        $zahtevModel = new ZahtevModel();
+
+        $zahtevModel->update($id, ['stanje' => 8]);
+
+        return redirect()->to(base_url('UserController/requests'));
+    }
+
 }
