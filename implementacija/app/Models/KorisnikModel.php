@@ -204,6 +204,34 @@ class KorisnikModel extends Model
         return $providers;
     }
 
+    public function getRequestsUser($st)
+    {
+        $zahtevM = new ZahtevModel();
+        $requests = $zahtevM->where('idKorisnika',$this->idKorisnika)->where('stanje', $st)->orderBy('idZahteva','DSC')->findAll();
+
+        foreach ($requests as $request) {
+            $request->linkTermini();
+            $request->linkPruzalac();
+            $request->linkKorisnik();
+            $request->linkKategorijaPruzaoca();
+        }
+
+        return $requests;
+    }
+
+    public function getRequestsProvider($st)
+    {
+        $zahtevM = new ZahtevModel();
+        $requests = $zahtevM->where('idPruzaoca',$this->idKorisnika)->where('stanje', $st)->orderBy('idZahteva','DSC')->findAll();
+        foreach ($requests as $request) {
+            $request->linkTermini();
+            $request->linkPruzalac();
+            $request->linkKorisnik();
+            $request->linkKategorijaPruzaoca();
+        }
+        return $requests;
+    }
+
     public static function findById($id)
     {
         $korisnikM = new KorisnikModel();

@@ -402,6 +402,18 @@ function onClick_Remove(q,l)
     }
 }
 
+function newRequest(startTime, maxLen)
+{
+    var startDate=new Date(startTime*1000);
+    document.getElementById("dateDisp").innerHTML=startDate.getDate()+"/"+(startDate.getMonth()+1)+"/"+startDate.getFullYear();
+    document.getElementById("startTimeDisp").innerHTML=startDate.getHours()+":"+(startDate.getMinutes()+"").padStart(2,"0");
+    document.getElementById("duration").value=30; 
+    document.getElementById("duration").max=maxLen;
+    document.getElementById("startTime").value=startTime;
+    document.getElementById("newRequestModalButton").click();
+
+}
+
 function newReservedSlot(startTime, maxLen)
 {
     var startDate=new Date(startTime*1000);
@@ -410,7 +422,7 @@ function newReservedSlot(startTime, maxLen)
     document.getElementById("duration").value=30;
     document.getElementById("duration").max=maxLen;
     document.getElementById("startTime").value=startTime;
-    document.getElementById("newReservedSlotModalButton").click()
+    document.getElementById("newReservedSlotModalButton").click();
 }
 
 function slotInfo(slotId)
@@ -422,8 +434,58 @@ function slotInfo(slotId)
     {
         if (this.readyState == 4 && this.status == 200) 
         {
-                document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
-                document.getElementById("requestInfoModalButton").click()
+            document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
+            document.getElementById("requestInfoModalButton").click();
+        }
+    }
+    xhr.send();
+}
+
+function onClick_AcceptRequest(id, i, pr, st=0)
+{
+    var xhr = new XMLHttpRequest();
+    var url;
+    if(pr == 1)
+    {
+        if(st == 1)
+        {
+            document.getElementById("idZ").value = id;
+            return;
+            
+        }
+        else
+        {
+            url = new URL(window.location.href).origin+"/ProviderController/OPrealiseRequest?id="+id;
+        }
+    }
+    else
+    {
+        url = new URL(window.location.href).origin+"/UserController/OPAcceptRequest?id="+id;
+    }
+
+    xhr.open("GET", url, true);
+    xhr.send();
+}
+
+function onClick_DenyRequest(id, i, pr)
+{
+    var xhr = new XMLHttpRequest();
+    var url;
+    if(pr == 1)
+    {
+        url = new URL(window.location.href).origin+"/ProviderController/OPRejectRequest?id="+id;
+    }
+    else
+    {
+        url = new URL(window.location.href).origin+"/UserController/OPRejectRequest?id="+id;
+    }
+    
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            document.getElementById("k" + i).innerHTML = "";
         }
     }
     xhr.send();

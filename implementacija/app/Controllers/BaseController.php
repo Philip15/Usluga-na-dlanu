@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\KategorijaModel;
 use App\Models\KorisnikModel;
+use App\Models\ZahtevModel;
 use App\Models\TerminModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -12,6 +13,9 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use stdClass;
+use App\Libraries\RequestInfoLib;
+
+use function PHPUnit\Framework\returnSelf;
 
 /**
  * Class BaseController
@@ -206,9 +210,37 @@ class BaseController extends Controller
         {
             return redirect()->to(base_url('/'));
         }
-        else
+        else 
         {
             return redirect()->back();
         }
     }
+
+    public function profile()
+    {
+        $id = $this->request->getGet("id");
+        $user = $this->session->get('user');
+
+        $providerM = new KorisnikModel();
+        $provider = $providerM->find($id);
+        $provider->linkKategorija();
+        $zahtevM = new ZahtevModel();
+        $komentari = $zahtevM->findAllReviewsForProvider($id);
+        $data['calendarid']=$id;
+        $data['calendaranon']='false';
+        $data['calendarfree']='newRequest';
+        $data['calendarbusy']='';
+        $data['provider']=$provider;
+        $data['komentari']=$komentari;
+        $data['id']=$id;
+
+        if($user !== null)
+        {
+            return view('profile-user', $data);
+        }
+
+        return view('profile-guest', $data);
+
+    }
+
 }
