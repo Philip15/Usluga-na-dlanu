@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content bg-light">
             <div class="modal-header border-light">
-                <h5 class="modal-title w-100 text-center ms-5" id="newRequestModalLabel"><?=lang('App.newRequest')?></h5>
+                <h5 class="modal-title w-100 text-center ms-5" id="newRequestModalLabel"><?=lang('App.createRequest')?></h5>
                 <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -33,18 +33,32 @@
                         </div>
                     </div>
 
-                    <div>
-                        <textarea class="form-control m-1" name="requestDesc" id="requestDesc" placeholder=<?=lang('App.desc')?>></textarea>
-                        <input class="form-check-input" type="checkbox" id="urgentBox">
-                        <label class="form-check-label" for="urgentBox"><?=lang('App.urgent')?></label>
+                    <div class="row m-0 mt-3">
+                        <textarea class="form-control" name="requestDesc" id="requestDesc" placeholder=<?=lang('App.desc')?>></textarea>
+                        <div class="form-check mt-2">
+                            <label class="form-check-label fs-6 fw-bold" for="urgentBox"><?=lang('App.urgent')?></label>
+                            <input class="form-check-input" type="checkbox" id="urgentBox" name="urgentBox">
+                        </div>
                     </div>
-
+                    <?php
+                            if(session('errorTextCreate') !== null)
+                            {
+                                echo '<p class="px-2 mt-2 mb-0 text-danger" id="createError">'.esc(session('errorTextCreate')).'</p>';
+                            }
+                        ?>
                     <div class="d-flex mt-3 justify-content-end">
-                        <button type="submit" class="btn btn-primary mx-1"  data-bs-toggle="modal" data-bs-target="#messageModal"><?=lang('App.createRequest')?></button>
+                        <button type="submit" class="btn btn-primary mx-1"><?=lang('App.createRequest')?></button>
                         <input type="hidden" name="startTime" id="startTime" value="">
-                        <input type="hidden" name="providerId" id="providerId" value=<?=$id ?>>
+                        <input type="hidden" name="providerId" id="providerId" value="<?=$provider->idKorisnika?>">
                     </div>
                 </form>
+                <?php
+                    if(session('errorData')!=null)
+                    {
+                        echo '<input type="hidden" id="errorStartTime" value="'.session('errorData')['datumVremePocetka'].'">';
+                        echo '<input type="hidden" id="errorDuration" value="'.session('errorData')['trajanje'].'">';
+                    }
+                ?>
             </div>
         </div>
     </div>

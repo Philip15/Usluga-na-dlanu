@@ -187,7 +187,7 @@ function displayProviders(res)
         var elem=
         `<div class="card w-20rem col-xs-auto m-3 position-relative">
             <a href="${url}/profile?id=${res[i].idKorisnika}"><span class="magic-link"></span></a>
-            <img src="${res[i].profilnaSlika}" class="card-img-top mt-2 h-294px"/>
+            <img src="${res[i].profilnaSlika}" class="card-img-top rounded-circle mt-2 h-294px"/>
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${res[i].ime} ${res[i].prezime}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${res[i].kategorija + (getSearchParam("sort")==1?" "+distance(res[i].lat,res[i].lon,getSearchParam("lat"),getSearchParam("lon"))+"km":"")}</h6>
@@ -271,7 +271,7 @@ function stars(rating)
             rating=0;
         }
     }
-    return pre +" "+ res;
+    return (Math.round(pre * 100) / 100) +" "+ res;
 }
 
 function onClick_Category(e)
@@ -411,7 +411,6 @@ function newRequest(startTime, maxLen)
     document.getElementById("duration").max=maxLen;
     document.getElementById("startTime").value=startTime;
     document.getElementById("newRequestModalButton").click();
-
 }
 
 function newReservedSlot(startTime, maxLen)
@@ -441,54 +440,20 @@ function slotInfo(slotId)
     xhr.send();
 }
 
-function onClick_AcceptRequest(id, i, pr, st=0)
+function profile_Init()
 {
-    var xhr = new XMLHttpRequest();
-    var url;
-    if(pr == 1)
+    if(document.getElementById("createError")!=null)
     {
-        if(st == 1)
-        {
-            document.getElementById("idZ").value = id;
-            return;
-            
-        }
-        else
-        {
-            url = new URL(window.location.href).origin+"/ProviderController/OPrealiseRequest?id="+id;
-        }
+        newRequest(document.getElementById('errorStartTime').value,document.getElementById('errorDuration').value)
     }
-    else
-    {
-        url = new URL(window.location.href).origin+"/UserController/OPAcceptRequest?id="+id;
-    }
-
-    xhr.open("GET", url, true);
-    xhr.send();
 }
 
-function onClick_DenyRequest(id, i, pr)
+function request_Init()
 {
-    var xhr = new XMLHttpRequest();
-    var url;
-    if(pr == 1)
+    if(document.getElementById("priceError")!=null)
     {
-        url = new URL(window.location.href).origin+"/ProviderController/OPRejectRequest?id="+id;
+        document.getElementById("newOfferModalButton").click();
     }
-    else
-    {
-        url = new URL(window.location.href).origin+"/UserController/OPRejectRequest?id="+id;
-    }
-    
-    xhr.open("GET", url, true);
-    xhr.onreadystatechange = function () 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            document.getElementById("k" + i).innerHTML = "";
-        }
-    }
-    xhr.send();
 }
 
 var origPic;

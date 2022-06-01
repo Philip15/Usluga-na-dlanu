@@ -11,7 +11,7 @@ class ZahtevModel extends Model
     protected $returnType     = 'App\Models\ZahtevModel';
 
     protected $allowedFields = ['idKorisnika','idPruzaoca','stanje','opis','hitno','cena','komentar','ocena','recenzija'];
-    // stanje: 1 - upucen pruzaocu, 2 - data ponuda, 3 - prihvacena ponuda, 4 - realizovan, 5 - ocenjen, 6 - odbijen 
+    // stanje: 1 - upucen pruzaocu, 2 - data ponuda, 3 - prihvacena ponuda, 4 - realizovan, 5 - ocenjen, 6 - odbijen od provajdera, 7 - odbijen od korisnika, 8 - odbijen obavesten
 
     public function linkTermini()
     {
@@ -47,20 +47,6 @@ class ZahtevModel extends Model
     {
         $zahtevM = new ZahtevModel();
         return $zahtevM->find($id);
-    }
-
-    // TODO
-    public static function findAllPendingForUser($id)
-    {
-        $zahtevi = new ZahtevModel();
-        $zahtevi =  $zahtevi->where("idKorisnika", $id);
-    }
-
-    //TODO
-    public static function findAllPendingForProvider($id)
-    {
-        $zahtevi = new ZahtevModel();
-        $zahtevi =  $zahtevi->where("idPruzaoca", $id);
     }
 
     public function findAllReviewsForProvider($id)

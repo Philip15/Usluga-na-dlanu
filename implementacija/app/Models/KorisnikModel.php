@@ -61,6 +61,12 @@ class KorisnikModel extends Model
         return $zahtevM->where('idKorisnika',$this->idKorisnika)->where('stanje',4)->countAllResults();
     }
 
+    public function rejectedNotifications()
+    {
+        $zahtevM = new ZahtevModel();
+        return $zahtevM->where('idKorisnika',$this->idKorisnika)->where('stanje',6)->countAllResults();
+    }
+
     public function incomingNotifications()
     {
         $zahtevM = new ZahtevModel();
@@ -71,6 +77,12 @@ class KorisnikModel extends Model
     {
         $zahtevM = new ZahtevModel();
         return $zahtevM->where('idPruzaoca',$this->idKorisnika)->where('stanje',3)->countAllResults();
+    }
+
+    public function rejectedProviderNotifications()
+    {
+        $zahtevM = new ZahtevModel();
+        return $zahtevM->where('idPruzaoca',$this->idKorisnika)->where('stanje',7)->countAllResults();
     }
 
     public function accountNotifications()
