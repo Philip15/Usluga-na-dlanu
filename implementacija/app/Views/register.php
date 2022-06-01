@@ -1,3 +1,8 @@
+<!--
+  * @author Lazar Premović  2019/0091
+  * @author Jana Pašajlić   2019/0132
+-->
+
 <?= $this->extend('layouts/defaultLayout') ?>
 
 <?= $this->section('content') ?>

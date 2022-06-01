@@ -1,12 +1,14 @@
 <?php
+/**
+  * @author Lazar Premović  2019/0091
+  * @author Filip Janjić    2019/0116
+  */
 
 namespace App\Controllers;
 
 use App\Models\ZahtevModel;
 use App\Libraries\RequestInfoLib;
 use App\Models\TerminModel;
-
-use function PHPUnit\Framework\returnSelf;
 
 class ProviderController extends BaseController
 {

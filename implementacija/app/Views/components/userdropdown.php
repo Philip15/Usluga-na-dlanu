@@ -1,3 +1,7 @@
+<!--
+  * @author Lazar Premović  2019/0091
+-->
+
 <?php $user=session('user');?>
 <div class="dropdown justify-content-end">
     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

@@ -1,3 +1,8 @@
+<!--
+  * @author Lazar Premović  2019/0091
+  * @author Filip Janjić    2019/0116
+-->
+
 <div class="modal fade" id="newRequestModal" tabindex="-1" aria-labelledby="newRequestModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content bg-light">

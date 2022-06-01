@@ -1,3 +1,7 @@
+<!--
+  * @author Lazar Premović  2019/0091
+-->
+
 <footer class="footer bg-light border-top mt-auto">
     <div class="container my-3">
         <div class="row justify-content-center gx-5">

@@ -1,4 +1,8 @@
 <?php
+/**
+  * @author Lazar Premović  2019/0091
+  */
+
 namespace App\Models;
 use CodeIgniter\Model;
 

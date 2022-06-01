@@ -1,4 +1,10 @@
 <?php
+/**
+  * @author Lazar Premović  2019/0091
+  * @author Jana Pašajlić   2019/0132
+  * @author Filip Janjić    2019/0116
+  */
+
 namespace App\Models;
 use CodeIgniter\Model;
 use DateTime;
