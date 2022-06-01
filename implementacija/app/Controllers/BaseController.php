@@ -13,9 +13,6 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use stdClass;
-use App\Libraries\RequestInfoLib;
-
-use function PHPUnit\Framework\returnSelf;
 
 /**
  * Class BaseController
@@ -219,27 +216,30 @@ class BaseController extends Controller
     public function profile()
     {
         $id = $this->request->getGet("id");
-        $user = $this->session->get('user');
+        if($id==null)
+        {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
         $providerM = new KorisnikModel();
         $provider = $providerM->find($id);
+        if($provider==null || $provider->pruzalac!=1)
+        {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
         $provider->linkKategorija();
+        $provider->rating = $provider->rating();
         $zahtevM = new ZahtevModel();
         $komentari = $zahtevM->findAllReviewsForProvider($id);
+        $data['jsinit']='profile';
         $data['calendarid']=$id;
-        $data['calendaranon']='false';
-        $data['calendarfree']='newRequest';
-        $data['calendarbusy']='';
+        $data['calendaranon']='true';
+        $data['calendarfree']=(session('user')!=null?'newRequest':'null');
+        $data['calendarbusy']='null';
         $data['provider']=$provider;
         $data['komentari']=$komentari;
-        $data['id']=$id;
-
-        if($user !== null)
-        {
-            return view('profile-user', $data);
-        }
-
-        return view('profile-guest', $data);
+        
+        return view('profile', $data);
 
     }
 

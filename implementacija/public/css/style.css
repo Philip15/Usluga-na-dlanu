@@ -212,8 +212,16 @@
     width: 300px;
 }
 
+.h-fit {
+    height: fit-content;
+}
+
 .h-438 {
     height: 438px;
+}
+
+.mh-500px {
+    max-height: 500px;    
 }
 
 .mt-3px {

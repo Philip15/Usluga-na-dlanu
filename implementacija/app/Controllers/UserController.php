@@ -306,19 +306,18 @@ class UserController extends BaseController
         return redirect()->to(base_url('UserController/reviews'));
     }
 
-    //TODO
     public function requests()
     {
         // prikaz view-a user-requests.php
         $korisnik = $this->session->get('user');
-        $data['requests1'] = $korisnik->getRequestsUser(1);
-        $data['requests2'] = $korisnik->getRequestsUser(2);
-        $data['requests3'] = $korisnik->getRequestsUser(3);
-        $data['requests6'] = $korisnik->getRequestsUser(6);
-        return view('user-requests',$data);
+        $data['requests'][0] = $korisnik->getRequestsUser(1);
+        $data['requests'][1] = $korisnik->getRequestsUser(2);
+        $data['requests'][2] = $korisnik->getRequestsUser(3);
+        $data['requests'][3] = $korisnik->getRequestsUser(6);
+        $data['provider'] = false;
+        return view('requests',$data);
     }
 
-    //TODO
     public function OPCreateRequest()
     {
         // kreiranje zahteva za uslugom od strane korisnika                         ( kreiranje u stanju 1 )
@@ -331,61 +330,103 @@ class UserController extends BaseController
             'opis'        => $this->request->getVar('requestDesc'),
             'hitno'       => $this->request->getVar('urgentBox') == "on",
         ];
-        $newRequest->insert($data);
-
-        $idZahteva = $newRequest->getInsertID();
-
-        date_default_timezone_set('Europe/Belgrade');
         $dataT['trajanje']=intval($this->request->getPost('duration'));
         $dataT['datumVremePocetka']=intval($this->request->getPost('startTime'));
         $dataT['idPruzaoca'] = (int)$this->request->getVar('providerId');
 
-        if($dataT['trajanje']==null || $dataT['datumVremePocetka']==null || session('user')->role()!='provider')
+        if(!$this->validate(['providerId'=>'required']))
         {
-            return redirect()->to(base_url('UserController/requests'));
+            return self::safeRedirectBack();
         }
-        if($dataT['trajanje']<30 || $dataT['trajanje']%30!=0 || session('user')->overlap($dataT['datumVremePocetka'],$dataT['datumVremePocetka']+$dataT['trajanje']*60))
+        if(!$this->validate(['requestDesc'=>'required']))
         {
-            return redirect()->to(base_url('UserController/requests'));
+            $this->session->setFlashdata('errorTextCreate', lang('App.errDesc'));
+            $this->session->setFlashdata('errorData', $dataT);
+            return redirect()->to(base_url('profile?id='.$data['idPruzaoca']));
         }
+        $provider = KorisnikModel::findById($data['idPruzaoca']);
+        if($provider==null || $provider->pruzalac!=1)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('profile?id='.$data['idPruzaoca']));
+        }
+        if($provider->idKorisnika==session('user')->idKorisnika)
+        {
+            $this->session->setFlashdata('errorTextCreate', lang('App.errSelfRequest'));
+            $this->session->setFlashdata('errorData', $dataT);
+            return redirect()->to(base_url('profile?id='.$data['idPruzaoca']));
+        }
+
+        date_default_timezone_set('Europe/Belgrade');
+
+        if($dataT['trajanje']==null || $dataT['datumVremePocetka']==null)
+        {
+            return redirect()->to(base_url('profile?id='.$data['idPruzaoca']));
+        }
+        if($dataT['trajanje']<30 || $dataT['trajanje']%30!=0 || $provider->overlap($dataT['datumVremePocetka'],$dataT['datumVremePocetka']+$dataT['trajanje']*60))
+        {
+            return redirect()->to(base_url('profile?id='.$data['idPruzaoca']));
+        }
+
+        $newRequest->insert($data);
+        $idZahteva = $newRequest->getInsertID();
+        
         $dataT['datumVremePocetka']=date('Y-m-d H:i:s',$dataT['datumVremePocetka']);
         $dataT['idZahteva'] = $idZahteva;
         $TerminM = new TerminModel();
         $TerminM->insert($dataT);
-        return redirect()->to(base_url('UserController/requests'));
-        
+        $this->session->setFlashdata('alertErrorText', lang('App.successfulRequest'));
+        return redirect()->to(base_url('profile?id='.$data['idPruzaoca']));     
     }
 
-    //TODO
     public function OPAcceptRequest()
     {
         // prihvatanje ponude                                                       ( prelazak 2 -> 3 )
         $id = $this->request->getGet('id');
+        $zahtev = ZahtevModel::findById($id);
+        if($zahtev==null || $zahtev->stanje!=2 || $zahtev->idKorisnika!=session('user')->idKorisnika)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('UserController/requests'));
+        }
+
         $zahtevModel = new ZahtevModel();
-
         $zahtevModel->update($id, ['stanje' => 3]);
-
+        return redirect()->to(base_url('UserController/requests'));
     }
 
     public function OPRejectRequest()
     {
-        $id = $this->request->getGet('id');
         // odbijanje zahteva u bilo kom trenutku                                    ( prelazak 2 -> 7 )
+        $id = $this->request->getGet('id');
+        $zahtev = ZahtevModel::findById($id);
+        if($zahtev==null || $zahtev->stanje!=2 || $zahtev->idKorisnika!=session('user')->idKorisnika)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('UserController/requests'));
+        }
+
         $zahtevModel = new ZahtevModel();
-
         $zahtevModel->update($id, ['stanje' => 7]);
-
+        $zahtev->linkTermini();
+        $terminM = new TerminModel();
+        $terminM->where('idZahteva', $id)->delete();
+        return redirect()->to(base_url('UserController/requests'));
     }
 
-    //TODO
-    public function OPcheckRejection()
+    public function OPCheckRejection()
     {
-        // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 7 -> 8 )
+        // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 6 -> 8 )
         $id = $this->request->getGet('id');
+        $zahtev = ZahtevModel::findById($id);
+        if($zahtev==null || $zahtev->stanje!=6 || $zahtev->idKorisnika!=session('user')->idKorisnika)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('UserController/requests'));
+        }
+
         $zahtevModel = new ZahtevModel();
-
         $zahtevModel->update($id, ['stanje' => 8]);
-
         return redirect()->to(base_url('UserController/requests'));
     }
 
