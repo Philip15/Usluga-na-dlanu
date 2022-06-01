@@ -187,7 +187,7 @@ function displayProviders(res)
         var elem=
         `<div class="card w-20rem col-xs-auto m-3 position-relative">
             <a href="${url}/profile?id=${res[i].idKorisnika}"><span class="magic-link"></span></a>
-            <img src="${res[i].profilnaSlika}" class="card-img-top mt-2 h-294px"/>
+            <img src="${res[i].profilnaSlika}" class="card-img-top rounded-circle mt-2 h-294px"/>
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${res[i].ime} ${res[i].prezime}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${res[i].kategorija + (getSearchParam("sort")==1?" "+distance(res[i].lat,res[i].lon,getSearchParam("lat"),getSearchParam("lon"))+"km":"")}</h6>
@@ -271,7 +271,7 @@ function stars(rating)
             rating=0;
         }
     }
-    return pre +" "+ res;
+    return (Math.round(pre * 100) / 100) +" "+ res;
 }
 
 function onClick_Category(e)
@@ -402,6 +402,17 @@ function onClick_Remove(q,l)
     }
 }
 
+function newRequest(startTime, maxLen)
+{
+    var startDate=new Date(startTime*1000);
+    document.getElementById("dateDisp").innerHTML=startDate.getDate()+"/"+(startDate.getMonth()+1)+"/"+startDate.getFullYear();
+    document.getElementById("startTimeDisp").innerHTML=startDate.getHours()+":"+(startDate.getMinutes()+"").padStart(2,"0");
+    document.getElementById("duration").value=30; 
+    document.getElementById("duration").max=maxLen;
+    document.getElementById("startTime").value=startTime;
+    document.getElementById("newRequestModalButton").click();
+}
+
 function newReservedSlot(startTime, maxLen)
 {
     var startDate=new Date(startTime*1000);
@@ -410,7 +421,7 @@ function newReservedSlot(startTime, maxLen)
     document.getElementById("duration").value=30;
     document.getElementById("duration").max=maxLen;
     document.getElementById("startTime").value=startTime;
-    document.getElementById("newReservedSlotModalButton").click()
+    document.getElementById("newReservedSlotModalButton").click();
 }
 
 function slotInfo(slotId)
@@ -422,9 +433,74 @@ function slotInfo(slotId)
     {
         if (this.readyState == 4 && this.status == 200) 
         {
-                document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
-                document.getElementById("requestInfoModalButton").click()
+            document.getElementById("requestInfoModalContent").innerHTML=this.responseText;
+            document.getElementById("requestInfoModalButton").click();
         }
     }
     xhr.send();
+}
+
+function profile_Init()
+{
+    if(document.getElementById("createError")!=null)
+    {
+        newRequest(document.getElementById('errorStartTime').value,document.getElementById('errorDuration').value)
+    }
+}
+
+function request_Init()
+{
+    if(document.getElementById("priceError")!=null)
+    {
+        document.getElementById("newOfferModalButton").click();
+    }
+}
+
+var origPic;
+
+function editProfile_Init()
+{
+    origPic = document.getElementById("imgDiv").innerHTML;
+    document.getElementById("changePictureApply").style.display="none";
+    $('#locationPicker').locationpicker({
+        location: {
+            latitude: document.getElementById("latInput").value,
+            longitude: document.getElementById("lonInput").value
+        },
+        radius: 0,
+        onchanged: editProfileLocationChangedCallback
+    });
+}
+
+function editProfileLocationChangedCallback(currentLocation, radius, isMarkerDropped)
+{
+    document.getElementById("latInput").value=currentLocation.latitude;
+    document.getElementById("lonInput").value=currentLocation.longitude;
+}
+
+function onChange_UploadPicture()
+{
+    var formData = new FormData();
+    formData.append("profilePicture", document.getElementById("profilePicture").files[0]);
+    var xhr = new XMLHttpRequest();
+    var url = new URL(window.location.href).origin+"/UserController/AJAXpicturePreview";
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function () 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            if(this.responseText.startsWith("<"))
+            {
+                document.getElementById("imgDiv").innerHTML=this.responseText;
+                document.getElementById("changePictureApply").style.display="block";
+            }
+            else
+            {
+                alert(this.responseText.substring(0,this.responseText.indexOf("<")));
+                document.getElementById("imgDiv").innerHTML=origPic;
+                document.getElementById("changePictureApply").style.display="none";
+            }
+        }
+    }
+    xhr.send(formData);
 }

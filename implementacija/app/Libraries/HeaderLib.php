@@ -7,12 +7,12 @@ class HeaderLib
     public static function menuItems($user)
     {
         $res='';
-        $res = $res.self::menuItem(base_url('UserController/requests'),lang('App.requests'),$user->requestNotifications());
+        $res = $res.self::menuItem(base_url('UserController/requests'),lang('App.requests'),$user->requestNotifications()+$user->rejectedNotifications());
         $res = $res.self::menuItem(base_url('UserController/reviews'),lang('App.reviews'),$user->reviewNotifications());
         if($user->role()=='provider')
         {
-            $res = $res.self::menuItem(base_url('ProviderController/requests'),lang('App.incomingRequests'),$user->incomingNotifications());
-            $res = $res.self::menuItem(base_url('ProviderController/timetable'),lang('App.timetable'),$user->acceptedNotifications());
+            $res = $res.self::menuItem(base_url('ProviderController/requests'),lang('App.incomingRequests'),$user->incomingNotifications()+$user->acceptedNotifications()+$user->rejectedProviderNotifications());
+            $res = $res.self::menuItem(base_url('ProviderController/timetable'),lang('App.timetable'));
         }
         $res = $res.self::menuItem(base_url('UserController/editProfile'),lang('App.editProfile'));
         if($user->role()=='admin')

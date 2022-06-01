@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ZahtevModel;
 use App\Libraries\RequestInfoLib;
 use App\Models\TerminModel;
 
@@ -9,6 +10,98 @@ use function PHPUnit\Framework\returnSelf;
 
 class ProviderController extends BaseController
 {
+    public function requests()
+    {
+        // prikaz view-a provider-requests.php
+        $korisnik = $this->session->get('user');
+        $data['jsinit']='request';
+        $data['requests'][0] = $korisnik->getRequestsProvider(1);
+        $data['requests'][1] = $korisnik->getRequestsProvider(2);
+        $data['requests'][2] = $korisnik->getRequestsProvider(3);
+        $data['requests'][3] = $korisnik->getRequestsProvider(7);
+        $data['provider'] = true;
+        return view('requests',$data);
+    }
+
+    public function OPCreateOffer()
+    {
+        // kreiranje ponude iz primljenog zahteva                                       ( prelazak 1 -> 2 )
+
+        $id = $this->request->getVar('idZ');
+        $zahtev = ZahtevModel::findById($id);
+        if($zahtev==null || $zahtev->stanje!=1 || $zahtev->idPruzaoca!=session('user')->idKorisnika)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('ProviderController/requests'));
+        }
+
+        $cena = intval($this->request->getVar('priceVal'));
+        $opis = $this->request->getVar('offerDesc');
+        if($cena == null || !is_numeric($this->request->getVar('priceVal')))
+        {
+            $this->session->setFlashdata('errorTextPrice', lang('App.errMsgPrice'));
+            $this->session->setFlashdata('errorId', $id);
+            return redirect()->to(base_url('ProviderController/requests'));
+        }  
+        else
+        {
+            $zahtevModel = new ZahtevModel();
+            $zahtevModel->update($id, ['stanje' => 2, 'cena' => $cena, 'komentar' => $opis]);
+            return redirect()->to(base_url('ProviderController/requests'));
+        }      
+
+    }
+
+    public function OPRejectRequest()
+    {
+        // odbijanje zahteva u bilo kom trenutku                                        ( prelazak 1 -> 6, 3 -> 6 )
+        $id = $this->request->getGet('id');
+        $zahtev = ZahtevModel::findById($id);
+        if($zahtev==null || ($zahtev->stanje!=1 && $zahtev->stanje!=3) || $zahtev->idPruzaoca!=session('user')->idKorisnika)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('ProviderController/requests'));
+        }
+
+        $zahtevModel = new ZahtevModel();
+        $zahtevModel->update($id, ['stanje' => 6]);
+        $terminM = new TerminModel();
+        $terminM->where('idZahteva', $id)->delete();
+        return redirect()->to(base_url('ProviderController/requests'));
+    }
+
+    public function OPRealizeRequest()
+    {
+        // oznacavanje zahteva kao realizovanog, slanje na recenziju                    ( prelazak 3 -> 4 )
+        $id = $this->request->getGet('id');
+        $zahtev = ZahtevModel::findById($id);
+        if($zahtev==null || $zahtev->stanje!=3 || $zahtev->idPruzaoca!=session('user')->idKorisnika)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('ProviderController/requests'));
+        }
+
+        $zahtevModel = new ZahtevModel();
+        $zahtevModel->update($id, ['stanje' => 4]);
+        return redirect()->to(base_url('ProviderController/requests'));
+    }
+
+    public function OPCheckRejection()
+    {
+        // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 7 -> 8 )
+        $id = $this->request->getGet('id');
+        $zahtev = ZahtevModel::findById($id);
+        if($zahtev==null || $zahtev->stanje!=7 || $zahtev->idPruzaoca!=session('user')->idKorisnika)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('ProviderController/requests'));
+        }
+
+        $zahtevModel = new ZahtevModel();
+        $zahtevModel->update($id, ['stanje' => 8]);
+        return redirect()->to(base_url('ProviderController/requests'));
+    }
+
     public function timetable()
     {
         $user = session('user');
@@ -34,7 +127,7 @@ class ProviderController extends BaseController
             //invalid request, fail silently
             return;
         }
-        return RequestInfoLib::slotInfo($slot);
+        return RequestInfoLib::slotInfo($slot,true,false);
     }
 
     public function OPReserveTime()

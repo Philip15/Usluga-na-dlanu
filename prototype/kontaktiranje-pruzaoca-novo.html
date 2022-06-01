@@ -1,0 +1,523 @@
+<!--Autor: Filip Janjić-->
+<!DOCTYPE html>
+
+<html lang="sr" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Filip Janjic">
+
+        <link rel="icon"       type="image/png" href="res/favicon.png">
+        <link rel="stylesheet" type="text/css"  href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css"  href="css/style.css" />
+		<link rel="stylesheet" type="text/css"  href="css/reg.css" />
+		<link rel="stylesheet" type="text/css"  href="css/profile.css" />
+        <link rel="stylesheet" type="text/css" href="css/calendar.css" />
+
+		<script src="js/prototype.js"></script>
+		<script src="js/request.js"></script>
+
+        <title>Usluga na dlanu</title>
+</head>
+<body style="background-color: #062639;">
+    <header>
+		<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered ">
+				<div class="modal-content bg-light">
+					<div class="modal-header border-light mt-3">
+						<h5 class="modal-title w-100 text-center ms-5" id="loginModalLabel">Prijava</h5>
+						<button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form class="d-flex flex-column container justify-content-center">
+							<div class="form-floating">
+								<input class="form-control m-1" type="text" name="username" id="username" placeholder="Korisničko ime">
+								<label class="d-flex align-items-center" for="username">Korisničko ime</label>
+							</div>
+							<div class="form-floating">
+								<input class="form-control m-1" type="password" name="pass" id="password" placeholder="Lozinka">
+								<label class="d-flex align-items-center" for="pass">Lozinka</label>
+							</div>
+							<p class="px-2 mt-2 mb-0 text-danger dnone" id="wrongPassword">Pogrešno korisničko ime ili lozinka.</p>
+							<div class="form-floating">
+								<button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" onclick="onClick_Login()">Prijavi se</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-light bg-light px-3">
+			<a class="navbar-brand fw-bolder fs-3" href="index.html">
+				<img src="res/Logot.png" height="50px"/>
+				Usluga na dlanu
+			</a>
+			<div class="dropdown justify-content-end" id="userProfile">
+				<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="res/placeholder-user.jpg" width="40" height="40" class="rounded-circle">
+						<span class="position-absolute top-0 start-40px translate-middle p-2 bg-danger border border-light rounded-circle" id="hasNotifications">
+							<span class="visually-hidden">Nova Obaveštenja</span>
+						</span>
+				</a>
+				<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+					<li><a class="dropdown-item" href="komandna-tabla.html">Recenzije <span class="badge bg-danger" id="numberOfNotifications"></span></a></li>
+					<li><a class="dropdown-item" href="komandna-tabla-pruzalac.html" id="dropdownZahtevi">Zahtevi <span class="badge bg-danger" id="numberOfRequests"></span></a></li>
+					<li><a class="dropdown-item" href="prihvaceni-zahtevi.html" id="dropdownPrihvaceniZahtevi">Prihvaćeni zahtevi <span class="badge bg-danger" id="numberOfRequests"></span></a></li>
+					<li><a class="dropdown-item" href="uredjivanje-profila.html" id="editUser">Uređivanje profila</a></li>
+					<li><a class="dropdown-item" href="uredjivanje-profila-pruzaoca.html" id="editProvider">Uređivanje profila</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="index.html" onclick="onClick_Logout()">Odjavi se</a></li>
+				</ul>
+			</div>
+			<div class="justify-content-end" id="loginButtons">
+				<button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Prijava</button>
+				<a class="btn btn-primary" href="registracija.html" role="button">Registracija</a>
+			</div>
+		</nav>
+		<script>ls.user="lazar";clearRequests();header_Init(true);</script>
+	</header>
+
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+		
+		<!--                                                                                                                                                     PROFILNA -->
+		
+            <div class="col-sm-5 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="res/placeholder-avatar1.jpg">
+                    <span class="font-weight-bold" style="font-size:larger">Pera Perić</span>
+                    <span class="text-black-50">pera.peric@gmail.com</span>
+					<span class="text-blamd-4k-50">Vodoinstalater</span>
+					<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#requestModal" style= "float:center;background-color:green;width:30%"
+					onclick="onClick_NewRequest()">Kreiraj zahtev</button>
+					<button class="btn btn-primary profile-button" type="button" style= "float:center; margin-top:1%;width:30%" id="emailBtn"
+				data-bs-toggle="modal" data-bs-target="#emailModal" onClick="clearPage()">Pošalji poruku</button>
+                    <br>
+                    <span> </span></div>
+            </div>
+       
+		<!--                                                                                                                                                     OPIS -->
+		
+		
+            <div class="col-sm-7 text-center" style="margin-top:60px">
+				<br><br><br><br><h1>Opis</h1>
+				<span class="text-blamd-4k-50">Visegodisnje iskustvo u svim vrstama popravki. Ciscenje kanalizacije i cevi kade, tus kabine, lavaboa i ostalih.
+				Zamena filtara na masini za pranje vesa, masini za susenje vesa. </span>
+				
+			</div>
+			
+		
+		</div>
+		
+		<div class="row" style="margin-top:10px">
+		
+		<!--                                                                                                                                                 KALENDAR -->
+			
+			
+				<h4 style="text-align:center">Kalendar</h4><br>
+				<div class="container-cal-profile"> 
+					<div class="wrap-cal">
+							<div class="month">
+								<ul>
+								<li class="prev">&#10094;</li>
+								<li class="next">&#10095;</li>
+								<li>Mart<br><span style="font-size:10px;">2022</span></li>
+								</ul>
+							</div>
+							
+							<ul class="weekdays">
+								<li>Pon</li>
+								<li>Uto</li>
+								<li>Sre</li>
+								<li>Čet</li>
+								<li>Pet</li>
+								<li>Sub</li>
+								<li>Ned</li>
+							</ul>
+							
+							<ul class="days">
+								<li><span class="last-month">28</span></li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+								<li><span class="active">10</span></li>
+								<li>11</li>
+								<li>12</li>
+								<li>13</li>
+								<li>14</li>
+								<li>15</li>
+								<li>16</li>
+								<li>17</li>
+								<li>18</li>
+								<li>19</li>
+								<li>20</li>
+								<li>21</li>
+								<li><span class="occupied">22</span></li>
+								<li><span class="occupied">23</span></li>
+								<li><span class="occupied">24</span></li>
+								<li><span class="occupied">25</span></li>
+								<li>26</li>
+								<li>27</li>
+								<li>28</li>
+								<li>29</li>
+								<li>30</li>
+								<li>31</li>
+								<li><span class="last-month">1</span></li>
+								<li><span class="last-month">2</span></li>
+								<li><span class="last-month">3</span></li>
+							</ul>
+						</div>
+					</div>
+				<br>         
+		
+		<!--                                                                                                                                                     MEJL -->
+			
+
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered ">
+				<div class="modal-content bg-light" style="width:200%">
+					<div class="modal-header border-light mt-3">
+						<h5 class="modal-title w-100 text-center ms-5" id="loginModalLabel">Kreiranje zahteva</h5>
+						<button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+                        <div class="container-cal-profile"> 
+							<div class="wrap-cal">
+									<div class="month">
+										<ul>
+										<li class="prev">&#10094;</li>
+										<li class="next">&#10095;</li>
+										<li>Mart<br><span style="font-size:10px;">2022</span></li>
+										</ul>
+									</div>
+									
+									<ul class="weekdays">
+										<li>Pon</li>
+										<li>Uto</li>
+										<li>Sre</li>
+										<li>Čet</li>
+										<li>Pet</li>
+										<li>Sub</li>
+										<li>Ned</li>
+									</ul>
+									
+									<ul class="days">
+										<li><span class="last-month">28</span></li>
+										<li>1</li>
+										<li>2</li>
+										<li>3</li>
+										<li>4</li>
+										<li>5</li>
+										<li>6</li>
+										<li>7</li>
+										<li>8</li>
+										<li>9</li>
+										<li><span class="active">10</span></li>
+										<li>11</li>
+										<li>12</li>
+										<li>13</li>
+										<li>14</li>
+										<li>15</li>
+										<li>16</li>
+										<li>17</li>
+										<li>18</li>
+										<li>19</li>
+										<li>20</li>
+										<li>21</li>
+										<li><span class="occupied">22</span></li>
+										<li><span class="occupied">23</span></li>
+										<li><span class="occupied">24</span></li>
+										<li><span class="occupied">25</span></li>
+										<li>26</li>
+										<li>27</li>
+										<li>28</li>
+										<li>29</li>
+										<li>30</li>
+										<li>31</li>
+										<li><span class="last-month">1</span></li>
+										<li><span class="last-month">2</span></li>
+										<li><span class="last-month">3</span></li>
+									</ul>
+								</div>
+							</div>
+						<form class="d-flex flex-column container justify-content-center">
+							<div class="form-floating">
+								<textarea class="form-control m-1" name="requestDesc" id="requestDesc" placeholder="Opis"></textarea>
+								<label class="d-flex align-items-center" for="requestDesc">Opis</label>
+							</div>
+							<div class="form-floating text-center">
+								<input type="checkbox" name="urgent" id="urgentBox">
+								<label class="d-flex align-items-center" for="urgentBox">Hitan zahtev</label>
+							</div>
+							<div class="form-floating">
+								<button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" id="sendRequestButton" onclick="onClick_TrySendRequest()">Pošalji zahtev</button>
+								<button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" id="acceptSendRequestButton" data-bs-toggle="modal" data-bs-target="#messageModal" 
+														style="background-color:green" hidden="true">Pošalji</button>
+								<button type="button" class="form-control btn btn-primary m-1 mt-4 mb-3 py-2" id="rejectSendRequestButton" onclick="onClick_RejectRequest()" hidden="true"
+																style="background-color:red">Otkaži</button>
+							</div>
+						</form>
+					</div> 
+				</div>
+			</div>
+		</div>
+			<div class="col-sm-12 text-center">
+				<br><br>
+				
+				<div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered ">
+						<div class="modal-content bg-light">
+							<div class="modal-header border-light mt-3">
+								<h5 class="modal-title w-100 text-center ms-5" id="emailModalLabel">Email uspešno poslat!</h5>
+								<button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+		
+			<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content bg-light">
+                        <div class="modal-header border-light mt-3">
+                            <h5 class="modal-title w-100 text-center ms-5" id="messageModalLabel">Zahtev uspešno poslat!</h5>
+                            <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		
+		<div class="row" style="margin-top:10px">
+		
+		<!--                                                                                                                                      				KOMENTARI -->
+			
+		<div class="col-sm border-right" style="overflow-y: scroll; height:500px">
+			<div class="card shadow-0 border overflow text-center" style="background-color: #f0f2f5;margin-top:30px; margin-bottom:30px;">
+			<h4>Komentari</h4>
+			  <div class="card-body p-4 overflow">
+				<div class="form-outline mb-4">
+				</div>
+
+				<div class="card mb-4">
+				  <div class="card-body">
+					<p>Vrsni majstor! Veoma profesionalno i efikasno!</p>
+
+					<div class="d-flex justify-content-between">
+					  <div class="d-flex flex-row align-items-center">
+						<img
+						  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+						  alt="avatar"
+						  width="25"
+						  height="25"
+						/>
+						<p class="small mb-0 ms-2">Zoran</p>
+					  </div>
+					  <div class="d-flex flex-row align-items-center">
+						<button style="height:20px; font-size:10px"><img src="res/Like.png" style="height:15px"/>Svidja mi se</button>
+						<i
+						  class="far fa-thumbs-up mx-2 fa-xs text-black"
+						  style="margin-top: -0.16rem;"
+						></i>
+						<p class="small text-muted mb-0">17</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<div class="card mb-4">
+				  <div class="card-body">
+					<p>Type your note, and hit enter to add it</p>
+
+					<div class="d-flex justify-content-between">
+					  <div class="d-flex flex-row align-items-center">
+						<img
+						  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+						  alt="avatar"
+						  width="25"
+						  height="25"
+						/>
+						<p class="small mb-0 ms-2">Johny</p>
+					  </div>
+					  <div class="d-flex flex-row align-items-center">
+						<button style="height:20px; font-size:10px"><img src="res/Like.png" style="height:15px"/>Svidja mi se</button>
+						<i
+						  class="far fa-thumbs-up mx-2 fa-xs text-black"
+						  style="margin-top: -0.16rem;"
+						></i>
+						<p class="small text-muted mb-0">4</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<div class="card mb-4">
+				  <div class="card-body">
+					<p>Type your note, and hit enter to add it</p>
+
+					<div class="d-flex justify-content-between">
+					  <div class="d-flex flex-row align-items-center">
+						<img
+						  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp"
+						  alt="avatar"
+						  width="25"
+						  height="25"
+						/>
+						<p class="small mb-0 ms-2">Mary Kate</p>
+					  </div>
+					  <div class="d-flex flex-row align-items-center text-primary">
+						<button style="height:20px; font-size:10px"><img src="res/Like.png" style="height:15px"/>Svidja mi se</button>
+						<i
+						  class="far fa-thumbs-up mx-2 fa-xs text-black"
+						  style="margin-top: -0.16rem;"
+						></i>
+						<p class="small text-muted mb-0">4</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<div class="card mb-4">
+				  <div class="card-body">
+					<p>Type your note, and hit enter to add it</p>
+
+					<div class="d-flex justify-content-between">
+					  <div class="d-flex flex-row align-items-center">
+						<img
+						  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+						  alt="avatar"
+						  width="25"
+						  height="25"
+						/>
+						<p class="small mb-0 ms-2">Johny</p>
+					  </div>
+					  <div class="d-flex flex-row align-items-center">
+						<button style="height:20px; font-size:10px"><img src="res/Like.png" style="height:15px"/>Svidja mi se</button>
+						<i
+						  class="far fa-thumbs-up mx-2 fa-xs text-black"
+						  style="margin-top: -0.16rem;"
+						></i>
+						<p class="small text-muted mb-0">4</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+				
+				<div class="card mb-4">
+				  <div class="card-body">
+					<p>Type your note, and hit enter to add it</p>
+
+					<div class="d-flex justify-content-between">
+					  <div class="d-flex flex-row align-items-center">
+						<img
+						  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+						  alt="avatar"
+						  width="25"
+						  height="25"
+						/>
+						<p class="small mb-0 ms-2">Johny</p>
+					  </div>
+					  <div class="d-flex flex-row align-items-center">
+						<button style="height:20px; font-size:10px"><img src="res/Like.png" style="height:15px"/>Svidja mi se</button>
+						<i
+						  class="far fa-thumbs-up mx-2 fa-xs text-black"
+						  style="margin-top: -0.16rem;"
+						></i>
+						<p class="small text-muted mb-0">4</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+				
+				<div class="card mb-4">
+				  <div class="card-body">
+					<p>Type your note, and hit enter to add it</p>
+
+					<div class="d-flex justify-content-between">
+					  <div class="d-flex flex-row align-items-center">
+						<img
+						  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+						  alt="avatar"
+						  width="25"
+						  height="25"
+						/>
+						<p class="small mb-0 ms-2">Johny</p>
+					  </div>
+					  <div class="d-flex flex-row align-items-center">
+						<button style="height:20px; font-size:10px"><img src="res/Like.png" style="height:15px"/>Svidja mi se</button>
+						<i
+						  class="far fa-thumbs-up mx-2 fa-xs text-black"
+						  style="margin-top: -0.16rem;"
+						></i>
+						<p class="small text-muted mb-0">4</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+				
+				<div class="card mb-4">
+				  <div class="card-body">
+					<p>Type your note, and hit enter to add it</p>
+
+					<div class="d-flex justify-content-between">
+					  <div class="d-flex flex-row align-items-center">
+						<img
+						  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+						  alt="avatar"
+						  width="25"
+						  height="25"
+						/>
+						<p class="small mb-0 ms-2">Johny</p>
+					  </div>
+					  <div class="d-flex flex-row align-items-center">
+						<button style="height:20px; font-size:10px"><img src="res/Like.png" style="height:15px"/>Svidja mi se</button>
+						<i
+						  class="far fa-thumbs-up mx-2 fa-xs text-black"
+						  style="margin-top: -0.16rem;"
+						></i>
+						<p class="small text-muted mb-0">4</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+  
+		
+		</div>
+		
+    </div>
+
+    <footer class="footer bg-light border-top mt-auto">
+		<div class="container my-3">
+			<div class="row justify-content-center gx-5">
+				<div class="col-md-auto text-center mx-5">
+					Principi softverskog inženjerstva
+				</div>
+				<div class="col-md-auto text-center mx-5">
+					<a href="https://www.etf.bg.ac.rs" class="text-reset"> Elektrotehnički fakultet u Beogradu</a>
+				</div>
+				<div class="col-md-auto text-center mx-5">
+					Tim: Under pressure
+				</div>
+			</div>
+		</div>
+	</footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
