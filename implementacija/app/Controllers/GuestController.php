@@ -70,7 +70,6 @@ class GuestController extends BaseController
             $this->session->setFlashdata('errorText', lang('App.errNotTNC'));
             return redirect()->to(site_url('GuestController/register'));
         }
-
         $korisnik = $korisnikModel->where('korisnickoIme', $korisnikPodaci['korisnickoIme'])->findAll();
         if ($korisnik != null) 
         {
