@@ -77,6 +77,10 @@ return [
     'errUserAlreadyExists'      => 'Korisničko ime postoji!',
     'errPasswordConfirmation'   => 'Lozinke moraju biti iste!',
     'errOldPassword'            => 'Morate uneti ispravnu lozinku!',
+    'errNoPicture'              => 'Niste odabrali datoteku!',
+    'errTooBig'                 => 'Datoteka koju ste odabrali je prevelika, maksimalna veličina je 3MB!',
+    'errWrongType'              => 'Datoteka koju ste odabrali nije slika!',
+    'errRequiredFields'         => 'Obavezna polja ne smeju biti prazna!',
     'successfulConversion'      => 'Uspešno ste postali pružalac!',
     'successfulPictureChange'   => 'Uspešno ste promenili profilnu sliku!',
     'successfulProfileUpdate'   => 'Uspešno ste izmenili željene podatke!',
@@ -118,5 +122,6 @@ return [
     'reserveSlot'               => 'Rezerviši termin',
     'duration'                  => 'Trajanje',
     'min'                       => 'min',
+    'apply'                     => 'Primeni',
     'blank'                     => '',
 ];

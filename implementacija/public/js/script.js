@@ -428,3 +428,52 @@ function slotInfo(slotId)
     }
     xhr.send();
 }
+
+var origPic;
+
+function editProfile_Init()
+{
+    origPic = document.getElementById("imgDiv").innerHTML;
+    document.getElementById("changePictureApply").style.display="none";
+    $('#locationPicker').locationpicker({
+        location: {
+            latitude: document.getElementById("latInput").value,
+            longitude: document.getElementById("lonInput").value
+        },
+        radius: 0,
+        onchanged: editProfileLocationChangedCallback
+    });
+}
+
+function editProfileLocationChangedCallback(currentLocation, radius, isMarkerDropped)
+{
+    document.getElementById("latInput").value=currentLocation.latitude;
+    document.getElementById("lonInput").value=currentLocation.longitude;
+}
+
+function onChange_UploadPicture()
+{
+    var formData = new FormData();
+    formData.append("profilePicture", document.getElementById("profilePicture").files[0]);
+    var xhr = new XMLHttpRequest();
+    var url = new URL(window.location.href).origin+"/UserController/AJAXpicturePreview";
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function () 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            if(this.responseText.startsWith("<"))
+            {
+                document.getElementById("imgDiv").innerHTML=this.responseText;
+                document.getElementById("changePictureApply").style.display="block";
+            }
+            else
+            {
+                alert(this.responseText.substring(0,this.responseText.indexOf("<")));
+                document.getElementById("imgDiv").innerHTML=origPic;
+                document.getElementById("changePictureApply").style.display="none";
+            }
+        }
+    }
+    xhr.send(formData);
+}

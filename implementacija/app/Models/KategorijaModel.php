@@ -30,4 +30,9 @@ class KategorijaModel extends Model
         return $kategorijaM->where('naziv',$name)->first();
     }
 
+    public static function findById($id)
+    {
+        $kategorijaM = new  KategorijaModel();
+        return $kategorijaM->find($id);
+    }
 }
