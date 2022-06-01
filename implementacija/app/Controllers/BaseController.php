@@ -13,6 +13,9 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use stdClass;
+use App\Libraries\RequestInfoLib;
+
+use function PHPUnit\Framework\returnSelf;
 
 /**
  * Class BaseController
@@ -223,13 +226,20 @@ class BaseController extends Controller
         $provider->linkKategorija();
         $zahtevM = new ZahtevModel();
         $komentari = $zahtevM->findAllReviewsForProvider($id);
+        $data['calendarid']=$id;
+        $data['calendaranon']='false';
+        $data['calendarfree']='newRequest';
+        $data['calendarbusy']='';
+        $data['provider']=$provider;
+        $data['komentari']=$komentari;
+        $data['id']=$id;
 
         if($user !== null)
         {
-            return view('profile-user', ['provider' => $provider, 'komentari'=>$komentari]);
+            return view('profile-user', $data);
         }
 
-        return view('profile-guest', ['provider' => $provider, 'komentari'=>$komentari]);
+        return view('profile-guest', $data);
 
     }
 

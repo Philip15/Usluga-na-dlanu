@@ -8,10 +8,9 @@ Views:
     Header
     Footer
     index
-profile(Guest,User)
+    profile(Guest,User)
     register
-requests(User,Provider)
-incomingRequests
+    requests(User,Provider)
 	reviews
 editProfile(User,Provider)
 timetable(User,Provider)
@@ -35,25 +34,24 @@ BaseController/profile
     GostController/OPRegister
 
     UserController/OPLogout
-UserController/OPCreateRequest
-UserController/requests
-UserController/OPAcceptRequest
-UserController/OPRejectRequest
-	UserController/reviews
-	UserController/OPPostReview
-	UserController/OPRemoveReview
+    UserController/OPCreateRequest
+    UserController/requests
+    UserController/OPAcceptRequest
+    UserController/OPRejectRequest
+    UserController/reviews
+    UserController/OPPostReview
+    UserController/OPRemoveReview
 UserController/editProfile
 UserController/OPUpdateProfile
 UserController/OPConvertProfile
 
-ProviderController/requests
-ProviderController/incoming_requests
-ProviderController/OPCreateOffer
-ProviderController/OPRealizeRequest
-ProviderController/OPRejectRequest
-	ProviderController/timetable
-	ProviderController/OPReserveTime
-	ProviderController/OPFreeTime
+    ProviderController/requests
+    ProviderController/OPCreateOffer
+    ProviderController/OPRealizeRequest
+    ProviderController/OPRejectRequest
+ProviderController/timetable
+ProviderController/OPReserveTime
+ProviderController/OPFreeTime
 
     AdminController/categories
     AdminController/OPAddCategory

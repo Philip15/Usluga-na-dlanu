@@ -25,9 +25,26 @@ class ProviderController extends BaseController
     public function OPCreateOffer()
     {
         // kreiranje ponude iz primljenog zahteva                                       ( prelazak 1 -> 2 )
+
+        $id = $this->request->getVar('idZ');
+        var_dump($id);
+        $zahtevModel = new ZahtevModel();
+
+        $cena = (int)$this->request->getVar('priceVal');
+        $opis = $this->request->getVar('offerDesc');
+        if($cena == null)
+        {
+            $this->session->setFlashdata('errorTextPrice', lang('App.errMsgPrice'));
+            return self::safeRedirectBack();
+        }  
+        else
+        {
+            $zahtevModel->update($id, ['stanje' => 2, 'cena' => $cena, 'komentar' => $opis]);
+            return redirect()->to(base_url('ProviderController/requests'));
+        }      
+
     }
 
-    //TODO
     public function OPRejectRequest()
     {
         // odbijanje zahteva u bilo kom trenutku                                        ( prelazak 1 -> 6, 3 -> 6 )
@@ -35,6 +52,7 @@ class ProviderController extends BaseController
         $zahtevModel = new ZahtevModel();
 
         $zahtevModel->update($id, ['stanje' => 6]);
+
     }
 
     public function OPRealizeRequest()

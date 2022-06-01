@@ -72,9 +72,9 @@
                     </div>
                     <div class="d-flex mb-3 justify-content-end">';
                     if ($op != 2 && $op != 7)
-                        echo '<button type="submit" name="btnAcc" class="btn btn-success  mx-1" onclick="onClick_AcceptRequest('.esc($req->idZahteva).', '.$cnt.', 1)">'.$btnAccept.'</button>';
+                        echo '<button type="submit" name="btnAcc" class="btn btn-success  mx-1" data-bs-toggle="modal" data-bs-target="#newOfferModal" onclick="onClick_AcceptRequest('.esc($req->idZahteva).', '.$cnt.', 1, '.$op.')">'.$btnAccept.'</button>';
                     if ($op != 2 && $op != 7)
-                        echo '<button type="submit" name="btnRej" class="btn btn-danger mx-1" onclick="onClick_DenyRequest('.esc($req->idZahteva).', '.$cnt.', 1)">'.lang("App.deny").'</button>';                        
+                        echo '<button type="submit" name="btnRej" class="btn btn-danger mx-1" onclick="onClick_DenyRequest('.esc($req->idZahteva).', '.$cnt.', 1, '.$op.')">'.lang("App.deny").'</button>';                        
                     echo
                     '</div>
                     </div>';
@@ -87,4 +87,5 @@
             showRequests(lang('App.rejectedOffers'),  $requests7, 7);
         ?>
 </div>
+<?=$this->include("components/newOffer")?>
 <?= $this->endSection() ?>  

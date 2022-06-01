@@ -125,11 +125,15 @@ return [
     'like'                      => 'Sviđa mi se',
     'successRequestSent'        => 'Uspešno poslat zahtev!',
     'period'                    => 'Vremenski period',
-    'price'                     => 'Cena',
     'comment'                   => 'Komentar',
     'arrivedRequests'           => 'Pristigli zahtevi',
     'madeOffers'                => 'Upućene ponude',
     'acceptedOffers'            => 'Prihvaćene ponude',
     'rejectedOffers'            => 'Odbijeni zahtevi',
     'realise'                   => 'Realizuj',
+    'createRequest'             => 'Kreiraj zahtev',
+    'sendMail'                  => 'Pošalji mejl',
+    'newOffer'                  => 'Nova ponuda',
+    'createOffer'               => 'Kreiraj ponudu',
+    'errMsgPrice'               => 'Cena mora biti uneta!'
 ];

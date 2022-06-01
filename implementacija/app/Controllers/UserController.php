@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\KategorijaModel;
 use App\Models\KorisnikModel;
 use App\Models\ZahtevModel;
+use App\Models\TerminModel;
 
 
 class UserController extends BaseController
@@ -228,6 +229,36 @@ class UserController extends BaseController
     {
         // kreiranje zahteva za uslugom od strane korisnika                         ( kreiranje u stanju 1 )
         $newRequest = new ZahtevModel();
+
+        $data = [
+            'idKorisnika' => (int)session('user')->idKorisnika,
+            'idPruzaoca' => (int)$this->request->getVar('providerId'),
+            'stanje'      => 1,
+            'opis'        => $this->request->getVar('requestDesc'),
+            'hitno'       => $this->request->getVar('urgentBox') == "on",
+        ];
+        $newRequest->insert($data);
+
+        $idZahteva = $newRequest->getInsertID();
+
+        date_default_timezone_set('Europe/Belgrade');
+        $dataT['trajanje']=intval($this->request->getPost('duration'));
+        $dataT['datumVremePocetka']=intval($this->request->getPost('startTime'));
+        $dataT['idPruzaoca'] = (int)$this->request->getVar('providerId');
+
+        if($dataT['trajanje']==null || $dataT['datumVremePocetka']==null || session('user')->role()!='provider')
+        {
+            return redirect()->to(base_url('UserController/requests'));
+        }
+        if($dataT['trajanje']<30 || $dataT['trajanje']%30!=0 || session('user')->overlap($dataT['datumVremePocetka'],$dataT['datumVremePocetka']+$dataT['trajanje']*60))
+        {
+            return redirect()->to(base_url('UserController/requests'));
+        }
+        $dataT['datumVremePocetka']=date('Y-m-d H:i:s',$dataT['datumVremePocetka']);
+        $dataT['idZahteva'] = $idZahteva;
+        $TerminM = new TerminModel();
+        $TerminM->insert($dataT);
+        return redirect()->to(base_url('UserController/requests'));
         
     }
 
