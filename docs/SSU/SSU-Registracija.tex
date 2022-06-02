@@ -24,7 +24,7 @@
 \title{\Large Elektrotehnički fakultet u Beogradu \\ 13S113PSI Principi Softverskog Inženjerstva}
 \author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
 	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
-\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.2}
+\date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\\large Verzija 1.3}
 \renewcommand{\contentsname}{Sadržaj}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -44,7 +44,7 @@
  \hline
  12.04.2022. & 1.2  & Korekcije nakon formalne inspekcije & \inicijalniautor \\
  \hline
- &  &  &  \\
+ 03.06.2022. & 1.3  & Korekcije nakon implementacije & \inicijalniautor \\
  \hline
 \end{tabular}
 \end{center}
@@ -83,45 +83,55 @@ Dokument će koristiti svi članovi projektnog tima u toku razvoja projekta i te
     
 \section{Scenario \genitivfunkcionalnosti}
 \subsection{Kratak opis}
-    Korisnik se registruje unošenjem jedinstvenog korisničkog imena, jedinstvene email adrese i lozinke. Bez registracije i kreiranja naloga korisnik nije u mogućnosti da vidi kontakt informacije o pružaocima usluga. Nakon korektno unetih podataka, na email adresu korisnika se šalje verifikacioni kod čijim se unošenjem prilikom registracije potvrđuje ispravnost unete email adrese, kreira se nalog i korisnik se registruje na sajt. 
+    Korisnik se registruje unošenjem jedinstvene email adrese, imena, prezimena, jedinstvenog korisničkog imena, lozinke i ponovljene lozinke. Bez registracije i kreiranja naloga korisnik nije u mogućnosti da kontaktira pružaoca usluga. Nakon korektno unetih podataka kreira se nalog i korisnik se dodaje u bazu registrovanih korisnika. 
     \newpage
 \subsection{Tok događaja}
     \paragraph*{Osnovni uspešni scenario}
     \begin{enumerate}
-        \item Korisnik unosi korisničko ime.
         \item Korisnik unosi email adresu.
+        \item Korisnik unosi ime.
+        \item Korisnik unosi prezime.
+        \item Korisnik unosi korisničko ime.
         \item Korisnik unosi lozinku.
+        \item Korisnik unosi ponovljenu lozinku.
         \item Korisnik mora da označi saglasnost o uslovima korišćenja.
         \item Korisnik pritiska dugme ''Registruj se''.
-        \item Sistem šalje verifikacioni kod na unetu korisničku email adresu, čijim daljim unosom korisnik potvrđuje da je uneta korektna email adresa. Unete informacije o korisniku se upisuju u bazu zahteva za kreiranje naloga. 
-        \item Korisnik unosi verifikacioni kod koji mu je dostavljen na email adresu.
-        \item Sistem unosi korisnikov nalog u bazu.
-        \item Nakon 24h zahtev za kreiranje naloga korisnika se briše iz baze.
+        \item Sistem obaveštava korisnka o uspešnoj registraciji i unosi korisnikov nalog u bazu.
     \end{enumerate}
 
     \paragraph*{Proširenja} 
     \begin{enumerate}
-        \item[1.1] Korisnik je uneo već postojeće korisničko ime.
-            \begin{enumerate}[noitemsep,topsep=-8pt]
-                \item Sistem prikazuje da je korisničko ime zauzeto.
-            \end{enumerate}
-   
-        \item[2.1] Korisnik je uneo email adresu koja postoji u bazi.
-        \begin{enumerate}[noitemsep,topsep=-8pt]
-            \item Sistem prikazuje da je email adresa zauzeta.
-        \end{enumerate}
     
-        \item[6.1] Korisnik nije uneo sve obavezne informacije.
+        \item[1.1] Korisnik je uneo email adresu koja postoji u bazi.
+            \begin{enumerate}[noitemsep,topsep=-8pt]
+                \item Sistem prikazuje poruku da je email adresa zauzeta.
+                \item Korisnik može pokušati ponovnu registraciju počev od koraka 1.
+            \end{enumerate}
+        
+        \item[4.1] Korisnik je uneo već postojeće korisničko ime.
+            \begin{enumerate}[noitemsep,topsep=-8pt]
+                \item Sistem prikazuje poruku da je korisničko ime zauzeto.
+                \item Korisnik može pokušati ponovnu registraciju počev od koraka 4.
+            \end{enumerate}
+            
+        \item[6.1] Korisnik nije uneo identičnu lozinku.
+            \begin{enumerate}[noitemsep,topsep=-8pt]
+                \item Sistem prikazuje poruku da lozinka nije identična.
+                \item Korisnik može pokušati ponovnu registraciju počev od koraka 6.
+            \end{enumerate}
+    
+        \item[8.1] Korisnik nije uneo sve obavezne informacije.
             \begin{enumerate}[noitemsep,topsep=-8pt]
                 \item Sistem prikazuje poruku da treba popuniti sva obavezna polja.
             \end{enumerate}
  
-        \item[6.2] Korisnik nije uneo validnu email adresu.
+        \item[8.2] Korisnik nije uneo validnu email adresu.
              \begin{enumerate}[noitemsep,topsep=-8pt]
                 \item Sistem prikazuje poruku da uneta email adresa nije validna.
-                \item Korisnik se vraća u korak 2.
+                \item Korisnik može pokušati ponovnu registraciju počev od koraka 1.
             \end{enumerate}
-        \item[6.3] Korisnik nije označio da prihvata uslove korišćenja.
+            
+        \item[8.3] Korisnik nije označio da prihvata uslove korišćenja.
          \begin{enumerate}[noitemsep,topsep=-8pt]
             \item Sistem prikazuje poruku da je potrebno označiti prihvatanje uslova korišćenja.
         \end{enumerate}
