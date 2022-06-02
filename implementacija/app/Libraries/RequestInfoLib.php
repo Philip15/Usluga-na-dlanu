@@ -8,8 +8,20 @@ namespace App\Libraries;
 use DateInterval;
 use DateTime;
 
+/**
+ * requestInfoLib - usluzna klasa za generisanje informacija o zahtevu ili terminu
+ */
 class RequestInfoLib
 {
+    /**
+     * Funkcija za generisanje informacija o terminu
+     * 
+     * @param TerminModel $slot termin
+     * @param bool $provider da li se pregled generise za pruzaoca ili klijenta
+     * @param bool $requests da li se pregled generise za stranicu sa listom zahteva
+     * 
+     * @return string
+     */
     public static function slotInfo($slot,$provider,$requests)
     {
         $reserved=$slot->idZahteva==null;
@@ -61,6 +73,14 @@ class RequestInfoLib
         return $res;
     }
 
+    /**
+     * Funkcija za generisanje informacija o zahtevu
+     * 
+     * @param ZahtevModel $zahtev zahtev
+     * @param bool $provider da li se pregled generise za pruzaoca ili klijenta
+     * 
+     * @return string
+     */
     public static function requestInfo($zahtev,$provider)
     {
         $res ='<div class="row">';
@@ -84,6 +104,14 @@ class RequestInfoLib
         return $res;
     }
 
+    /**
+     * Funkcija za formatiranje vremenskog intervala
+     * 
+     * @param int $start pocetak intervala UNIXTS
+     * @param int $lenght trajanje intervala u minutima
+     * 
+     * @return string
+     */
     public static function timeSpan($start,$length)
     {
         $startDate=new DateTime($start);
@@ -94,12 +122,27 @@ class RequestInfoLib
         return $startTime.' - '.$endTime.'  ('.$len.'h)';
     }
 
+    /**
+     * Funkcija za generisanje jedne linije informacija
+     * 
+     * @param string $label ime svojstva
+     * @param string $text  vrednost svojstva
+     * 
+     * @return string
+     */
     public static function infoLine($label,$text)
     {
         if($label==null || $text==null){return '';}
         return '<p class="form-label fs-6 fw-bold">'.esc($label).': '.esc($text).'</p>';
     }
 
+    /**
+     * Funkcija za generisanje dugmeta za prikaz vise informacija o terminu
+     * 
+     * @param int $id id termina
+     * 
+     * @return string
+     */
     public static function seeMoreButton($id)
     {
         return '<div class="d-flex mt-3 justify-content-end">
@@ -107,6 +150,13 @@ class RequestInfoLib
                 </div>';
     }
 
+    /**
+     * Funkcija za generisanje dugmeta za uklanjanje rucno rezervisanog termina
+     * 
+     * @param int $id id termina
+     * 
+     * @return string
+     */
     public static function deleteButton($id)
     {
         return '<div class="d-flex mt-3 justify-content-end">
@@ -114,6 +164,15 @@ class RequestInfoLib
                 </div>';
     }
 
+    /**
+     * Funkcija za generisanje dugmadi za operacije sa zahtevom na stranici sa listom zahteva
+     * 
+     * @param int $id id zahteva
+     * @param int $state stanje zahteva
+     * @param bool $provider da li se prikaz generise za pruzaoca ili klijenta
+     * 
+     * @return string
+     */
     public static function requestButtons($id,$state,$provider)
     {
         if(!$provider && $state==2)

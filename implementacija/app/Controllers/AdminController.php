@@ -9,14 +9,29 @@ namespace App\Controllers;
 use App\Models\KategorijaModel;
 use App\Models\KorisnikModel;
 
+/**
+ * AdminController - kontroler za administratora
+ */
 class AdminController extends BaseController
 {
+    /**
+     * Prikaz liste kategorija
+     * 
+     * @return Response 
+     */
     public function categories()
     {   
         $data['categories']=KategorijaModel::getAll();
         return view('categories', $data);
     }
 
+    /**
+     * Funkcija za dodavanje kategorije
+     * 
+     * @postParam string category kategorija
+     * 
+     * @return Response
+     */
     public function OPAddCategory()
     {
         if (!$this->validate(['category'=>'required'])) 
@@ -38,6 +53,14 @@ class AdminController extends BaseController
         return redirect()->to(base_url('AdminController/categories'));
     }
 
+    
+    /**
+     * Funkcija za uklanjanje kategorije
+     * 
+     * @getParam int id idKategorije
+     * 
+     * @return Response
+     */
     public function OPRemoveCategory()
     {
         $kategorijaModel = new KategorijaModel();
@@ -56,6 +79,11 @@ class AdminController extends BaseController
         return redirect()->to(base_url('AdminController/categories'));
     }
 
+    /**
+     * Prikaz zahteva za konverziju pruzaoca
+     * 
+     * @return Response 
+     */
     public function accountRequests() 
     {
         $korisnikModel = new KorisnikModel();
@@ -68,6 +96,13 @@ class AdminController extends BaseController
         return view('accountrequests', $data);
     }
 
+    /**
+     * Funkcija za odobravanje konverzije u pruzaoca
+     * 
+     * @getParam int id idKorisnika
+     * 
+     * @return Response
+     */
     public function OPApproveRequest()
     {
         $korisnikModel = new KorisnikModel();
@@ -75,6 +110,13 @@ class AdminController extends BaseController
         return redirect()->to(base_url('AdminController/accountrequests'));
     }
 
+    /**
+     * Funkcija za odbijanje konverzije u pruzaoca
+     * 
+     * @getParam int id idKorisnika
+     * 
+     * @return Response
+     */
     public function OPDenyRequest()
     {
         $korisnikModel = new KorisnikModel();

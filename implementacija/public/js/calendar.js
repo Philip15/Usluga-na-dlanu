@@ -2,20 +2,27 @@
   * @author Lazar Premović  2019/0091
   */
 
-var selectedMonth;
-var selectedDate;
-var calendarM;
-var calendarDH;
-var calendarD;
-var dayData;
+var selectedMonth;  //Izabrani mesec
+var selectedDate;   //Izabrani dan
+var calendarM;      //Element koji predstavlja kalendar
+var calendarDH;     //Element koji predstavlja zaglavlje devnog prikaza
+var calendarD;      //Element koji predstavlja sadrzaj dnevnog prikaza
+var dayData;        //Podaci o trenutno izabranom danu
 
-var months = ["Januar","Februar","Mart","April","Maj","Jun","Jul","Avgust","Septembar","Oktobar","Novembar","Decembar"]
+var months = ["Januar","Februar","Mart","April","Maj","Jun","Jul","Avgust","Septembar","Oktobar","Novembar","Decembar"];    //Imena meseci
 
-var id;
-var anon;
-var freeCallback;
-var busyCallback;
+var id;             //Identifikator korisnika ciji se kalendar prikazuje
+var anon;           //Da li se prikazuju detalji o terminima
+var freeCallback;   //Funkcija koja se poziva pri kliku na slobodno polje u dnevnom kalendaru
+var busyCallback;   //Funkcija koja se poziva pri kliku na zauzeto polje u dnevnom kalendaru
 
+/**
+ * Inicijalizacija kalendara
+ * @param {Number} userid   id korisnika ciji se kalendar prikazuje
+ * @param {Boolean} isAnon  da li se prikazuju detalji o terminima
+ * @param {Function} free   funkcija koja se poziva pri kliku na slobodno polje u dnevnom kalendaru
+ * @param {Function} busy   funkcija koja se poziva pri kliku na zauzeto polje u dnevnom kalendaru
+ */
 function calendar_Init(userid,isAnon,free,busy)
 {
     id=userid;
@@ -34,6 +41,11 @@ function calendar_Init(userid,isAnon,free,busy)
     drawCalendar();
 }
 
+/**
+ * Iscrtavanje kalendara
+ * @param {Boolean} redraw  da li je u pitanju ponovni poziv iz callback-a AJAX zahteva 
+ * @param {Number[]} data   zauzetost pruzaoca na dnevnom nivou 0-1
+ */
 function drawCalendar(redraw,data)
 {
     mHeader().innerHTML=months[selectedMonth]+" "+selectedYear+".";
@@ -102,6 +114,11 @@ function drawCalendar(redraw,data)
     }
 }
 
+/**
+ * Iscrtavanje dnevnog kalendara
+ * @param {String[]} data   zauzetost pruzaoca na sa granularnoscu od 30 min, null oznacava slododan termin, 
+ * 0 oznacava zauzet termin bes opisa ili produzetak zauzetog termina, tekst sadrzi opis zauzetog termina
+ */
 function drawDay(data)
 {
     dayData=data;
@@ -130,32 +147,60 @@ function drawDay(data)
         }
 }
 
+/**
+ * Dohvata zaglavlje mesecnog kalendara
+ * @returns Element
+ */
 function mHeader()
 {
     return calendarM.children[0].children[0].children[1];
 }
 
+/**
+ * Dohvata zaglavlje dnevnog kalendara
+ * @returns Element
+ */
 function dHeader()
 {
     return calendarDH.children[0].children[0].children[0];
 }
 
+/**
+ * Dohvata polje mesecnog kalendara
+ * @param {Number} w    nedelja u mesecu
+ * @param {Number} dow  dan u nedelji
+ * @returns Element
+ */
 function dateF(w,dow)
 {
     return calendarM.children[1].children[w].children[dow];
 }
 
+/**
+ * Dohvata polje dnevnog kalendara
+ * @param {Number} t    indeks polja 
+ * @returns Element
+ */
 function dayF(t)
 {
     return calendarD.children[0].children[t].children[1];
 }
 
+/**
+ * Pomera datum na prethodni ponedeljak
+ * @param {Date} date  datum
+ * @returns Date
+ */
 function moveToPrevMonday(date)
 {
     date.setDate(date.getDate()-(date.getDay()==0?6:date.getDay()-1));
     return date;
 }
 
+/**
+ * Funkcija koja obradjuje klik na polje mesecnog kalendara
+ * @param {Event} e informacije o dogadjaju 
+ */
 function onClick_calendarM(e)
 {
     var elem=e.target;
@@ -195,6 +240,10 @@ function onClick_calendarM(e)
     drawCalendar();
 }
 
+/**
+ * Funkcija koja obradjuje klik na polje dnevnog kalendara
+ * @param {Event} e informacije o dogadjaju 
+ */
 function onClick_calendarD(e)
 {
     var elem=e.target;

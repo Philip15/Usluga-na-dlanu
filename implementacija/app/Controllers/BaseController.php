@@ -59,6 +59,11 @@ class BaseController extends Controller
         $this->session = \Config\Services::session();
     }
 
+    /**
+     * Prikazuje glavnu stranicu
+     * 
+     * @return Response
+     */
     public function index()
     {
         $data['jsinit']='mainPage';
@@ -67,6 +72,17 @@ class BaseController extends Controller
         return view('mainpage',$data);
     }
 
+    /**
+     * Dohvatanje pruzaoca odredjene kategorije, slobodne u datom terminu
+     * 
+     * @getParam int cat kategorija pruzaoca
+     * @getParam string tFrom vreme pocetka
+     * @getParam string tTo vreme kraja
+     * @getParam string dFrom datum pocetka
+     * @getParam string dTo datum kraja
+     * 
+     * @return Response
+     */
     public function AJAXGetProviders()
     {
         $cat=$this->request->getGet('cat');
@@ -112,6 +128,14 @@ class BaseController extends Controller
             ->setJSON(json_encode($result));
     }
 
+    /**
+     * Informacije o zauzetosti pruzaoca za ceo mesec
+     * 
+     * @getParam int id id pruzaoca
+     * @getParam int date datum
+     * 
+     * @return Response
+     */
     public function AJAXGetCalendarData()
     {
         $id=$this->request->getGet('id');
@@ -142,6 +166,15 @@ class BaseController extends Controller
             ->setJSON(json_encode($result));
     }
 
+    /**
+     * Informacije o zauzetosti pruzaoca za jedan dan
+     * 
+     * @getParam int id id pruzaoca
+     * @getParam int date datum
+     * @getParam int anon prikaz detalja o terminu
+     * 
+     * @return Response
+     */
     public function AJAXGetDayData()
     {
         date_default_timezone_set('Europe/Belgrade');
@@ -206,6 +239,11 @@ class BaseController extends Controller
             ->setJSON(json_encode($result));
     }
 
+    /**
+     * Bezbedno preusmeravanje na proslu stranicu
+     * 
+     * @return Response
+     */
     public static function safeRedirectBack()
     {
         if(str_contains(previous_url(),'/AJAX') || str_contains(previous_url(),'/OP'))
@@ -218,6 +256,14 @@ class BaseController extends Controller
         }
     }
 
+    /**
+     * Prikaz profila pruzaoca
+     * 
+     * @getParam int id id pruzaoca
+     * 
+     * @return Response
+     * @throws PageNotFoundException
+     */
     public function profile()
     {
         $id = $this->request->getGet("id");

@@ -12,14 +12,27 @@ use App\Models\KorisnikModel;
 use App\Models\ZahtevModel;
 use App\Models\TerminModel;
 
+/**
+ * UserController - kontroler za ulogovane korisnike
+ */
 class UserController extends BaseController
 {
+    /**
+     * Funkcija za odjavljivanje korisnika sa sistema
+     * 
+     * @return Response
+     */
     public function OPlogout() 
     {
         $this->session->destroy();
         return self::safeRedirectBack();
     }
 
+    /**
+     * Prikaz stranice za uredjivanje profila
+     * 
+     * @return Response
+     */
     public function editProfile()
     {
         $data['categories'] = KategorijaModel::getAll();
@@ -31,6 +44,21 @@ class UserController extends BaseController
         return view('editprofile', $data);
     }
 
+    /**
+     * Funckija za cuvanje promena profila
+     * 
+     * @postParam string ime ime korisnika
+     * @postParam string prezime prezime korisnika
+     * @postParam string username korisnicko ime 
+     * @postParam string email email korisnika
+     * @postParam string dodatneInformacije dodatne informacije korisnika
+     * @postParam string adresa adresa korisnika
+     * @postParam int kategorija id kategorije
+     * @postParam float lat geografska sirina
+     * @postParam float lon geografska duzina
+     * 
+     * @return Response
+     */
     public function OPsaveChanges()
     {
         $korisnikPodaci = [
@@ -93,6 +121,13 @@ class UserController extends BaseController
         return redirect()->to(site_url('UserController/editProfile'));
     }
 
+    /**
+     * Funkcija za menjanje prfilne slike
+     * 
+     * @postParam file profilePicture profilna slika
+     * 
+     * @return Response
+     */ 
     public function OPchangeProfilePicture()
     {
         $code = $this->verifyFile('profilePicture');
@@ -120,6 +155,13 @@ class UserController extends BaseController
         return redirect()->to(site_url('UserController/editProfile'));
     }
 
+    /**
+     * Funkcija koja prikazuje poslatu sliku
+     * 
+     * @postParam file profilePicture profilna slika
+     * 
+     * @return Response
+     */
     public function AJAXpicturePreview()
     {
         $code = $this->verifyFile('profilePicture');
@@ -142,6 +184,13 @@ class UserController extends BaseController
         }
     }
 
+    /**
+     * Funkcija koja proverava poslati fajl
+     * 
+     * @param string $key naziv fajla
+     * 
+     * @return int
+     */
     private function verifyFile($key)
     {
         //actuallyUploaded
@@ -165,6 +214,16 @@ class UserController extends BaseController
         return 0;
     }
 
+    /**
+     * Funckija za konverziju korisnika u pruzaoca
+     * 
+     * @postParam int kategorija id kategorije
+     * @postParam string adresa adresa korisnika
+     * @postParam float lat geografska sirina
+     * @postParam float lon geografska duzina
+     * 
+     * @return Response
+    */
     public function OPconvertProfile()
     {
         $korisnikPodaci = [
@@ -187,6 +246,14 @@ class UserController extends BaseController
         return redirect()->to(site_url('UserController/editProfile'));
     }
 
+    /**
+     * Funkcija koja proverava geografsku duzinu i sirinu
+     * 
+     * @param float $lat geografska sirina
+     * @param float $lon geografska duzina
+     * 
+     * @return bool
+     */
     private function verifyLatLon($lat,$lon)
     {
         if(is_numeric($lat) && is_numeric($lon))
@@ -201,6 +268,15 @@ class UserController extends BaseController
         return false;
     }
 
+    /**
+     * Funkcija za meanjaje lozinke
+     * 
+     * @postParam string oldPassword stara lozinka
+     * @postParam string newPassword nova lozinka
+     * @postParam string newPasswordAgain ponovljena nova lozinka
+     * 
+     * @return Response
+     */
     public function OPupdatePassword()
     {
         $korisnikPodaci = [
@@ -236,6 +312,11 @@ class UserController extends BaseController
         return redirect()->to(site_url('UserController/editProfile'));
     }
 
+    /**
+     * Prikaz zahteva za koje se moze ostaviti recenzija
+     * 
+     * @return Response
+     */
     public function reviews()
     {
         $korisnik = $this->session->get('user');
@@ -244,6 +325,15 @@ class UserController extends BaseController
         return view('reviews',$data);
     }   
     
+    /**
+     * Funkcija za ostavljanje recenzije
+     * 
+     * @postParam int id id zahteva
+     * @postParam int rating ocena
+     * @postParam string comment opcioni komentar
+     * 
+     * @return Response
+     */
     public function OPpostReview()                                                                  //( prelazak 4 -> 5 )
     {
         $id = $this->request->getPost('id');
@@ -286,6 +376,13 @@ class UserController extends BaseController
         return redirect()->to(base_url('UserController/reviews'));
     }
 
+    /**
+     * Funkcija za uklanajnje zahteva bez ostavljanja recenzije
+     * 
+     * @getParam int id id zahteva
+     * 
+     * @return Response
+     */
     public function OPremoveReview()
     {
         $id = $this->request->getGet('id');
@@ -311,6 +408,11 @@ class UserController extends BaseController
         return redirect()->to(base_url('UserController/reviews'));
     }
 
+    /**
+     * Prikaz upucenih zahteva
+     * 
+     * @return Response
+     */
     public function requests()
     {
         // prikaz view-a user-requests.php
@@ -323,6 +425,17 @@ class UserController extends BaseController
         return view('requests',$data);
     }
 
+    /**
+     * Funkicija za kreiranje zahteva
+     * 
+     * @postParam int providerId id pruzaoca
+     * @postParam string requestDesc opis zahteva
+     * @postParam string urgentBox hitnost zahteva
+     * @postParam int duration trajanje
+     * @postParam int startTime pocetak
+     * 
+     * @return Response
+     */
     public function OPCreateRequest()
     {
         // kreiranje zahteva za uslugom od strane korisnika                         ( kreiranje u stanju 1 )
@@ -384,6 +497,13 @@ class UserController extends BaseController
         return redirect()->to(base_url('profile?id='.$data['idPruzaoca']));     
     }
 
+    /**
+     * Funkicija za prihvatanje ponude
+     * 
+     * @getParam int id id zahteva
+     * 
+     * @return Response
+     */
     public function OPAcceptRequest()
     {
         // prihvatanje ponude                                                       ( prelazak 2 -> 3 )
@@ -400,6 +520,13 @@ class UserController extends BaseController
         return redirect()->to(base_url('UserController/requests'));
     }
 
+    /**
+     * Funkicija za odbijanje ponude
+     * 
+     * @getParam int id id zahteva
+     * 
+     * @return Response
+     */
     public function OPRejectRequest()
     {
         // odbijanje zahteva u bilo kom trenutku                                    ( prelazak 2 -> 7 )
@@ -419,6 +546,13 @@ class UserController extends BaseController
         return redirect()->to(base_url('UserController/requests'));
     }
 
+    /**
+     * Funkicija za potvrdjivanje odbijenog zahteva
+     * 
+     * @getParam int id id zahteva
+     * 
+     * @return Response
+     */
     public function OPCheckRejection()
     {
         // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 6 -> 8 )

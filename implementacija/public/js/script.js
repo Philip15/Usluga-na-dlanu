@@ -4,6 +4,11 @@
   */
 
 //Yet again, shamelessly stolen from the internet
+/**
+ * Funkcija koja dohvata imenovani get parametar iz URL-a
+ * @param {String} parameterName    naziv parametra
+ * @returns 
+ */
 function findGetParameter(parameterName) 
 {
     var result = null,
@@ -18,6 +23,9 @@ function findGetParameter(parameterName)
     return result;
 }
 
+/**
+ * Inicijalizacija zaglavlja
+ */
 function header_Init()
 {
     if(document.getElementById("wrongPassword")!=null)
@@ -26,6 +34,9 @@ function header_Init()
     }
 }
 
+/**
+ * Inicijalizacija glavne stranice
+ */
 function mainPage_Init()
 {
     window.searchParams={};
@@ -92,16 +103,29 @@ function mainPage_Init()
     getProviders(new URL(location.href).search);
 }
 
+/**
+ * Dohvata parametar pretrage po nazivu
+ * @param {String} key  naziv parametra 
+ * @returns String
+ */
 function getSearchParam(key)
 {
     return window.searchParams[key];
 }
 
+/**
+ * Postavlja parametar pretrage po nazivu
+ * @param {String} key      naziv parametra
+ * @param {String} value    vrednost parametra
+ */
 function setSearchParam(key,value)
 {
     window.searchParams[key]=value;
 }
 
+/**
+ * Azuriranje glavne stranice
+ */
 function updateView()
 {
     var url = new URL(location.href)
@@ -150,6 +174,10 @@ function updateView()
     }
 }
 
+/**
+ * Dohvata pruzaoce usluga koji odgovaraju zadatim parametrima pretrage
+ * @param {String} query    upit za pretragu 
+ */
 function getProviders(query) 
 {
     var xhr = new XMLHttpRequest();
@@ -166,6 +194,10 @@ function getProviders(query)
     xhr.send();
 }
 
+/**
+ * Prikazuje pruzaoce dobijene kao rezultat AJAX upita ka serveru
+ * @param {Object[]} res    rezultat upita, pruzaoci
+ */
 function displayProviders(res)
 {
     var containter = document.getElementById("cardContainer");
@@ -204,6 +236,12 @@ function displayProviders(res)
     }
 }
 
+/**
+ * Sortira pruzaoce po oceni
+ * @param {Object} x    prvi pruzaoc 
+ * @param {Object} y    drugi pruzaoc 
+ * @returns int rezultat poredjenja
+ */
 function sortOcena(x,y)
 {
     if (x.ocena < y.ocena) 
@@ -217,6 +255,12 @@ function sortOcena(x,y)
     return 0;
 }
 
+/**
+ * Sortira pruzaoce po udaljenost
+ * @param {Object} a    prvi pruzaoc 
+ * @param {Object} b    drugi pruzaoc 
+ * @returns int rezultat poredjenja
+ */
 function sortUdaljenost(a,b)
 {
     const dist1=distance(a.lat,a.lon,getSearchParam("lat"),getSearchParam("lon"));
@@ -232,6 +276,14 @@ function sortUdaljenost(a,b)
     return sortOcena(a,b);
 }
 
+/**
+ * Racuna udaljenost izmedju dve tacke na planeti
+ * @param {Number} lat1     geografska sirina prve tacke
+ * @param {Number} lon1     geografska duzina prve tacke
+ * @param {Number} lat2     geografksa sirina druge tacke
+ * @param {Number} lon2     geografska duzina druge tacke
+ * @returns udaljenost u metrima
+ */
 function distance(lat1,lon1,lat2,lon2)
 {
     // Shamelessly stolen of the internet :)
@@ -250,6 +302,11 @@ function distance(lat1,lon1,lat2,lon2)
     return Math.round((d + Number.EPSILON) * 100) / 100;
 }
 
+/**
+ * Generise prikaz ocene pruzaoca u zvezdicama
+ * @param {Number} rating 
+ * @returns string formiran html
+ */
 function stars(rating)
 {
     const pre=rating;
@@ -279,6 +336,10 @@ function stars(rating)
     return (Math.round(pre * 100) / 100) +" "+ res;
 }
 
+/**
+ * Funkcija koja obradjuje klik na kategoriju usluga
+ * @param {Event} e informacije o dogadjaju 
+ */
 function onClick_Category(e)
 {
     document.getElementsByClassName("active")[0].classList.remove("active");
@@ -287,6 +348,9 @@ function onClick_Category(e)
     updateView();
 }
 
+/**
+ * Funkcija koja obradjuje promenu izbora o filtriranju po datumu
+ */
 function onChange_DateFilter() 
 {
     if(document.getElementById("dateFilter").checked)
@@ -310,7 +374,9 @@ function onChange_DateFilter()
     updateView();
 }
 
-
+/**
+ * Funkcija koja obradjuje klik dugme za filtriranje po datumu
+ */
 function onClick_DateFilter() 
 {
     var stimeFrom = document.getElementById("timeFrom").value;
@@ -329,6 +395,9 @@ function onClick_DateFilter()
     updateView();
 }
 
+/**
+ * Funkcija koja obradjuje promenu kriterujuma za sortiranje
+ */
 function onChange_SortSelect()
 {
     if(document.getElementById("sortSelect").value==0)
@@ -346,6 +415,12 @@ function onChange_SortSelect()
     updateView();
 }
 
+/**
+ * Funkcija koja obradjuje promenu lokacije u odnosu na koju se izracunava udaljenost
+ * @param {Object} currentLocation  odabrana lokacija 
+ * @param {Number} radius 
+ * @param {Boolean} isMarkerDropped 
+ */
 function locationChangedCallback(currentLocation, radius, isMarkerDropped) {
     setSearchParam("lat",currentLocation.latitude);
     setSearchParam("lon",currentLocation.longitude);
@@ -353,6 +428,9 @@ function locationChangedCallback(currentLocation, radius, isMarkerDropped) {
     updateView();
 }
 
+/**
+ * Inicijalizacija stranice sa recenzijama
+ */
 function reviews_Init()
 {
     var elems =document.getElementsByClassName("stars");
@@ -363,17 +441,29 @@ function reviews_Init()
     }
 }
 
+/**
+ * Funkcija koja obradjuje pomeranje misa po zvezdicama za odabir ocene
+ * @param {Event} e informacije o dogadjaju 
+ */
 function onMouseOver_StarSelector(e) 
 {
     var stars=Math.min(Math.floor(e.offsetX/20)+1,5);
     SetStars(e.currentTarget, stars);
 }
 
+/**
+ * Funkcija koja obradjuje napustanje zvezdica za odabir ocene od strane misa
+ * @param {Event} e informacije o dogadjaju 
+ */
 function onMouseOut_StarSelector(e) 
 {
     SetStars(e.currentTarget, 0);
 }
 
+/**
+ * Funkcija koja obradjuje klik misa na zvezdicu za odabir ocene
+ * @param {Event} e informacije o dogadjaju 
+ */
 function onClick_StarSelector(e)
 {
     var stars=Math.min(Math.floor(e.offsetX/20)+1,5);
@@ -381,6 +471,11 @@ function onClick_StarSelector(e)
     SetStars(e.currentTarget,0);
 }
 
+/**
+ * Funkcija koja azurira prikaz zvezdica za odabir ocene
+ * @param {Element} elem    kontejner koji sadrzi zvezdice ciji prikaz treba azurirati 
+ * @param {Number} stars    vrednost na koju treba azurirati prikaz
+ */
 function SetStars(elem, stars)
 {
     var elems =elem.children;
@@ -399,6 +494,11 @@ function SetStars(elem, stars)
     }
 }
 
+/**
+ * Funkcija koja prkazuje poruku i ukoliko je odgovor pozitivan, preusmerava na odredjeni URL
+ * @param {String} q    tekst poruke 
+ * @param {String} l    URL na koji se preusmerava korisnik
+ */
 function onClick_Remove(q,l)
 {
     if(confirm(q))
@@ -407,6 +507,11 @@ function onClick_Remove(q,l)
     }
 }
 
+/**
+ * Funkcija koja prikazuje formu za kreiranje novog zahteva i azurira njene podatke
+ * @param {Number} startTime    veme pocetka termina
+ * @param {Number} maxLen       maksimalno trajanje termina
+ */
 function newRequest(startTime, maxLen)
 {
     var startDate=new Date(startTime*1000);
@@ -418,6 +523,11 @@ function newRequest(startTime, maxLen)
     document.getElementById("newRequestModalButton").click();
 }
 
+/**
+ * Funkcija koja prikazuje formu za kreiranje novog rezervisanog termina i azurira njene podatke
+ * @param {Number} startTime    veme pocetka termina
+ * @param {Number} maxLen       maksimalno trajanje termina
+ */
 function newReservedSlot(startTime, maxLen)
 {
     var startDate=new Date(startTime*1000);
@@ -429,6 +539,10 @@ function newReservedSlot(startTime, maxLen)
     document.getElementById("newReservedSlotModalButton").click();
 }
 
+/**
+ * Funkcija koja prikazuje informacije o terminu slanjem AJAX zahteva serveru
+ * @param {Number} slotId   id termina 
+ */
 function slotInfo(slotId)
 {
     var xhr = new XMLHttpRequest();
@@ -445,6 +559,9 @@ function slotInfo(slotId)
     xhr.send();
 }
 
+/**
+ *  Inicijalizacija stranice sa profilom pruzaoca 
+ */
 function profile_Init()
 {
     if(document.getElementById("createError")!=null)
@@ -453,6 +570,9 @@ function profile_Init()
     }
 }
 
+/**
+ * Inicijalizacija stranice sa pregledom zahteva
+ */
 function request_Init()
 {
     if(document.getElementById("priceError")!=null)
@@ -461,8 +581,11 @@ function request_Init()
     }
 }
 
-var origPic;
+var origPic;    //Prvobitna profilna slika
 
+/**
+ * Inicijalizacija stranice za uredjivanje profila
+ */
 function editProfile_Init()
 {
     origPic = document.getElementById("imgDiv").innerHTML;
@@ -477,12 +600,21 @@ function editProfile_Init()
     });
 }
 
+/**
+ * Funkcija koja obradjuje promenu lokacije na stranici za uredjivanje profila
+ * @param {Object} currentLocation  odabrana lokacija 
+ * @param {Number} radius 
+ * @param {Boolean} isMarkerDropped 
+ */
 function editProfileLocationChangedCallback(currentLocation, radius, isMarkerDropped)
 {
     document.getElementById("latInput").value=currentLocation.latitude;
     document.getElementById("lonInput").value=currentLocation.longitude;
 }
 
+/**
+ * Funkcija koja obradjuje promenu izbora profilne slike
+ */
 function onChange_UploadPicture()
 {
     var formData = new FormData();

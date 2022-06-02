@@ -5,8 +5,18 @@
 
 namespace App\Libraries;
 
+/**
+ * HeaderLib - usluzna klasa za generisanje menija u header-u
+ */
 class HeaderLib
 {
+    /**
+     * Funkcija koja kreira padajuci meni u header-u za zadatog korisnika
+     * 
+     * @param KorisnikModel $user korisnik za koga se prikazuje meni
+     * 
+     * @return string
+     */
     public static function menuItems($user)
     {
         $res='';
@@ -28,6 +38,15 @@ class HeaderLib
         return $res;
     }
 
+    /**
+     * Funkcija koja kreira jednu stavku meni-a sa opcionim brojem notifikacija
+     * 
+     * @param string $href url na koji vodi stavka meni-a
+     * @param string $string tekst za prikaz
+     * @param int $notifCount opcioni broj notifikacija za datu stavku
+     * 
+     * @return string
+     */
     public static function menuItem($href,$string,$notifCount=null)
     {
         $res = '<li><a class="dropdown-item d-flex justify-content-between" href="'.esc($href).'">'.esc($string);
@@ -39,6 +58,11 @@ class HeaderLib
         return $res;
     }
 
+    /**
+     * Funkcija koja kreira pregradu meni-a
+     * 
+     * @return string
+     */
     public static function menuDivider()
     {
         return '<li><hr class="dropdown-divider"></li>';

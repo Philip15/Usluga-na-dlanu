@@ -9,8 +9,18 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
+/**
+ * AdminFilter - filter za admin kontroler 
+ */
 class AdminFilter implements FilterInterface
 {
+    /**
+     * Funkcija koja se poziva pre izvrsenja admin kontrolera
+     * 
+     * @param RequestInterface $request Request
+     * 
+     * @return Response
+     */
     public function before(RequestInterface $request, $arguments = null)
     {
         $korisnik = session('user');

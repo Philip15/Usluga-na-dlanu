@@ -8,13 +8,30 @@ namespace App\Controllers;
 
 use App\Models\KorisnikModel;
 
+/**
+ * GuestController - kontroler za neulogovanog korisnika
+ */
 class GuestController extends BaseController
 {
+
+    /**
+     * Prikaz stranice za registraciju
+     * 
+     * @return Response
+     */
     public function register()
     {
         return view('register');
     }
 
+    /**
+     * Funkcija za prijavu korisnika na sistem
+     * 
+     * @postParam string username korisncko ime
+     * @postParam string password lozinka
+     * 
+     * @return Response
+     */
     public function OPlogin() 
     {
         if (!$this->validate(['username'=>'required', 'password'=> 'required'])) 
@@ -38,6 +55,19 @@ class GuestController extends BaseController
         return self::safeRedirectBack();
     }
 
+    /**
+     * Funkcija za registraciju korisnika na sistem
+     * 
+     * @postParam string username korisncko ime
+     * @postParam string password lozinka
+     * @postParam string password2 ponovljena lozinka
+     * @postParam string email email adresa
+     * @postParam string ime ime korisnika
+     * @postParam string prezime prezime korisnika
+     * @postParam string uslovi_koriscenja da li je korisnik prihvatio uslove koriscenja
+     * 
+     * @return Response 
+     */
     public function OPregister() 
     {
         $korisnikPodaci = [

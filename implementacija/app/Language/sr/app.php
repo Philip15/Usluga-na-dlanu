@@ -5,6 +5,11 @@
   * @author Filip Janjić    2019/0116
   */
   
+/**
+ * Niz prevoda za lokalizaciju na srpski jezik
+ * 
+ * @return string[]
+ */
 return [
     'title'                     => 'Usluga na dlanu',
     'loginTitle'                => 'Prijava',

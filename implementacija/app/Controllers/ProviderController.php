@@ -10,8 +10,16 @@ use App\Models\ZahtevModel;
 use App\Libraries\RequestInfoLib;
 use App\Models\TerminModel;
 
+/**
+ * ProviderController - kontroler za pruzaoca
+ */
 class ProviderController extends BaseController
 {
+    /**
+     * Prikaz dolaznih zahteva
+     * 
+     * @return Response
+     */
     public function requests()
     {
         // prikaz view-a provider-requests.php
@@ -25,6 +33,15 @@ class ProviderController extends BaseController
         return view('requests',$data);
     }
 
+    /**
+     * Funkcija za slanje ponude na pristigli zahtev
+     * 
+     * @postVar int idZ id zahteva
+     * @postVar int priceVal predlozena cena zahteva
+     * @postVar string offerDesc opcioni opis
+     * 
+     * @return Response
+     */
     public function OPCreateOffer()
     {
         // kreiranje ponude iz primljenog zahteva                                       ( prelazak 1 -> 2 )
@@ -54,6 +71,13 @@ class ProviderController extends BaseController
 
     }
 
+    /**
+     * Funckija za odbijanje zahteva
+     * 
+     * @getParam int id id zahteva
+     * 
+     * @return Response
+     */
     public function OPRejectRequest()
     {
         // odbijanje zahteva u bilo kom trenutku                                        ( prelazak 1 -> 6, 3 -> 6 )
@@ -72,6 +96,13 @@ class ProviderController extends BaseController
         return redirect()->to(base_url('ProviderController/requests'));
     }
 
+    /**
+     * Funckija za realizovanje zahteva
+     * 
+     * @getParam int id id zahteva
+     * 
+     * @return Response
+     */
     public function OPRealizeRequest()
     {
         // oznacavanje zahteva kao realizovanog, slanje na recenziju                    ( prelazak 3 -> 4 )
@@ -88,6 +119,13 @@ class ProviderController extends BaseController
         return redirect()->to(base_url('ProviderController/requests'));
     }
 
+    /**
+     * Funckija za potvrdjivanje odbijenog zahteva
+     * 
+     * @getParam int id id zahteva
+     * 
+     * @return Response
+     */
     public function OPCheckRejection()
     {
         // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 7 -> 8 )
@@ -104,6 +142,11 @@ class ProviderController extends BaseController
         return redirect()->to(base_url('ProviderController/requests'));
     }
 
+    /**
+     * Prikaz kalendara pruzaoca
+     * 
+     * @return Response
+     */
     public function timetable()
     {
         $user = session('user');
@@ -115,6 +158,13 @@ class ProviderController extends BaseController
         return view('timetable',$data);
     }
 
+    /**
+     * Funckija za prikaz informacija o terminu
+     * 
+     * @getParam int slot id termina
+     * 
+     * @return Response
+     */
     public function AJAXGetSlotInfo()
     {
         $slotId=$this->request->getGet('slot');
@@ -132,6 +182,14 @@ class ProviderController extends BaseController
         return RequestInfoLib::slotInfo($slot,true,false);
     }
 
+    /**
+     * Funckija za rucno zauzimanje termina
+     * 
+     * @postParam int duration trajanje termina
+     * @postParam int startTime pocetak termina
+     * 
+     * @return Response
+     */
     public function OPReserveTime()
     {
         date_default_timezone_set('Europe/Belgrade');
@@ -155,6 +213,13 @@ class ProviderController extends BaseController
         return redirect()->to(base_url('ProviderController/timetable'));
     }
 
+    /**
+     * Funckija za uklanajnje rucno zauzetog termina
+     * 
+     * @postParam int id id termina
+     * 
+     * @return Response
+     */
     public function OPFreeTime()
     {
         $id=$this->request->getGet('id');
