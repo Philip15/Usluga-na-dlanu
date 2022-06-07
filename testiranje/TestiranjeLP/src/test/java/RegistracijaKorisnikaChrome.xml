@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="RegistracijaKorisnikaChrome">
+    <parameter name="browser" value="chrome" />
+    <test name="Uspešna registracija">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha|tasha|tasha|tasha123|tasha123|true|ok"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nema email">
+	<parameter name="sdata" value="|tasha|tasha|tasha|tasha123|tasha123|true|Niste uneli sva polja!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nevalidan email">
+	<parameter name="sdata" value="tashatashatasha|tasha|tasha|tasha|tasha123|tasha123|true|email"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Email vec postoji">
+	<parameter name="sdata" value="test@test.test|tasha|tasha|tasha|tasha123|tasha123|true|E-mail već postoji!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nema ime">
+	<parameter name="sdata" value="tasha@tasha.tasha||tasha|tasha|tasha123|tasha123|true|Niste uneli sva polja!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nema prezime">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha||tasha|tasha123|tasha123|true|Niste uneli sva polja!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nema username">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha|tasha||tasha123|tasha123|true|Niste uneli sva polja!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Username vec postoji">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha|tasha|test|tasha123|tasha123|true|Korisničko ime postoji!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nema password">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha|tasha|tasha||tasha123|true|Niste uneli sva polja!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nema ponovljen password">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha|tasha|tasha|tasha123||true|Niste uneli sva polja!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Passwordi razliciti">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha|tasha|tasha|tasha123|tasha12|true|Lozinke moraju biti iste!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+    <test name="Nisu prihvaceni uslovi">
+	<parameter name="sdata" value="tasha@tasha.tasha|tasha|tasha|tasha|tasha123|tasha123|false|Niste prihvatili uslove korišćenja!"/>
+
+	<classes>
+		<class name="RegistracijaKorisnikaTestovi"/>
+	</classes>
+    </test>
+</suite>

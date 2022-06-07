@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ZahteviTransferChrome">
+    <parameter name="browser" value="chrome" />
+    <test name="Stanje 1->2">
+	<parameter name="startState" value="1"/>
+        <parameter name="endState" value="2"/>
+        <parameter name="buttonIndex" value="0"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 1->2 Fail">
+	<parameter name="startState" value="1"/>
+        <parameter name="endState" value="2"/>
+        <parameter name="buttonIndex" value="2"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 1->2 No desc">
+	<parameter name="startState" value="1"/>
+        <parameter name="endState" value="2"/>
+        <parameter name="buttonIndex" value="3"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 1->2 Fail2">
+	<parameter name="startState" value="1"/>
+        <parameter name="endState" value="2"/>
+        <parameter name="buttonIndex" value="4"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 1->6">
+	<parameter name="startState" value="1"/>
+        <parameter name="endState" value="6"/>
+        <parameter name="buttonIndex" value="1"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 2->3">
+	<parameter name="startState" value="2"/>
+        <parameter name="endState" value="3"/>
+        <parameter name="buttonIndex" value="0"/>
+        <parameter name="transferType" value="false"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 2->7">
+	<parameter name="startState" value="2"/>
+        <parameter name="endState" value="7"/>
+        <parameter name="buttonIndex" value="1"/>
+        <parameter name="transferType" value="false"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 3->4">
+	<parameter name="startState" value="3"/>
+        <parameter name="endState" value="4"/>
+        <parameter name="buttonIndex" value="0"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 3->6">
+	<parameter name="startState" value="3"/>
+        <parameter name="endState" value="6"/>
+        <parameter name="buttonIndex" value="1"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 6->8">
+	<parameter name="startState" value="6"/>
+        <parameter name="endState" value="8"/>
+        <parameter name="buttonIndex" value="0"/>
+        <parameter name="transferType" value="false"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 7->8">
+	<parameter name="startState" value="7"/>
+        <parameter name="endState" value="8"/>
+        <parameter name="buttonIndex" value="0"/>
+        <parameter name="transferType" value="true"/>
+
+	<classes>
+		<class name="ZahteviTransferTestovi"/>
+	</classes>
+    </test>
+</suite>

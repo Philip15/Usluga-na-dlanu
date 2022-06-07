@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ZahteviChrome">
+    <parameter name="browser" value="chrome" />
+    <test name="Stanje 0">
+	<parameter name="state" value="0"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 1">
+	<parameter name="state" value="1"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 2">
+	<parameter name="state" value="2"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 3">
+	<parameter name="state" value="3"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 4">
+	<parameter name="state" value="4"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 5">
+	<parameter name="state" value="5"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 6">
+	<parameter name="state" value="6"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 7">
+	<parameter name="state" value="7"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+    <test name="Stanje 8">
+	<parameter name="state" value="8"/>
+
+	<classes>
+		<class name="ZahteviTestovi"/>
+	</classes>
+    </test>
+</suite>

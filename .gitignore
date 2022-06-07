@@ -9,3 +9,14 @@ SSU-Template.pdf
 
 #Ignore other teams project for Formal Review
 docs/Formalna Inspekcija/blurr
+
+#Netbeans ignore
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+target/
