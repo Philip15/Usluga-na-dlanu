@@ -181,15 +181,15 @@ class BaseController extends Controller
         $id=$this->request->getGet('id');
         $date=$this->request->getGet('date');
         $anon=$this->request->getGet('anon');
-        $day=24*60*60;
-        $date = $date + (2*60*60);
-        $date = intval($date/$day)*$day;
-        $date = $date + (6*60*60);
-
+        
         $result = [];
 
         if($id!=null && $date!=null)
         {
+            $day=24*60*60;
+            $date = $date + (2*60*60);
+            $date = intval($date/$day)*$day;
+            $date = $date + (6*60*60);
             $requestedUser = KorisnikModel::findById($id);
             if($requestedUser!=null && $requestedUser->pruzalac==1)
             {

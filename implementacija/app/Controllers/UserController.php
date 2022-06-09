@@ -196,6 +196,10 @@ class UserController extends BaseController
         //actuallyUploaded
         //size:<3MB
         //type:image
+        if(!isset($_FILES[$key]))
+        {
+            return -1;
+        }
         if($_FILES[$key]['tmp_name'] == "")
         {
             return -1;
@@ -234,7 +238,7 @@ class UserController extends BaseController
             'pruzalac' => 2
         ];
 
-        if (!$this->validate(['kategorija'=>'required', 'adresaPoslovanja'=>'required','lat'=>'required','lon'=>'required']) || !$this->verifyLatLon($korisnikPodaci['lat'],$korisnikPodaci['lon']) || KategorijaModel::findById($korisnikPodaci['idKategorije'])==null)
+        if (!$this->validate(['kategorija'=>'required', 'adresaPoslovanja'=>'required','lat'=>'required','lon'=>'required']) || !$this->verifyLatLon($korisnikPodaci['lat'],$korisnikPodaci['lon']) || KategorijaModel::findById($korisnikPodaci['idKategorije'])==null || session('user')->role()!='user')
         {
             $this->session->setFlashdata('podaciKonverzija', $korisnikPodaci);
             $this->session->setFlashdata('errorTextConversion', lang('App.errEmptyFieldsConversion'));
@@ -259,7 +263,7 @@ class UserController extends BaseController
         if(is_numeric($lat) && is_numeric($lon))
         {
             $lat=floatval($lat);
-            $lat=floatval($lon);
+            $lon=floatval($lon);
             if($lat >=-90 && $lat<=90 && $lon >=-180 && $lon<=180)
             {
                 return true;
@@ -360,7 +364,7 @@ class UserController extends BaseController
             //Invalid request, fail silently
             return redirect()->to(base_url('UserController/reviews'));
         }
-        if($rating==0)
+        if($rating<=0)
         {
             $this->session->setFlashdata('alertErrorText',lang('App.mandatoryRating'));
             return redirect()->to(base_url('UserController/reviews'));
@@ -508,6 +512,11 @@ class UserController extends BaseController
     {
         // prihvatanje ponude                                                       ( prelazak 2 -> 3 )
         $id = $this->request->getGet('id');
+        if($id==null)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('UserController/requests'));
+        }
         $zahtev = ZahtevModel::findById($id);
         if($zahtev==null || $zahtev->stanje!=2 || $zahtev->idKorisnika!=session('user')->idKorisnika)
         {
@@ -531,6 +540,11 @@ class UserController extends BaseController
     {
         // odbijanje zahteva u bilo kom trenutku                                    ( prelazak 2 -> 7 )
         $id = $this->request->getGet('id');
+        if($id==null)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('UserController/requests'));
+        }
         $zahtev = ZahtevModel::findById($id);
         if($zahtev==null || $zahtev->stanje!=2 || $zahtev->idKorisnika!=session('user')->idKorisnika)
         {
@@ -557,6 +571,11 @@ class UserController extends BaseController
     {
         // oznacavanje notifikacije odbijenog zahteva kao pregledane                ( prelazak 6 -> 8 )
         $id = $this->request->getGet('id');
+        if($id==null)
+        {
+            //invalid request, fail silently
+            return redirect()->to(base_url('UserController/requests'));
+        }
         $zahtev = ZahtevModel::findById($id);
         if($zahtev==null || $zahtev->stanje!=6 || $zahtev->idKorisnika!=session('user')->idKorisnika)
         {

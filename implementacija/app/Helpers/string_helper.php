@@ -18,3 +18,10 @@ if (!function_exists('str_contains')) {
         return '' === $needle || false !== strpos($haystack, $needle);
     }
 }
+
+if (!function_exists('str_starts_with')) {
+  function str_starts_with(string $haystack, string $needle): bool
+  {
+      return substr($haystack, 0, strlen($needle)) === $needle;
+  }
+}

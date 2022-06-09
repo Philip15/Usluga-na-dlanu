@@ -10,6 +10,7 @@ use CodeIgniter\Model;
 use DateTime;
 use DateInterval;
 use DatePeriod;
+use Error;
 use Exception;
 use stdClass;
 
@@ -34,8 +35,15 @@ class KorisnikModel extends Model
      */
     public function linkKategorija()
     {
-        $kategorijaM = new KategorijaModel();
-        $this->kategorija=$kategorijaM->find($this->idKategorije);
+        if($this->idKategorije!=null)
+        {
+            $kategorijaM = new KategorijaModel();
+            $this->kategorija=$kategorijaM->find($this->idKategorije);
+        }
+        else
+        {
+            $this->kategorija=null;
+        }
     }
 
     /**
@@ -203,6 +211,10 @@ class KorisnikModel extends Model
      */
     public function available($tFrom,$tTo,$dFrom,$dTo)
     {
+        if(substr_count($dFrom,'-')!=2 || substr_count($dTo,'-')!=2)
+        {
+            return false;
+        }
         $this->linkManuelnoZauzetiTermini();
         $availArr = $this->shortTermini();
         try
@@ -212,6 +224,10 @@ class KorisnikModel extends Model
 
             $begin = new DateTime($dFrom);
             $end = new DateTime($dTo);
+        }
+        catch (Error  $ex)
+        {
+            return false;
         }
         catch (Exception  $ex)
         {
@@ -287,7 +303,7 @@ class KorisnikModel extends Model
         {
             $dt=new DateTime($slot->datumVremePocetka);
             $ts=intval($dt->format('U'));
-            if(($ts+$slot->trajanje) > $start and $end > $ts)
+            if(($ts+($slot->trajanje*60)) > $start and $end > $ts)
             {
                 return true;
             }
@@ -340,7 +356,7 @@ class KorisnikModel extends Model
     public function getRequestsUser($st)
     {
         $zahtevM = new ZahtevModel();
-        $requests = $zahtevM->where('idKorisnika',$this->idKorisnika)->where('stanje', $st)->orderBy('idZahteva','DSC')->findAll();
+        $requests = $zahtevM->where('idKorisnika',$this->idKorisnika)->where('stanje', $st)->orderBy('idZahteva','DESC')->findAll();
 
         foreach ($requests as $request) {
             $request->linkTermini();
@@ -362,7 +378,7 @@ class KorisnikModel extends Model
     public function getRequestsProvider($st)
     {
         $zahtevM = new ZahtevModel();
-        $requests = $zahtevM->where('idPruzaoca',$this->idKorisnika)->where('stanje', $st)->orderBy('idZahteva','DSC')->findAll();
+        $requests = $zahtevM->where('idPruzaoca',$this->idKorisnika)->where('stanje', $st)->orderBy('idZahteva','DESC')->findAll();
         foreach ($requests as $request) {
             $request->linkTermini();
             $request->linkPruzalac();
