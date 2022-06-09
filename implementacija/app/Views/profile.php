@@ -18,7 +18,7 @@
                 <span class="font-weight-bold text-center fs-4 mt-3"><?= esc($provider->ime) ?>&nbsp;<?= esc($provider->prezime) ?></span>
                 <span class="font-weight-bold fs-5 my-1"><?= esc(ucfirst($provider->kategorija->naziv)) ?></span>
                 <span class="font-weight-bold fs-5 my-1"><script type="text/javascript">document.write(stars(<?=$provider->rating?>))</script></span>
-                <a href="<?= (session('user')!=null)? 'mailto://'.esc($provider->email) : '' ?>" class="text-muted"><?= (session('user')!=null)? esc($provider->email) : lang('App.loginForEmail') ?></a>
+                <a <?php if (session('user')==null) echo 'data-bs-toggle="modal" data-bs-target="#loginModal"' ?> href="<?= (session('user')!=null)? 'mailto://'.esc($provider->email) : '#loginModal'?>" class="text-muted"><?= (session('user')!=null)? esc($provider->email) : lang('App.loginForEmail') ?></a>
                 <?php if(session('user')!=null){echo '<span class="font-weight-bold fs-6 my-1">'.esc($provider->adresa).'</span>';}?>
             </div>
         </div>
