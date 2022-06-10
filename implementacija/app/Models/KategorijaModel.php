@@ -27,7 +27,7 @@ class KategorijaModel extends Model
     public function linkPruzaoci()
     {
         $korsnikM = new KorisnikModel();
-        $this->pruzaoci = $korsnikM->where('idKategorije',$this->idKategorije)->find();
+        $this->pruzaoci = $korsnikM->where('idKategorije',$this->idKategorije)->where('pruzalac', 1)->find();
     }
 
     /**
