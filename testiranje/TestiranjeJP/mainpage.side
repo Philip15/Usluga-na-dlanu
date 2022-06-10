@@ -2377,12 +2377,18 @@
       ],
       "value": ""
     }, {
-      "id": "4ea86e5c-f36b-4544-8609-91e9e8e015ff",
+      "id": "0794817d-180d-406d-bb26-d888bd5560b2",
       "comment": "",
-      "command": "assertAlert",
-      "target": "Vremenski period nije validan.",
-      "targets": [],
-      "value": ""
+      "command": "assertText",
+      "target": "id=providerNotFound",
+      "targets": [
+        ["id=providerNotFound", "id"],
+        ["css=#providerNotFound", "css:finder"],
+        ["xpath=//h5[@id='providerNotFound']", "xpath:attributes"],
+        ["xpath=//main/h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Ne postoji nijedan ponuđač koji ispunjava uslove pretrage, molimo proširite kriterijum pretrage.')]", "xpath:innerText"]
+      ],
+      "value": "Ne postoji nijedan ponuđač koji ispunjava uslove pretrage, molimo proširite kriterijum pretrage."
     }]
   }],
   "suites": [{
