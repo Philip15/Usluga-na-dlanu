@@ -171,13 +171,13 @@ class ProviderController extends BaseController
         if($slotId==null)
         {
             //invalid request, fail silently
-            return;
+            return $this->response->setStatusCode(400);
         }
         $slot = TerminModel::findById($slotId);
         if($slot==null || $slot->idPruzaoca!=session('user')->idKorisnika)
         {
             //invalid request, fail silently
-            return;
+            return $this->response->setStatusCode(400);
         }
         return RequestInfoLib::slotInfo($slot,true,false);
     }
@@ -226,13 +226,13 @@ class ProviderController extends BaseController
         if($id==null)
         {
             //invalid request, fail silently
-            return;
+            return $this->response->setStatusCode(400);
         }
         $slot = TerminModel::findById($id);
         if($slot==null || $slot->idPruzaoca!=session('user')->idKorisnika || $slot->idZahteva!=null)
         {
             //invalid request, fail silently
-            return;
+            return $this->response->setStatusCode(400);
         }
         $TerminM = new TerminModel();
         $TerminM->delete($id);

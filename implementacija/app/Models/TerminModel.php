@@ -37,8 +37,15 @@ class TerminModel extends Model
      */
     public function linkZahtev()
     {
-        $zahtevM = new ZahtevModel();
-        $this->zahtev = $zahtevM->find($this->idZahteva);
+        if ($this->idZahteva != null) 
+        {
+            $zahtevM = new ZahtevModel();
+            $this->zahtev = $zahtevM->find($this->idZahteva);
+        }
+        else 
+        {
+            $this->zahtev = null;
+        }
     }
 
     /**
