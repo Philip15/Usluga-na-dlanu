@@ -18,6 +18,7 @@ final class AdminControllerTest extends CIUnitTestCase
     protected function setUp():void
     {
         parent::setUp();
+        $this->resetDB();
         unset($_SESSION);
         unset($_FILES);
         $_FILES=[];
@@ -28,6 +29,26 @@ final class AdminControllerTest extends CIUnitTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
+    }
+
+    protected function resetDB()
+    {
+        $db = \Config\Database::connect();
+        $lines = file("..\docs\Modelovanje Baze\usluga_na_dlanu_data.sql");
+        $tmp = '';
+
+        foreach ($lines as $line)
+        {
+            if (substr($line, 0, 2) == '--' || $line == '')
+                continue;
+            $tmp .= $line;
+
+            if (substr(trim($line), -1, 1) == ';')
+            {
+                $db->query($tmp);
+                $tmp = '';
+            }
+        }
     }
 
     public function testOPAddCategorySuccess()

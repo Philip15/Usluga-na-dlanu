@@ -16,7 +16,7 @@ final class UserControllerTest extends CIUnitTestCase
     protected function setUp():void
     {
         parent::setUp();
-        //$this->resetDB();
+        $this->resetDB();
         unset($_SESSION);
         unset($_FILES);
         $_FILES=[];
@@ -32,7 +32,7 @@ final class UserControllerTest extends CIUnitTestCase
     protected function resetDB()
     {
         $db = \Config\Database::connect();
-        $lines = file("D:\Faks\_6.Semestar\PSI\Usluga-na-dlanu\docs\Modelovanje Baze\usluga_na_dlanu_data.sql");
+        $lines = file("..\docs\Modelovanje Baze\usluga_na_dlanu_data.sql");
         $tmp = '';
 
         foreach ($lines as $line)

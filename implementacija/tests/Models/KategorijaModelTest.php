@@ -6,6 +6,29 @@ use PHPUnit\Framework\TestCase;
 
 final class KategorijaModelTest extends TestCase
 {
+    protected function setUp():void
+    {
+        $this->resetDB();
+    }
+    protected function resetDB()
+    {
+        $db = \Config\Database::connect();
+        $lines = file("..\docs\Modelovanje Baze\usluga_na_dlanu_data.sql");
+        $tmp = '';
+
+        foreach ($lines as $line)
+        {
+            if (substr($line, 0, 2) == '--' || $line == '')
+                continue;
+            $tmp .= $line;
+
+            if (substr(trim($line), -1, 1) == ';')
+            {
+                $db->query($tmp);
+                $tmp = '';
+            }
+        }
+    }
 
     public function testLinkPruzaoci()
     {

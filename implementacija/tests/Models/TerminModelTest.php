@@ -9,13 +9,13 @@ final class TerminModelTest extends TestCase
 {
     protected function setUp():void
     {
-        // $this->resetDB();
+        $this->resetDB();
     }
 
     protected function resetDB()
     {
         $db = \Config\Database::connect();
-        $lines = file("C:\Users\Jana\Desktop\Usluga-na-dlanu\docs\Modelovanje Baze\usluga_na_dlanu_data.sql");
+        $lines = file("..\docs\Modelovanje Baze\usluga_na_dlanu_data.sql");
         $tmp = '';
 
         foreach ($lines as $line)
