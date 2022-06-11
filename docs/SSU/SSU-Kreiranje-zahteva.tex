@@ -20,7 +20,7 @@
 \author{\Huge Usluga na dlanu\\ \ \\ \ \\ \ \\ \ \\
 	\Large \textbf{Specifikacija scenarija upotrebe funkcionalnosti}\\\Large \textbf{\genitivfunkcionalnosti} \\ \ \\}
 \date{\Large   Tim: Under pressure \\ Filip Janjić 2019/0116 \\ Jana Pašajlić 2019/0132 \\ Lazar Premović 2019/0091  \\ \  \\ \  \\
-	\large Verzija 1.0}
+	\large Verzija 1.1}
 \renewcommand{\contentsname}{Sadržaj}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\labelenumii}{\arabic{enumii}.}
@@ -39,7 +39,7 @@
 				\hline
 				\inicijalnidatum & 1.0  & Inicijalna verzija & \inicijalniautor \\
 				\hline
-				&  & &  \\
+				10.06.2022. & 1.1 & Izmene pri implementaciji & Filip Janjić, Jana Pašajlić \\
 				\hline
 				&  &  &  \\
 				\hline
@@ -92,16 +92,14 @@
 					\item Korisnik označava period zahteva na kalendaru.
 					\item Unosi se opis zahteva u prostor predviđenu za to.
 					\item Označava se hitnost zahteva.
-					\item Korisnik pritiska dugme "Pošalji".
-					\item Prikazuje se dugme za potvrdu i odbijanje kada korisnik potvrđuje kreiranje zahteva i isti se prosleđuje pružaocu.
+					\item Korisnik pritiska dugme "Pošalji" i zahtev se prosleđuje pružaocu.
 					\item Pružalac dobija obaveštenje o novom zahtevu.
 					\item Pružalac klikom prihvata zahtev nakon čega se otvara prozor za dodatne opcije.
-					\item Pružalac modifikuje vremenski period zahteva.
 					\item Pružalac unosi obaveznu okvirnu cenu usluge i komentar i pritiska dugme "Prihvati".
-					\item Prikazuje se prozor na kojem pružalac potvrđuje prihvatanje zahteva, isti se prosleđuje korisniku i briše iz tekućih zahteva.
-					\item Korisniku stiže obaveštenje o prihvaćenom zahtevu sa modifikovanim uslovima.
+					\item Zahtev se prosleđuje korisniku i menja mu se stanje.
+					\item Korisniku stiže obaveštenje o prihvaćenom zahtevu sa dodatnim informacijama.
 					\item Korisnik prihvata zahtev klikom na dugme "Prihvati".
-					\item Pružaocu stiže obaveštenje o prihvaćenom zahtevu i kalendar mu se ažurira zauzimajući period dat u istom.
+					\item Pružaocu stiže obaveštenje o prihvaćenom zahtevu.
 					\item Prelazi se na stranicu profila pružaoca.
 				\end{enumerate}
 			\paragraph*{Proširenja}
@@ -110,24 +108,16 @@
 						\begin{enumerate}[noitemsep,topsep=-8pt]
 							\item Prelazi se na akciju 2.
 						\end{enumerate}
-					\item[7.1] Korisnik pritiska dugme "Otkaži".
-						\begin{enumerate}[noitemsep,topsep=-8pt]
-							\item Prelazi se na akciju 6.
-						\end{enumerate}
-					\item[9.1] Korisnik pritiska dugme "Odbij".
+					\item[9.1] Pružalac pritiska dugme "Odbij".
 						\begin{enumerate}[noitemsep,topsep=-8pt]
 							\item Zahtev se briše iz tekućih zahteva pružaoca i korisniku se šalje obaveštenje o odbijanju zahteva.
 							\item Prelazi se na akciju 17.
 						\end{enumerate}
-					\item[11.1] Korisnik ne unosi cenu.
+					\item[9.2] Pružalac ne unosi cenu.
 						\begin{enumerate}[noitemsep,topsep=-8pt]
 							\item Dugme "Prihvati" postaje neaktivno.
 						\end{enumerate}
-					\item[12.1] Korisnik pritiska dugme "Otkaži".
-						\begin{enumerate}[noitemsep,topsep=-8pt]
-							\item Prelazi se na akciju 11.
-						\end{enumerate}
-					\item[14.1] Korisnik pritiska dugme "Odbij".
+					\item[12.1] Korisnik pritiska dugme "Odbij".
 						\begin{enumerate}[noitemsep,topsep=-8pt]
 							\item Zahtev se briše iz tekućih i pružaocu se šalje obaveštenje o odbijanju zahteva.
 							\item Prelazi se na akciju 17.
